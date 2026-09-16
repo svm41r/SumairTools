@@ -3180,6 +3180,14 @@ app.endUndoGroup();
                             <span>&bull;</span>
                             <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zip?v=7.0.2', 'SumairTools_v7.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zip</a></span>
                         </div>
+
+                        <!-- Windows Quick Instructions -->
+                        <div class="mt-4 p-3.5 rounded-2xl bg-cyanAccent/5 border border-cyanAccent/20 font-mono text-xs text-neutral-300 leading-relaxed">
+                            <span class="text-cyanAccent font-bold block mb-1">⚡ Windows Instructions:</span>
+                            • Unzip <code class="text-white font-bold">SumairTools_v7.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.<br>
+                            • Restart After Effects, open <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key.<br>
+                            <span class="text-emerald-400 text-[11px] font-semibold">✓ The "No response from AE engine" error is completely fixed!</span>
+                        </div>
                     </div>
                 </div>
 
@@ -3206,6 +3214,14 @@ app.endUndoGroup();
                             <span>Direct .ZXP: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zxp?v=7.0.2', 'SumairTools_v7.0.zxp')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zxp</a></span>
                             <span>&bull;</span>
                             <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zip?v=7.0.2', 'SumairTools_v7.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zip</a></span>
+                        </div>
+
+                        <!-- Mac Quick Instructions -->
+                        <div class="mt-4 p-3.5 rounded-2xl bg-purpleAccent/5 border border-purpleAccent/20 font-mono text-xs text-neutral-300 leading-relaxed">
+                            <span class="text-purpleAccent font-bold block mb-1">⚡ Mac Instructions:</span>
+                            • Unzip <code class="text-white font-bold">SumairTools_v7.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder.<br>
+                            • Restart After Effects, open <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key.<br>
+                            <span class="text-emerald-400 text-[11px] font-semibold">✓ The "No response from AE engine" error is completely fixed!</span>
                         </div>
                     </div>
                 </div>
@@ -3239,6 +3255,27 @@ app.endUndoGroup();
                 </div>
             </div>
 
+            <!-- Instructions Banner: Windows & Mac -->
+            <div class="reveal delay-250 max-w-xl mx-auto mb-6 p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-black/60 to-teal-500/10 border border-emerald-500/30 text-left shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                <div class="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <h4 class="font-mono font-bold text-xs uppercase tracking-wider text-emerald-400">⚡ Installation Instructions</h4>
+                </div>
+                <div class="space-y-2.5 font-mono text-xs text-neutral-300 leading-relaxed">
+                    <p class="flex items-start gap-2">
+                        <span class="text-cyanAccent font-bold shrink-0">🪟 Windows Users:</span>
+                        <span>Unzip <code class="text-white bg-white/10 px-1.5 py-0.5 rounded font-bold">SumairTools_v7.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.</span>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <span class="text-purpleAccent font-bold shrink-0">🍎 Mac Users:</span>
+                        <span>Unzip <code class="text-white bg-white/10 px-1.5 py-0.5 rounded font-bold">SumairTools_v7.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder.</span>
+                    </p>
+                    <p class="pt-2 border-t border-white/10 text-neutral-200">
+                        • Restart After Effects, open <code class="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key. <span class="text-emerald-400 font-semibold block sm:inline mt-1 sm:mt-0">✓ The "No response from AE engine" error is completely gone!</span>
+                    </p>
+                </div>
+            </div>
+
             <!-- 3-Step Setup Instructions Accordion: Windows -->
             <div id="os-steps-windows" style="display: block;" class="reveal delay-300 max-w-xl mx-auto p-6 rounded-2xl bg-black/60 border border-white/10 text-left hover:border-white/20 transition-all">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
@@ -3253,7 +3290,7 @@ app.endUndoGroup();
                 <ol class="space-y-2.5 font-mono text-xs text-neutral-300 list-decimal list-inside">
                     <li><span class="text-white font-semibold">1-Click Install:</span> Unzip <code class="text-cyanAccent font-bold">SumairTools_v7.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.</li>
                     <li><span class="text-white font-semibold">Alternative:</span> Drag &amp; drop <code class="text-crimson font-bold">SumairTools_v7.0.zxp</code> into <a href="https://updates.aescripts.com/win/aescripts%20+%20aeplugins%20desktop%20apps%20%28setup%29.exe" target="_blank" rel="noopener noreferrer" class="text-cyanAccent font-bold hover:underline">aescripts ZXP Installer</a>.</li>
-                    <li><span class="text-white font-semibold">Launch in AE:</span> Restart After Effects ➔ Go to <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>!</li>
+                    <li><span class="text-white font-semibold">Launch in AE:</span> Restart After Effects ➔ Go to <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key. The "No response from AE engine" error is completely gone!</li>
                 </ol>
             </div>
 
@@ -3277,7 +3314,7 @@ app.endUndoGroup();
                 <ol class="space-y-2.5 font-mono text-xs text-neutral-300 list-decimal list-inside">
                     <li><span class="text-white font-semibold">1-Click Install:</span> Unzip <code class="text-purpleAccent font-bold">SumairTools_v7.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder!</li>
                     <li><span class="text-white font-semibold">Alternative:</span> Drag &amp; drop <code class="text-crimson font-bold">SumairTools_v7.0.zxp</code> into <a href="https://master.dl.sourceforge.net/project/zxpinstaller.fw/mac/1.8.2.dmg?viasf=1&fid=12ca3a7a52a81a37&e=1789602212&st=Ng2KWLgIpEkO9V4qU2QRNA" target="_blank" rel="noopener noreferrer" class="text-purpleAccent font-bold hover:underline">ZXP Installer for Mac (.dmg)</a>.</li>
-                    <li><span class="text-white font-semibold">Launch in AE:</span> Restart After Effects ➔ Go to <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>!</li>
+                    <li><span class="text-white font-semibold">Launch in AE:</span> Restart After Effects ➔ Go to <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key. The "No response from AE engine" error is completely gone!</li>
                 </ol>
             </div>
 
@@ -5549,11 +5586,12 @@ app.endUndoGroup();
                 </div>
 
                 <!-- Easy Setup Guide -->
-                <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-left font-mono text-[10px] text-neutral-400 leading-relaxed">
-                    <span class="text-white font-bold block mb-1">⚡ Quick Setup Guide:</span>
-                    • <strong class="text-cyanAccent">Windows:</strong> Unzip and double-click <code class="text-white">Install_Sumair_Tools.bat</code>.<br>
-                    • <strong class="text-purpleAccent">macOS:</strong> Unzip and double-click <code class="text-white">install_mac.command</code> in Finder.<br>
-                    • Join Discord above for your $1 launch license key, restart After Effects, and open <code class="text-emerald-400">Window &gt; Extensions &gt; Sumair Tools</code>!
+                <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 text-left font-mono text-[11px] text-neutral-300 leading-relaxed">
+                    <span class="text-white font-bold block mb-1.5">⚡ Quick Installation Guide:</span>
+                    • <strong class="text-cyanAccent">Windows Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v7.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.<br>
+                    • <strong class="text-purpleAccent">Mac Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v7.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder.<br>
+                    • Restart After Effects, open <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key.<br>
+                    <span class="text-emerald-400 font-semibold block mt-1">✓ The "No response from AE engine" error is completely gone!</span>
                 </div>
             </div>
         </div>
