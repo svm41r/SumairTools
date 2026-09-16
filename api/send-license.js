@@ -8,6 +8,44 @@
  */
 
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
+
+// Auto-load local .env if not pre-injected by host platform
+(function loadLocalEnv() {
+    if (process.env.GMAIL_APP_PASSWORD) return;
+    try {
+        var envCandidates = [
+            path.resolve(process.cwd(), '.env'),
+            path.resolve(__dirname, '../.env'),
+            path.resolve(__dirname, '.env')
+        ];
+        for (var i = 0; i < envCandidates.length; i++) {
+            var envPath = envCandidates[i];
+            if (fs.existsSync(envPath)) {
+                var content = fs.readFileSync(envPath, 'utf8');
+                var lines = content.split('\n');
+                for (var j = 0; j < lines.length; j++) {
+                    var line = lines[j].trim();
+                    if (!line || line.indexOf('#') === 0) continue;
+                    var eqIdx = line.indexOf('=');
+                    if (eqIdx > 0) {
+                        var k = line.substring(0, eqIdx).trim();
+                        var v = line.substring(eqIdx + 1).trim();
+                        if ((v.indexOf('"') === 0 && v.lastIndexOf('"') === v.length - 1) ||
+                            (v.indexOf("'") === 0 && v.lastIndexOf("'") === v.length - 1)) {
+                            v = v.substring(1, v.length - 1);
+                        }
+                        if (!process.env[k]) {
+                            process.env[k] = v;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    } catch (e) {}
+})();
 
 // -----------------------------------------------------------------
 // 1. SMTP Transport Configuration (Gmail App Password / Custom SMTP)
