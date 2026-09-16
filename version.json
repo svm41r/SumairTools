@@ -1,12 +1,13 @@
 {
-  "version": "7.0",
-  "badgeText": "VERSION 7.0 WINDOWS & macOS RELEASE!",
-  "title": "Sumair Tools Cyber Suite v7.0",
-  "date": "2026-09-16",
+  "version": "7.0.2",
+  "badgeText": "VERSION 7.0.2 HOTFIX: WINDOWS & macOS AE ENGINE FIX!",
+  "title": "Sumair Tools Cyber Suite v7.0.2",
+  "date": "2026-09-17",
   "changelog": [
+    "⚡ Fixed ExtendScript engine initialization (resolved 'No response from AE engine')",
+    "🍎 1-Click macOS Automated Installer with direct Unix permissions & cfprefsd cache flush",
+    "🪟 1-Click Windows Automated Installer with universal CSXS registry bypass",
     "🚀 Version 7.0 Full Windows & macOS Cross-Platform Support!",
-    "🍎 1-Click macOS Automated Installer (install_mac.command & install_mac.sh)",
-    "🪟 1-Click Windows Automated Installer (Install_Sumair_Tools.bat & install_extension.ps1)",
     "📦 Universal Adobe CEP ZXP & Full ZIP Distribution Packages",
     "🌀 Super Morphings: Integrated 1-Click native morph engine for shapes & vectors",
     "🔤 Bouncy Text Studio: Kinetic typography word-by-word bounce animation engine",
@@ -17,9 +18,9 @@
     "🤖 High-Intelligence ExtendScript AI generation with active Groq models & offline Ollama fallback"
   ],
   "downloadUrl": "https://sumairtools.online/#download",
-  "zxpUrl": "https://sumairtools.online/SumairTools_v7.0.zxp",
-  "windowsZipUrl": "https://sumairtools.online/SumairTools_v7.0_Windows.zip",
-  "macZipUrl": "https://sumairtools.online/SumairTools_v7.0_Mac.zip",
+  "zxpUrl": "https://sumairtools.online/SumairTools_v7.0.zxp?v=7.0.2",
+  "windowsZipUrl": "https://sumairtools.online/SumairTools_v7.0_Windows.zip?v=7.0.2",
+  "macZipUrl": "https://sumairtools.online/SumairTools_v7.0_Mac.zip?v=7.0.2",
   "platforms": [
     "Windows 10/11 (64-bit)",
     "macOS Apple Silicon (M1/M2/M3/M4) & Intel"
