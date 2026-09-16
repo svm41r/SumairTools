@@ -683,6 +683,31 @@
     // -----------------------------------------------------------------
     // GMAIL SMTP AUTOMATED LICENSE DISTRIBUTION
     // -----------------------------------------------------------------
+    function getBackendApiUrl() {
+        if (window.ST_CONFIG && window.ST_CONFIG.API_URL) {
+            return window.ST_CONFIG.API_URL.replace(/\/+$/, '');
+        }
+        var saved = localStorage.getItem('ST_BACKEND_API_URL');
+        if (saved) return saved.replace(/\/+$/, '');
+        return '';
+    }
+
+    window.configureBackendApiUrl = function () {
+        var current = getBackendApiUrl();
+        var input = prompt('Enter your Vercel / Serverless Backend URL:\n(e.g. https://your-project.vercel.app)\n\nLeave empty to use relative path (/api/...):', current);
+        if (input !== null) {
+            var trimmed = input.trim().replace(/\/+$/, '');
+            if (trimmed) {
+                localStorage.setItem('ST_BACKEND_API_URL', trimmed);
+                alert('✓ Backend API URL set to:\n' + trimmed);
+            } else {
+                localStorage.removeItem('ST_BACKEND_API_URL');
+                alert('✓ Cleared custom backend URL. Using relative path (/api/...).');
+            }
+            if (typeof window.loadAdminData === 'function') window.loadAdminData();
+        }
+    };
+
     window.mintAndEmailLicense = async function () {
         var emailInput = document.getElementById('dispatch-email');
         var nameInput = document.getElementById('dispatch-name');
@@ -769,7 +794,8 @@
                 alertBox.innerHTML = '🚀 License <b>' + licenseKey + '</b> minted! Transmitting dark-mode HTML email via Gmail SMTP...';
             }
 
-            var apiRes = await fetch('/api/send-license', {
+            var endpoint = (getBackendApiUrl() ? getBackendApiUrl() : '') + '/api/send-license';
+            var apiRes = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -782,10 +808,27 @@
             });
 
             var result = {};
+            var responseText = '';
             try {
-                result = await apiRes.json();
+                responseText = await apiRes.text();
+                result = JSON.parse(responseText);
             } catch (parseErr) {
-                result = { success: false, error: 'Failed to parse API response' };
+                if (apiRes.status === 405) {
+                    result = {
+                        success: false,
+                        error: 'HTTP 405 Not Allowed. Your site (' + window.location.hostname + ') is running on GitHub Pages (static host), which cannot run server-side Node.js/SMTP endpoints. Please deploy to Vercel.'
+                    };
+                } else if (apiRes.status === 404) {
+                    result = {
+                        success: false,
+                        error: 'HTTP 404 Not Found at ' + endpoint + '. Ensure your serverless backend is deployed.'
+                    };
+                } else {
+                    result = {
+                        success: false,
+                        error: 'Server returned HTTP ' + apiRes.status + ': ' + (responseText.substring(0, 150) || 'Empty response')
+                    };
+                }
             }
 
             if (apiRes.ok && result.success) {
@@ -813,6 +856,9 @@
                 }
             } else {
                 var errDetail = result.error || 'Check serverless log or SMTP credentials';
+                var showConfigBtn = (apiRes.status === 405 || !getBackendApiUrl()) ? 
+                    '<div class="pt-2"><button onclick="configureBackendApiUrl()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition-all cursor-pointer">⚙️ Configure Vercel Backend URL</button></div>' : '';
+
                 if (alertBox) {
                     alertBox.className = 'mt-3.5 p-4 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/50 text-crimson block space-y-2';
                     alertBox.innerHTML = `
@@ -825,9 +871,7 @@
                         <div class="text-[11px] text-crimson font-bold bg-black/50 p-2.5 rounded-lg border border-crimson/30">
                             Error: ${errDetail}
                         </div>
-                        <div class="text-[10px] text-neutral-400">
-                            Ensure <code>GMAIL_APP_PASSWORD</code> is configured in your server <code>.env</code> file.
-                        </div>
+                        ${showConfigBtn}
                     `;
                 }
                 if (typeof window.loadAdminData === 'function') {
@@ -873,7 +917,8 @@
                 originalBtn.innerText = 'Sending...';
             }
 
-            var apiRes = await fetch('/api/send-license', {
+            var endpoint = (getBackendApiUrl() ? getBackendApiUrl() : '') + '/api/send-license';
+            var apiRes = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -884,10 +929,24 @@
             });
 
             var result = {};
+            var responseText = '';
             try {
-                result = await apiRes.json();
+                responseText = await apiRes.text();
+                result = JSON.parse(responseText);
             } catch (e) {
-                result = { success: false, error: 'Failed to parse response' };
+                if (apiRes.status === 405) {
+                    result = {
+                        success: false,
+                        error: 'HTTP 405 Not Allowed: GitHub Pages is a static host and cannot run server-side Node.js/SMTP code.\n\nPlease deploy your repository to Vercel (100% free) or point to your Vercel backend URL.'
+                    };
+                    setTimeout(function () {
+                        if (confirm('GitHub Pages cannot run server-side Gmail SMTP (HTTP 405).\n\nDo you want to configure your Vercel backend URL now?')) {
+                            window.configureBackendApiUrl();
+                        }
+                    }, 400);
+                } else {
+                    result = { success: false, error: 'Server returned HTTP ' + apiRes.status + ': ' + (responseText.substring(0, 150) || 'Non-JSON response') };
+                }
             }
 
             if (apiRes.ok && result.success) {
@@ -902,7 +961,7 @@
                     }
                 }
             } else {
-                alert('⚠️ Gmail SMTP Failed:\n' + (result.error || 'Unknown error occurred. Check .env configuration.'));
+                alert('⚠️ Gmail SMTP Failed:\n' + (result.error || 'Unknown error occurred. Check backend configuration.'));
             }
         } catch (err) {
             alert('❌ Network/System Error: ' + err.message);
