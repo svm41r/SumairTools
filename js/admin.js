@@ -431,6 +431,11 @@
             // Copy Key button always present
             actionBtns += `<button onclick="copyLicenseKey('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-mono font-bold transition-all mr-1.5 cursor-pointer" title="Copy license key">📋 Copy</button>`;
 
+            // Email License Key button (Direct Gmail SMTP dispatch)
+            var safeLicName = (lic.user_name || '').replace(/['"\\]/g, ' ');
+            var safeLicEmail = (lic.user_email || '').replace(/['"\\]/g, ' ');
+            actionBtns += `<button onclick="sendExistingLicenseEmail('${lic.license_key}', '${safeLicEmail}', '${safeLicName}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-300 hover:text-white text-[11px] font-mono font-bold transition-all mr-1.5 cursor-pointer" title="Dispatch license key via Gmail SMTP">📧 Email</button>`;
+
             if (isRevoked) {
                 statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border text-crimson bg-crimson/15 border-crimson/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-crimson"></span> REVOKED</span>';
                 actionBtns += `<button onclick="reactivateLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-300 hover:text-black text-[11px] font-mono font-bold transition-all cursor-pointer" title="Reactivate license">✓ Reactivate</button>`;
@@ -673,6 +678,239 @@
 
         console.log('[Admin Filter] Matched records:', filtered.length, 'of total:', adminLicenses.length);
         renderTable(filtered);
+    };
+
+    // -----------------------------------------------------------------
+    // GMAIL SMTP AUTOMATED LICENSE DISTRIBUTION
+    // -----------------------------------------------------------------
+    window.mintAndEmailLicense = async function () {
+        var emailInput = document.getElementById('dispatch-email');
+        var nameInput = document.getElementById('dispatch-name');
+        var submitBtn = document.getElementById('dispatch-submit-btn');
+        var btnIcon = document.getElementById('dispatch-btn-icon');
+        var btnText = document.getElementById('dispatch-btn-text');
+        var alertBox = document.getElementById('dispatch-status-alert');
+
+        if (!emailInput) return;
+
+        var email = emailInput.value.trim().toLowerCase();
+        var name = nameInput ? nameInput.value.trim() : '';
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            if (alertBox) {
+                alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
+                alertBox.innerHTML = '⚠️ <b>Invalid Email Address</b>: Please enter a valid recipient email address.';
+            }
+            emailInput.focus();
+            return;
+        }
+
+        // Set UI loading state
+        if (submitBtn) submitBtn.disabled = true;
+        if (btnIcon) btnIcon.innerHTML = '⏳';
+        if (btnText) btnText.textContent = 'MINTING & DISPATCHING...';
+        if (alertBox) {
+            alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-cyanAccent/10 border-cyanAccent/30 text-cyanAccent block';
+            alertBox.innerHTML = '⚙️ Provisioning enterprise license key in Supabase & connecting to Gmail SMTP...';
+        }
+
+        try {
+            var licenseKey = null;
+
+            // Step 1: Mint license key via Supabase RPC or resilient fallback
+            try {
+                if (window.sbClient) {
+                    var rpcRes = await window.sbClient.rpc('generate_batch_licenses', { p_count: 1 });
+                    if (!rpcRes.error && rpcRes.data && rpcRes.data.length > 0) {
+                        licenseKey = rpcRes.data[0].license_key;
+                    }
+                }
+            } catch (rpcErr) {
+                console.warn('[Admin] RPC generate_batch_licenses failed, using client fallback:', rpcErr);
+            }
+
+            // Fallback generation if RPC didn't return a key
+            if (!licenseKey) {
+                var pool = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+                var seg = function () {
+                    var s = '';
+                    for (var i = 0; i < 4; i++) s += pool.charAt(Math.floor(Math.random() * pool.length));
+                    return s;
+                };
+                licenseKey = 'ST-' + seg() + '-' + seg() + '-' + seg() + '-' + seg();
+
+                if (window.sbClient) {
+                    var insRes = await window.sbClient.from('licenses').insert([{
+                        license_key: licenseKey,
+                        user_email: email,
+                        user_name: name || null,
+                        status: 'unactivated',
+                        is_active: true
+                    }]);
+                    if (insRes.error) {
+                        console.warn('[Admin] Fallback insert error:', insRes.error);
+                    }
+                }
+            } else {
+                // Link the newly minted key to customer email and name
+                if (window.sbClient) {
+                    await window.sbClient.from('licenses').update({
+                        user_email: email,
+                        user_name: name || null,
+                        status: 'unactivated',
+                        is_active: true
+                    }).eq('license_key', licenseKey);
+                }
+            }
+
+            // Step 2: Trigger Gmail SMTP Dispatch
+            if (alertBox) {
+                alertBox.innerHTML = '🚀 License <b>' + licenseKey + '</b> minted! Transmitting dark-mode HTML email via Gmail SMTP...';
+            }
+
+            var apiRes = await fetch('/api/send-license', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    license_key: licenseKey,
+                    customer_name: name
+                })
+            });
+
+            var result = {};
+            try {
+                result = await apiRes.json();
+            } catch (parseErr) {
+                result = { success: false, error: 'Failed to parse API response' };
+            }
+
+            if (apiRes.ok && result.success) {
+                if (alertBox) {
+                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-mono text-xs border bg-emerald-500/15 border-emerald-500/40 text-emerald-300 block space-y-2';
+                    alertBox.innerHTML = `
+                        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                            <span>✅</span> <span>LICENSE DELIVERED SUCCESSFULLY</span>
+                        </div>
+                        <div class="text-neutral-200">
+                            Key <span class="text-white font-bold bg-black/40 px-2 py-0.5 rounded border border-emerald-500/40 select-all">${licenseKey}</span> has been emailed to <b class="text-white">${email}</b>.
+                        </div>
+                        <div class="text-[11px] text-neutral-400 flex items-center gap-3 pt-1">
+                            <span>Message ID: ${result.messageId || 'Delivered'}</span>
+                            <span>•</span>
+                            <span>Attempt: ${result.attempt || 1}/3</span>
+                            <button onclick="copyLicenseKey('${licenseKey}')" class="ml-auto px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition-colors cursor-pointer">📋 Copy Key</button>
+                        </div>
+                    `;
+                }
+                emailInput.value = '';
+                if (nameInput) nameInput.value = '';
+                if (typeof window.loadAdminData === 'function') {
+                    window.loadAdminData();
+                }
+            } else {
+                var errDetail = result.error || 'Check serverless log or SMTP credentials';
+                if (alertBox) {
+                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/50 text-crimson block space-y-2';
+                    alertBox.innerHTML = `
+                        <div class="flex items-center gap-2 font-bold text-sm">
+                            <span>⚠️</span> <span>GMAIL SMTP DISPATCH FAILED</span>
+                        </div>
+                        <div class="text-neutral-200">
+                            License was provisioned in Supabase as <span class="text-white font-bold bg-black/40 px-2 py-0.5 rounded border border-white/20 select-all">${licenseKey}</span>, but the email could not be transmitted.
+                        </div>
+                        <div class="text-[11px] text-crimson font-bold bg-black/50 p-2.5 rounded-lg border border-crimson/30">
+                            Error: ${errDetail}
+                        </div>
+                        <div class="text-[10px] text-neutral-400">
+                            Ensure <code>GMAIL_APP_PASSWORD</code> is configured in your server <code>.env</code> file.
+                        </div>
+                    `;
+                }
+                if (typeof window.loadAdminData === 'function') {
+                    window.loadAdminData();
+                }
+            }
+
+        } catch (err) {
+            console.error('[Admin] mintAndEmailLicense fatal error:', err);
+            if (alertBox) {
+                alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
+                alertBox.innerHTML = '❌ <b>System Error</b>: ' + (err.message || 'Unknown network error occurred');
+            }
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+            if (btnIcon) btnIcon.innerHTML = '⚡';
+            if (btnText) btnText.textContent = 'MINT & DISPATCH EMAIL';
+        }
+    };
+
+    window.sendExistingLicenseEmail = async function (licenseKey, existingEmail, existingName) {
+        var recipientEmail = existingEmail;
+        if (!recipientEmail || !recipientEmail.includes('@')) {
+            recipientEmail = prompt('Enter customer email to dispatch license ' + licenseKey + ' to:');
+            if (!recipientEmail || !recipientEmail.trim()) return;
+            recipientEmail = recipientEmail.trim().toLowerCase();
+        }
+
+        var recipientName = existingName || '';
+        if (!recipientName) {
+            var promptName = prompt('Enter client name (Optional, press OK to skip):', '');
+            if (promptName !== null) recipientName = promptName.trim();
+        }
+
+        if (!confirm('Dispatch enterprise license ' + licenseKey + ' to ' + recipientEmail + ' via Gmail SMTP?')) {
+            return;
+        }
+
+        try {
+            var originalBtn = document.activeElement;
+            if (originalBtn && originalBtn.tagName === 'BUTTON') {
+                originalBtn.disabled = true;
+                originalBtn.innerText = 'Sending...';
+            }
+
+            var apiRes = await fetch('/api/send-license', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: recipientEmail,
+                    license_key: licenseKey,
+                    customer_name: recipientName
+                })
+            });
+
+            var result = {};
+            try {
+                result = await apiRes.json();
+            } catch (e) {
+                result = { success: false, error: 'Failed to parse response' };
+            }
+
+            if (apiRes.ok && result.success) {
+                alert('✓ Success!\nLicense ' + licenseKey + ' has been sent to ' + recipientEmail + ' via Gmail SMTP.');
+                if (window.sbClient && (!existingEmail || existingEmail !== recipientEmail)) {
+                    await window.sbClient.from('licenses').update({
+                        user_email: recipientEmail,
+                        user_name: recipientName || null
+                    }).eq('license_key', licenseKey);
+                    if (typeof window.loadAdminData === 'function') {
+                        window.loadAdminData();
+                    }
+                }
+            } else {
+                alert('⚠️ Gmail SMTP Failed:\n' + (result.error || 'Unknown error occurred. Check .env configuration.'));
+            }
+        } catch (err) {
+            alert('❌ Network/System Error: ' + err.message);
+        } finally {
+            if (typeof window.loadAdminData === 'function') {
+                window.loadAdminData();
+            }
+        }
     };
 
     window.generateBatchKeys = async function (count) {

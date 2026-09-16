@@ -249,6 +249,56 @@
             </div>
         </div>
 
+        <!-- MINT & DISPATCH LICENSE VIA GMAIL SMTP (Automated Email Distribution) -->
+        <div class="glass-card p-6 rounded-3xl border-crimson/40 bg-gradient-to-br from-panelDark via-panelDark to-crimson/10 shadow-[0_0_40px_rgba(255,0,60,0.15)] relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-crimson/20 border border-crimson/50 text-xl flex items-center justify-center flex-shrink-0 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.3)]">
+                        ✉️
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h2 class="font-display font-black text-lg text-white tracking-wide">
+                                INSTANT LICENSE MINT &amp; GMAIL DISPATCH
+                            </h2>
+                            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                                GMAIL SMTP ACTIVE
+                            </span>
+                        </div>
+                        <p class="text-[11px] font-mono text-neutral-400 mt-0.5">
+                            Auto-generates enterprise ST-XXXX key in Supabase &amp; delivers dark-mode HTML welcome kit with installation instructions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="license-dispatch-form" onsubmit="event.preventDefault(); mintAndEmailLicense();" class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+                <div class="sm:col-span-5">
+                    <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1">
+                        Recipient Customer Email <span class="text-crimson">*</span>
+                    </label>
+                    <input id="dispatch-email" type="email" placeholder="customer@example.com" required autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                </div>
+
+                <div class="sm:col-span-4">
+                    <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1">
+                        Client Full Name <span class="text-neutral-500">(Optional)</span>
+                    </label>
+                    <input id="dispatch-name" type="text" placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                </div>
+
+                <div class="sm:col-span-3">
+                    <button type="submit" id="dispatch-submit-btn" class="btn-crimson w-full py-2.5 px-4 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,0,60,0.4)] whitespace-nowrap">
+                        <span id="dispatch-btn-icon">⚡</span>
+                        <span id="dispatch-btn-text">MINT &amp; DISPATCH EMAIL</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Real-time Status Alert Container -->
+            <div id="dispatch-status-alert" class="hidden mt-3.5 p-3 rounded-xl font-mono text-xs border transition-all"></div>
+        </div>
+
         <!-- Telemetry Management Panel -->
         <div class="glass-card p-6 rounded-3xl border-white/10">
             <!-- Filter & Action Controls -->
@@ -278,6 +328,9 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2.5 flex-wrap">
+                    <button onclick="document.getElementById('dispatch-email').focus(); document.getElementById('dispatch-email').scrollIntoView({behavior:'smooth'});" class="px-3.5 py-2 rounded-xl bg-crimson/20 hover:bg-crimson/30 border border-crimson/50 text-crimson hover:text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,0,60,0.25)] cursor-pointer">
+                        <span>✉️</span> Mint &amp; Email
+                    </button>
                     <button onclick="generateBatchKeys(50)" class="px-4 py-2 rounded-xl bg-crimson hover:bg-crimson/80 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.4)] cursor-pointer">
                         <span>⚡</span> Mint 50 Keys
                     </button>

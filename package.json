@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "formidable": "^3.5.1",
+    "nodemailer": "^10.0.10",
     "openai": "^4.56.0"
   }
 }
