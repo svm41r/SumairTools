@@ -728,10 +728,14 @@
         }
     }
 
+    function getGasUrl() {
+        return localStorage.getItem('ST_GAS_URL') || (window.ST_CONFIG && (window.ST_CONFIG.GAS_URL || window.ST_CONFIG.EMAIL_API_URL)) || '';
+    }
+
     function updateDispatchBadge() {
         var badge = document.getElementById('dispatch-status-badge');
         if (!badge) return;
-        var gasUrl = localStorage.getItem('ST_GAS_URL') || '';
+        var gasUrl = getGasUrl();
         if (gasUrl) {
             badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
             badge.innerHTML = '⚡ GOOGLE APPS SCRIPT ACTIVE';
@@ -742,7 +746,7 @@
     }
 
     window.configureDispatchMode = function () {
-        var currentGas = localStorage.getItem('ST_GAS_URL') || '';
+        var currentGas = getGasUrl();
         var msg = "✉️ EMAIL DISPATCH CONFIGURATION (GitHub Pages)\n\n" +
             "• Mode 1 (Default): 1-Click Gmail Web Composer\n" +
             "  Opens Gmail compose pre-filled with customer email, key, & instructions (No setup needed).\n\n" +
@@ -765,7 +769,7 @@
     };
 
     async function dispatchEmail(email, licenseKey, customerName) {
-        var gasUrl = localStorage.getItem('ST_GAS_URL');
+        var gasUrl = getGasUrl();
         if (gasUrl) {
             try {
                 await fetch(gasUrl, {
