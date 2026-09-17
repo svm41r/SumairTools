@@ -1,9 +1,11 @@
 {
-  "version": "7.0.2",
-  "badgeText": "VERSION 7.0.2: MASK & SHAPE TOOLS + PIXELATED REVEAL FIX!",
-  "title": "Sumair Tools Cyber Suite v7.0.2",
-  "date": "2026-09-17",
+  "version": "7.0.3",
+  "badgeText": "VERSION 7.0.3: AUTO SFX PLACEMENT + SRT-POWERED AUTO B-ROLL STUDIO!",
+  "title": "Sumair Tools Cyber Suite v7.0.3",
+  "date": "2026-09-18",
   "changelog": [
+    "⚡ Auto SFX Placement Engine: 1-Click automated sound effects placement synchronized to timeline layer cuts & transitions with customizable pre-roll offset & audio gain",
+    "🎬 Auto B-Roll Studio: Millisecond-accurate SRT subtitle timestamp parsing & B-Roll sequencer with intelligent niche keyword matching (Roofing, HVAC, Bathroom, Siding), auto-scale fill, and Ken Burns slow zoom motion",
     "✨ Pixelated Reveal: High-performance Apple VisionOS glassmorphic linear wipe + mosaic transition fix (100% native clarity return)",
     "🎭 Mask & Shape Tools: 2-in-1 Suite with 1-Click Trim Paths & Modifiers (Branch 1) + SS to AE Comp Reconstructor (Branch 2)",
     "⚡ Fixed ExtendScript engine initialization (resolved 'No response from AE engine')",
@@ -19,11 +21,5 @@
     "🤖 High-Intelligence ExtendScript AI generation with active Groq models & offline Ollama fallback"
   ],
   "downloadUrl": "https://sumairtools.online/#download",
-  "zxpUrl": "https://sumairtools.online/SumairTools_v7.0.zxp?v=7.0.2",
-  "windowsZipUrl": "https://sumairtools.online/SumairTools_v7.0_Windows.zip?v=7.0.2",
-  "macZipUrl": "https://sumairtools.online/SumairTools_v7.0_Mac.zip?v=7.0.2",
-  "platforms": [
-    "Windows 10/11 (64-bit)",
-    "macOS Apple Silicon (M1/M2/M3/M4) & Intel"
-  ]
+  "zxpUrl": "https://sumairtools.online/SumairTools_v7.0.zxp?v=7.0.3"
 }
