@@ -1,9 +1,11 @@
 {
   "version": "7.0.2",
-  "badgeText": "VERSION 7.0.2 HOTFIX: WINDOWS & macOS AE ENGINE FIX!",
+  "badgeText": "VERSION 7.0.2: MASK & SHAPE TOOLS + PIXELATED REVEAL FIX!",
   "title": "Sumair Tools Cyber Suite v7.0.2",
   "date": "2026-09-17",
   "changelog": [
+    "✨ Pixelated Reveal: High-performance Apple VisionOS glassmorphic linear wipe + mosaic transition fix (100% native clarity return)",
+    "🎭 Mask & Shape Tools: 2-in-1 Suite with 1-Click Trim Paths & Modifiers (Branch 1) + SS to AE Comp Reconstructor (Branch 2)",
     "⚡ Fixed ExtendScript engine initialization (resolved 'No response from AE engine')",
     "🍎 1-Click macOS Automated Installer with direct Unix permissions & cfprefsd cache flush",
     "🪟 1-Click Windows Automated Installer with universal CSXS registry bypass",
@@ -12,7 +14,6 @@
     "🌀 Super Morphings: Integrated 1-Click native morph engine for shapes & vectors",
     "🔤 Bouncy Text Studio: Kinetic typography word-by-word bounce animation engine",
     "🦘 Bounce Studio Pro: Native physics engine with 5 presets, waveform simulator & keyframe baker",
-    "✨ Pixelated Reveal: Apple VisionOS glassmorphic linear wipe + mosaic transition",
     "📈 Motion Graph Easing Engine with JerryFlow & Flow dual-pass velocity slope calculations",
     "⚡ Direct Groq Whisper AI Engine (whisper-large-v3-turbo) with real-time live terminal logging",
     "🤖 High-Intelligence ExtendScript AI generation with active Groq models & offline Ollama fallback"
