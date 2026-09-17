@@ -2791,6 +2791,9 @@ app.endUndoGroup();
                                             <button onclick="simApplyTrimPaths('draw_off')" class="py-2 px-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-crimson/40 hover:bg-white/10 text-white font-bold text-[11px] transition-all flex items-center justify-center gap-1.5">
                                                 <span>💨 Draw Off</span>
                                             </button>
+                                            <button onclick="simApplyTrimPaths('draw_on_off')" class="col-span-2 py-2 px-2.5 rounded-xl bg-gradient-to-r from-crimson/25 to-cyan-500/25 border border-cyan-400/40 hover:border-cyan-400 text-white font-bold text-[11px] transition-all flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(56,189,248,0.25)]">
+                                                <span>✨ Draw On & Off (Both in 1 Layer)</span>
+                                            </button>
                                             <button onclick="simApplyTrimPaths('pulse')" class="py-2 px-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-cyan-400/40 hover:bg-white/10 text-white font-bold text-[11px] transition-all flex items-center justify-center gap-1.5">
                                                 <span>⚡ Line Pulse</span>
                                             </button>
@@ -6853,6 +6856,14 @@ app.endUndoGroup();
                 path.style.strokeDashoffset = '-1200';
                 if (status) status.textContent = '💨 Animated Draw-Off (Start 0% → 100%)';
                 triggerSimExecutionToast('💨 Trim Paths Draw-Off (Wipe) Applied!', '✂️');
+            } else if (type === 'draw_on_off') {
+                path.style.strokeDasharray = '260 1200';
+                path.style.strokeDashoffset = '1200';
+                void path.offsetWidth;
+                path.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                path.style.strokeDashoffset = '-320';
+                if (status) status.textContent = '✨ Draw On & Off (Start & End animated together on 1 layer)';
+                triggerSimExecutionToast('✨ Draw On & Off (Self-Erasing Trail) Applied!', '💫');
             } else if (type === 'pulse') {
                 path.style.strokeDasharray = '140 1000';
                 path.style.strokeDashoffset = '1000';
