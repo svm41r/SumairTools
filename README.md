@@ -1,12 +1,12 @@
-# Sumair Tools v6.5 — Official Website & Landing Page
+# Sumair Tools v8.0 — Official Website & Landing Page
 
-Official landing page and distribution repository for **Sumair Tools v6.5** (Latest Version), the all-in-one After Effects automation suite engineered by Sumair Ali Siddiqui.
+Official landing page and distribution repository for **Sumair Tools v8.0** (Latest Version), the all-in-one After Effects automation suite engineered by Sumair Ali Siddiqui.
 
 🌐 **Live Website:** [https://sumairtools.online/](https://sumairtools.online/)
 
 ---
 
-## ⚡ What's New in v6.5?
+## ⚡ What's New in v8.0?
 
 - 🤖 **AI Agent Assistant:** Conversational natural-language prompt-to-JSX engine powered directly by Groq Cloud AI with zero user API key configuration needed, plus Ollama 100% offline fallback.
 - ⚡ **Caption Pro (Quick Transcribe):** Timeline audio extraction to WAV, automated Whisper AI speech-to-text, and instant marker/subtitle building.
