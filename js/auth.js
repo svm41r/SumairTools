@@ -198,34 +198,11 @@
         return true;
     };
 
-    // --- Dynamically Update All Download Buttons on Site ---
+    // --- Dynamically Update Verified Package Cards on Site ---
     function updateDownloadButtonsState(user) {
         var isAuth = Boolean(user);
 
-        // 1. Top Navbar Download Button
-        var navDownloadBtn = document.getElementById('nav-download-btn');
-        var navDownloadText = document.getElementById('nav-download-btn-text');
-        if (navDownloadText) {
-            navDownloadText.innerText = isAuth ? 'DOWNLOAD v8.0' : 'DOWNLOAD v8.0';
-        }
-        if (navDownloadBtn) {
-            navDownloadBtn.title = isAuth ? 'Download Sumair Tools v8.0' : 'Download Sumair Tools v8.0';
-        }
-
-        // 2. Mobile Nav Download Button
-        var mobileDownloadText = document.getElementById('mobile-nav-download-btn-text');
-        if (mobileDownloadText) {
-            mobileDownloadText.innerText = isAuth ? 'DOWNLOAD v8.0' : 'DOWNLOAD v8.0';
-        }
-
-        // 3. Hero Section CTA Button
-        var heroDownloadText = document.getElementById('hero-download-btn-text');
-        if (heroDownloadText) {
-            var os = window.getOperatingSystem();
-            heroDownloadText.innerText = isAuth ? (os === 'mac' ? 'DOWNLOAD FOR MAC (.ZIP)' : 'DOWNLOAD FOR WIN (.ZIP)') : (os === 'mac' ? 'DOWNLOAD FOR MAC (.ZIP)' : 'DOWNLOAD FOR WIN (.ZIP)');
-        }
-
-        // 4. Download Hub Section Cards
+        // Download Hub Section Cards (Direct Verified Packages)
         var cardWinText = document.getElementById('card-download-win-text');
         if (cardWinText) cardWinText.innerText = isAuth ? 'DOWNLOAD FOR WINDOWS (1-CLICK)' : 'DOWNLOAD FOR WINDOWS (1-CLICK)';
 
@@ -237,12 +214,6 @@
 
         var cardZxpText = document.getElementById('card-download-zxp-text');
         if (cardZxpText) cardZxpText.innerText = isAuth ? 'DOWNLOAD NOW (.ZXP)' : 'DOWNLOAD NOW (.ZXP)';
-
-        // 5. Footer Link
-        var footerDownloadText = document.getElementById('footer-download-text');
-        if (footerDownloadText) {
-            footerDownloadText.innerText = 'Download v8.0 (Win & Mac)';
-        }
     }
 
     // --- Sign In Action ---
@@ -419,7 +390,7 @@
         }, 400);
     };
 
-    // --- Google OAuth ---
+    // --- Google OAuth (Official Direct Supabase Authentication) ---
     window.handleGoogleAuth = async function () {
         var activeBtn = (typeof event !== 'undefined' && event && event.currentTarget) 
             ? event.currentTarget 
@@ -428,7 +399,7 @@
         if (activeBtn) {
             activeBtn.disabled = true;
             activeBtn.style.opacity = '0.7';
-            activeBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Connecting to Google...';
+            activeBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Redirecting to Google...';
         }
 
         function restoreBtn() {
@@ -439,13 +410,16 @@
             }
         }
 
+        var redirectUrl = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+            ? (window.location.origin + window.location.pathname)
+            : 'https://sumairtools.online/';
+
         if (window.sbClient && window.ST_CONFIG && window.ST_CONFIG.isConfigured()) {
             try {
                 var res = await window.sbClient.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
-                        redirectTo: window.location.origin,
-                        skipBrowserRedirect: true
+                        redirectTo: redirectUrl
                     }
                 });
 
@@ -456,42 +430,18 @@
                 }
 
                 if (res.data && res.data.url) {
-                    // Pre-flight check: Verify Supabase has Google provider enabled
-                    // to prevent users getting trapped on raw Supabase 400 error page
-                    try {
-                        var check = await fetch(res.data.url, {
-                            headers: { 'apikey': window.ST_CONFIG.ANON_KEY }
-                        });
-                        if (check.status === 400) {
-                            var body = await check.json();
-                            if (body.msg && body.msg.indexOf('not enabled') !== -1) {
-                                restoreBtn();
-                                showToast('Google Sign-In is not enabled in Supabase yet. Please sign in with Email & Password below!', true);
-                                var emailInput = document.getElementById('signin-email') || document.getElementById('signup-email');
-                                if (emailInput) {
-                                    emailInput.focus();
-                                    emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                                return;
-                            }
-                        }
-                    } catch (probeErr) {
-                        // Network probe error or CORS: proceed with standard redirect
-                    }
-
-                    // Provider is enabled - redirect directly to Google OAuth
                     window.location.href = res.data.url;
                     return;
                 }
             } catch (err) {
                 restoreBtn();
-                showToast(err.message || 'Google Auth error.', true);
+                showToast(err.message || 'Google Auth connection error.', true);
                 return;
             }
         } else {
             restoreBtn();
-            // Standalone Google Auth Simulator
-            var simEmail = prompt('Enter your Google email address to simulate OAuth sign-in:', 'sumairalisiddiqui@gmail.com');
+            // Standalone / Offline fallback
+            var simEmail = prompt('Enter your Google email address to sign in:', 'sumairalisiddiqui@gmail.com');
             if (simEmail) {
                 var localUser = {
                     id: 'usr_g_' + Math.abs(simEmail.split('').reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)),
@@ -681,6 +631,13 @@
                         currentUser = session.user;
                         localStorage.setItem('ST_CURRENT_USER', JSON.stringify(currentUser));
                         updateNavbarState(currentUser);
+                        if (window.location.hash && (window.location.hash.indexOf('access_token') !== -1 || window.location.search.indexOf('code=') !== -1)) {
+                            var uName = (session.user.user_metadata && session.user.user_metadata.full_name) || session.user.email.split('@')[0];
+                            showToast('Signed in successfully with Google! Welcome ' + uName, false);
+                            if (window.history && window.history.replaceState) {
+                                window.history.replaceState(null, '', window.location.pathname);
+                            }
+                        }
                     } else if (event === 'SIGNED_OUT') {
                         currentUser = null;
                         localStorage.removeItem('ST_CURRENT_USER');
