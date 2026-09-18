@@ -206,42 +206,42 @@
         var navDownloadBtn = document.getElementById('nav-download-btn');
         var navDownloadText = document.getElementById('nav-download-btn-text');
         if (navDownloadText) {
-            navDownloadText.innerText = isAuth ? 'DOWNLOAD v7.0' : 'SIGN IN TO DOWNLOAD';
+            navDownloadText.innerText = isAuth ? 'DOWNLOAD v8.0' : 'DOWNLOAD v8.0';
         }
         if (navDownloadBtn) {
-            navDownloadBtn.title = isAuth ? 'Download Sumair Tools v7.0' : 'Sign In to Download Sumair Tools';
+            navDownloadBtn.title = isAuth ? 'Download Sumair Tools v8.0' : 'Download Sumair Tools v8.0';
         }
 
         // 2. Mobile Nav Download Button
         var mobileDownloadText = document.getElementById('mobile-nav-download-btn-text');
         if (mobileDownloadText) {
-            mobileDownloadText.innerText = isAuth ? 'DOWNLOAD v7.0' : 'SIGN IN TO DOWNLOAD';
+            mobileDownloadText.innerText = isAuth ? 'DOWNLOAD v8.0' : 'DOWNLOAD v8.0';
         }
 
         // 3. Hero Section CTA Button
         var heroDownloadText = document.getElementById('hero-download-btn-text');
         if (heroDownloadText) {
             var os = window.getOperatingSystem();
-            heroDownloadText.innerText = isAuth ? (os === 'mac' ? 'DOWNLOAD FOR MAC (.ZIP)' : 'DOWNLOAD FOR WIN (.ZIP)') : 'SIGN IN TO DOWNLOAD';
+            heroDownloadText.innerText = isAuth ? (os === 'mac' ? 'DOWNLOAD FOR MAC (.ZIP)' : 'DOWNLOAD FOR WIN (.ZIP)') : (os === 'mac' ? 'DOWNLOAD FOR MAC (.ZIP)' : 'DOWNLOAD FOR WIN (.ZIP)');
         }
 
         // 4. Download Hub Section Cards
         var cardWinText = document.getElementById('card-download-win-text');
-        if (cardWinText) cardWinText.innerText = isAuth ? 'DOWNLOAD FOR WINDOWS (1-CLICK)' : 'SIGN IN TO DOWNLOAD (WINDOWS)';
+        if (cardWinText) cardWinText.innerText = isAuth ? 'DOWNLOAD FOR WINDOWS (1-CLICK)' : 'DOWNLOAD FOR WINDOWS (1-CLICK)';
 
         var cardMacText = document.getElementById('card-download-mac-text');
-        if (cardMacText) cardMacText.innerText = isAuth ? 'DOWNLOAD FOR macOS (1-CLICK)' : 'SIGN IN TO DOWNLOAD (macOS)';
+        if (cardMacText) cardMacText.innerText = isAuth ? 'DOWNLOAD FOR macOS (1-CLICK)' : 'DOWNLOAD FOR macOS (1-CLICK)';
 
         var cardUniversalText = document.getElementById('card-download-universal-text');
-        if (cardUniversalText) cardUniversalText.innerText = isAuth ? 'DOWNLOAD UNIVERSAL BUNDLE' : 'SIGN IN TO DOWNLOAD (UNIVERSAL)';
+        if (cardUniversalText) cardUniversalText.innerText = isAuth ? 'DOWNLOAD UNIVERSAL BUNDLE' : 'DOWNLOAD UNIVERSAL BUNDLE';
 
         var cardZxpText = document.getElementById('card-download-zxp-text');
-        if (cardZxpText) cardZxpText.innerText = isAuth ? 'DOWNLOAD NOW (.ZXP)' : 'SIGN IN TO DOWNLOAD (.ZXP)';
+        if (cardZxpText) cardZxpText.innerText = isAuth ? 'DOWNLOAD NOW (.ZXP)' : 'DOWNLOAD NOW (.ZXP)';
 
         // 5. Footer Link
         var footerDownloadText = document.getElementById('footer-download-text');
         if (footerDownloadText) {
-            footerDownloadText.innerText = isAuth ? 'Download v7.0 (Win & Mac)' : 'Sign In to Download';
+            footerDownloadText.innerText = 'Download v8.0 (Win & Mac)';
         }
     }
 
@@ -545,7 +545,7 @@
             targetEl.outerHTML = `
                 <div id="nav-user-container" class="relative flex items-center gap-2 flex-shrink-0">
                     <div class="relative">
-                        <button onclick="toggleUserDropdown(event)" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono font-bold text-white transition-all shadow-sm whitespace-nowrap flex-shrink-0">
+                        <button onclick="toggleUserDropdown(event)" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-display font-semibold text-white transition-all shadow-sm whitespace-nowrap flex-shrink-0 cursor-pointer">
                             <span class="w-5 h-5 rounded-full bg-crimson flex items-center justify-center text-[10px] text-white font-black">${initials}</span>
                             <span class="max-w-[80px] sm:max-w-[100px] truncate">${displayName}</span>
                             <svg class="w-3 h-3 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -555,13 +555,17 @@
                                 <div class="text-[9px] text-neutral-500 font-mono">LOGGED IN AS</div>
                                 <div class="text-xs text-white font-bold truncate">${user.email}</div>
                             </div>
-                            <button onclick="openAuthModal(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-2">
+                            ${isMasterAdmin ? `
+                            <a href="admin.html" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-crimson hover:bg-crimson/10 transition-all flex items-center gap-2 mb-1">
+                                <span>🛡️</span> Admin Command Center
+                            </a>` : ''}
+                            <button onclick="openAuthModal(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-2 cursor-pointer">
                                 <span>📦</span> Downloads & Setup
                             </button>
-                            <button onclick="openDashboardModal(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-neutral-200 hover:bg-white/10 transition-all flex items-center gap-2">
+                            <button onclick="openDashboardModal(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-neutral-200 hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer">
                                 <span>⚡</span> Full Dashboard
                             </button>
-                            <button onclick="handleSignOut(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-neutral-400 hover:text-crimson hover:bg-crimson/10 transition-all flex items-center gap-2 mt-1">
+                            <button onclick="handleSignOut(); hideUserDropdown();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-mono font-bold text-neutral-400 hover:text-crimson hover:bg-crimson/10 transition-all flex items-center gap-2 mt-1 cursor-pointer">
                                 <span>➔</span> Sign Out
                             </button>
                         </div>
@@ -595,17 +599,27 @@
             var mobileUserContainer = document.getElementById('mobile-nav-user-container');
             if (mobileUserContainer) {
                 mobileUserContainer.outerHTML = `
-                    <a href="javascript:void(0)" id="mobile-nav-auth-btn" onclick="toggleMobileMenu(); openAuthModal('signin');" class="px-4 py-3 rounded-xl bg-white/5 hover:bg-crimson/20 border border-white/5 hover:border-crimson/40 text-neutral-200 hover:text-white flex items-center justify-between transition-all font-mono font-bold">
-                        <span>🔑 Sign In / Register</span>
-                        <span class="text-xs text-crimson">➔</span>
-                    </a>
+                    <div id="mobile-nav-user-container" class="flex flex-col gap-2 pt-2 border-t border-white/10">
+                        <button onclick="toggleMobileMenu(); openAuthModal('signin');" class="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-200 text-xs font-medium flex items-center justify-between cursor-pointer">
+                            <span>🔑 Sign In</span>
+                            <span class="text-neutral-400">➔</span>
+                        </button>
+                        <button onclick="toggleMobileMenu(); openAuthModal('signup');" class="w-full text-left px-4 py-2.5 rounded-xl bg-crimson/20 border border-crimson/40 text-white text-xs font-bold flex items-center justify-between cursor-pointer">
+                            <span>✨ Create Account</span>
+                            <span class="text-crimson">➔</span>
+                        </button>
+                    </div>
                 `;
             }
             targetEl.outerHTML = `
-                <button id="nav-auth-btn" onclick="openAuthModal('signin')" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-crimson/20 border border-white/10 hover:border-crimson text-xs font-mono font-bold text-white transition-all shadow-sm whitespace-nowrap flex-shrink-0" title="Sign In to Sumair Tools">
-                    <svg class="w-3.5 h-3.5 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                    <span>SIGN IN</span>
-                </button>
+                <div id="nav-user-container" class="hidden sm:flex items-center gap-2 flex-shrink-0">
+                    <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="text-xs font-medium text-neutral-400 hover:text-white transition-colors px-2.5 py-1.5 cursor-pointer">
+                        Sign In
+                    </button>
+                    <button id="nav-signup-btn" onclick="openAuthModal('signup')" class="text-xs font-semibold text-neutral-200 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-3.5 py-1.5 rounded-full transition-all shadow-sm cursor-pointer">
+                        Create Account
+                    </button>
+                </div>
             `;
         }
 

@@ -1,25 +1,18 @@
 {
-  "version": "7.0.3",
-  "badgeText": "VERSION 7.0.3: AUTO SFX PLACEMENT + SRT-POWERED AUTO B-ROLL STUDIO!",
-  "title": "Sumair Tools Cyber Suite v7.0.3",
+  "version": "8.0.0",
+  "badgeText": "VERSION 8.0: MOTION GRAPHS + ADVANCED 10-RIG MOTION STUDIO SUITE!",
+  "title": "Sumair Tools Cyber Suite v8.0",
   "date": "2026-09-18",
   "changelog": [
-    "⚡ Auto SFX Placement Engine: 1-Click automated sound effects placement synchronized to timeline layer cuts & transitions with customizable pre-roll offset & audio gain",
-    "🎬 Auto B-Roll Studio: Millisecond-accurate SRT subtitle timestamp parsing & B-Roll sequencer with intelligent niche keyword matching (Roofing, HVAC, Bathroom, Siding), auto-scale fill, and Ken Burns slow zoom motion",
-    "✨ Pixelated Reveal: High-performance Apple VisionOS glassmorphic linear wipe + mosaic transition fix (100% native clarity return)",
-    "🎭 Mask & Shape Tools: 2-in-1 Suite with 1-Click Trim Paths & Modifiers (Branch 1) + SS to AE Comp Reconstructor (Branch 2)",
-    "⚡ Fixed ExtendScript engine initialization (resolved 'No response from AE engine')",
-    "🍎 1-Click macOS Automated Installer with direct Unix permissions & cfprefsd cache flush",
+    "📈 Motion Graphs Easing Engine: Live curve inspector, interactive bezier preview, animated velocity ball & JerryFlow / Flow curve sync",
+    "✨ Advanced 10-Rig Procedural Motion Studio: Proximity Effector, 3D Extrusion, Dynamic Number Counter, Bounce Studio Pro, Text Morph Studio, Pixelated Reveal, Bouncy Text, SFX Studio, Auto B-Roll, and Orb Generator",
+    "⚡ Auto SFX Placement Engine: 1-Click automated sound effects placement synchronized to timeline cuts",
+    "🎬 Auto B-Roll Studio: Millisecond-accurate SRT subtitle timestamp parsing & 6-12s B-Roll sequencer with niche matching",
+    "🍎 1-Click macOS Automated Installer with Apple Silicon M1–M4 & Intel optimization",
     "🪟 1-Click Windows Automated Installer with universal CSXS registry bypass",
-    "🚀 Version 7.0 Full Windows & macOS Cross-Platform Support!",
-    "📦 Universal Adobe CEP ZXP & Full ZIP Distribution Packages",
-    "🌀 Super Morphings: Integrated 1-Click native morph engine for shapes & vectors",
-    "🔤 Bouncy Text Studio: Kinetic typography word-by-word bounce animation engine",
-    "🦘 Bounce Studio Pro: Native physics engine with 5 presets, waveform simulator & keyframe baker",
-    "📈 Motion Graph Easing Engine with JerryFlow & Flow dual-pass velocity slope calculations",
-    "⚡ Direct Groq Whisper AI Engine (whisper-large-v3-turbo) with real-time live terminal logging",
-    "🤖 High-Intelligence ExtendScript AI generation with active Groq models & offline Ollama fallback"
+    "🚀 Version 8.0 Full Cross-Platform After Effects CC 2019–2026+ Support",
+    "📦 Universal Adobe CEP ZXP & Full ZIP Distribution Packages"
   ],
   "downloadUrl": "https://sumairtools.online/#download",
-  "zxpUrl": "https://sumairtools.online/SumairTools_v7.0.zxp?v=7.0.3"
+  "zxpUrl": "https://sumairtools.online/SumairTools_v8.0.zxp?v=8.0.0"
 }
