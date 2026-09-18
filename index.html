@@ -1413,39 +1413,77 @@
                                             <span class="text-[9px] font-bold bg-crimson text-white px-2 py-0.5 rounded">WATCH ▶</span>
                                         </div>
 
-                                        <!-- RED MARKERS & SHORTCUTS -->
+                                        <!-- 1. CLIPBOARD & MEDIA -->
                                         <div>
-                                            <div class="ext-section-heading">🔴 SHORTCUTS &amp; LAYER UTILITIES (RED MARKERS)</div>
+                                            <div class="ext-section-heading">📋 CLIPBOARD &amp; MEDIA</div>
+                                            <button class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-crimson/25 to-purple-600/25 border border-crimson/45 hover:border-crimson text-white font-bold text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(255,0,60,0.25)] transition-all cursor-pointer" onclick="AudioFX.laser(); showSimToast('Pasted clipboard image at playhead!');">
+                                                <span class="text-sm">📋</span>
+                                                <span>PASTE IMAGE FROM CLIPBOARD</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- 2. LAYER & STRUCTURE UTILITIES -->
+                                        <div>
+                                            <div class="ext-section-heading">📦 LAYER &amp; STRUCTURE UTILITIES</div>
                                             <div class="grid grid-cols-2 gap-1.5">
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Added Null controller & parented selection');">
-                                                    <span>🔲 Null Add &amp; Parent</span>
-                                                </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Un-precomposed layer into timeline');">
-                                                    <span>📦 UnPrecomp Layer</span>
-                                                </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Nuclear Cleaner: removed unused assets');">
-                                                    <span>☢ Nuclear Cleaner</span>
+                                                <div class="grid grid-cols-2 gap-1.5 col-span-2">
+                                                    <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Precomposed selected layers into new comp!');">
+                                                        <span>📦 COMP</span>
+                                                    </button>
+                                                    <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Un-precomposed layer back to timeline!');">
+                                                        <span>📂 UNPRECOMP</span>
+                                                    </button>
+                                                </div>
+                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Added Null controller &amp; parented selection');">
+                                                    <span>🔲 Null &amp; Parent</span>
                                                 </button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Added red marker to selected layers');">
                                                     <span>📌 Layer Marker</span>
                                                 </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Trimmed composition to playhead');">
-                                                    <span>⏱ Trim Comp Duration</span>
+                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Smart Split &amp; Trim: Split active layer at playhead');">
+                                                    <span>✂️ Split &amp; Trim</span>
                                                 </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Added comps to Render Queue!');">
-                                                    <span>🎬 Add to Render Queue</span>
+                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Nuclear Cleaner: removed unused assets');">
+                                                    <span>☢ Nuclear Clean</span>
                                                 </button>
                                             </div>
                                         </div>
 
-                                        <!-- MOTION & FX PRESETS -->
+                                        <!-- 3. TIMELINE & SEQUENCE -->
                                         <div>
-                                            <div class="ext-section-heading">🏀 MOTION &amp; FX PRESETS</div>
+                                            <div class="ext-section-heading">⏱ TIMELINE &amp; SEQUENCE</div>
                                             <div class="grid grid-cols-2 gap-1.5">
-                                                <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied: Bounce Preset');">
-                                                    <span>🏀 Bounce Preset</span>
+                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Custom FPS: Opened Frame Rate Selector');">
+                                                    <span>⏱️ Custom FPS</span>
                                                 </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied: Zoom FX');">
+                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Batch Sequence: Staggered selected layers');">
+                                                    <span>🔢 Batch Sequence</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- 4. RENDER QUEUE (MULTI-FORMAT) -->
+                                        <div>
+                                            <div class="ext-section-heading">🎬 ADD TO RENDER QUEUE</div>
+                                            <div class="p-2 rounded-xl bg-black/60 border border-cyan-400/30 shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+                                                <div class="flex items-center justify-between mb-1.5 px-0.5">
+                                                    <span class="text-[10px] font-mono font-bold text-cyan-400">EXPORT FORMAT:</span>
+                                                    <span class="text-[9px] text-neutral-400">Active / Selected</span>
+                                                </div>
+                                                <div class="grid grid-cols-4 gap-1.5">
+                                                    <button class="py-1 px-1 rounded-md text-[10px] font-mono font-bold text-white bg-cyan-400/10 border border-cyan-400/40 hover:bg-cyan-400/25 transition-all text-center cursor-pointer" onclick="AudioFX.laser(); showSimToast('Added to Render Queue: MP4 (H.264)');">MP4</button>
+                                                    <button class="py-1 px-1 rounded-md text-[10px] font-mono font-bold text-white bg-emerald-400/10 border border-emerald-400/40 hover:bg-emerald-400/25 transition-all text-center cursor-pointer" onclick="AudioFX.laser(); showSimToast('Added to Render Queue: MP3 Audio');">MP3</button>
+                                                    <button class="py-1 px-1 rounded-md text-[10px] font-mono font-bold text-white bg-purple-400/10 border border-purple-400/40 hover:bg-purple-400/25 transition-all text-center cursor-pointer" onclick="AudioFX.laser(); showSimToast('Added to Render Queue: PNG Sequence (Alpha)');">PNG</button>
+                                                    <button class="py-1 px-1 rounded-md text-[10px] font-mono font-bold text-white bg-amber-400/10 border border-amber-400/40 hover:bg-amber-400/25 transition-all text-center cursor-pointer" onclick="AudioFX.laser(); showSimToast('Added to Render Queue: JPEG Sequence');">JPEG</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 5. MOTION & FX PRESETS (Bounce Removed) -->
+                                        <div>
+                                            <div class="ext-section-heading">✨ MOTION &amp; FX PRESETS</div>
+                                            <div class="grid grid-cols-3 gap-1.5">
+                                                <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied: Cinematic Zooms');">
                                                     <span>🔍 Zooms</span>
                                                 </button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied: Deep Glow');">
@@ -1453,25 +1491,6 @@
                                                 </button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied: Light Sweep');">
                                                     <span>🌌 Light Sweep</span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- TIMELINE & FPS CHANGER -->
-                                        <div>
-                                            <div class="ext-section-heading">⏱ TIMELINE &amp; FPS CHANGER</div>
-                                            <div class="grid grid-cols-2 gap-1.5">
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Comp changed from 30 to 60 FPS');">
-                                                    <span>⚡ 30 ➔ 60 FPS</span>
-                                                </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Comp changed from 60 to 30 FPS');">
-                                                    <span>⚡ 60 ➔ 30 FPS</span>
-                                                </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Time Remap Keys applied');">
-                                                    <span>⏱ Time Remap Keys</span>
-                                                </button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.click(); showSimToast('Batch Sequence executed');">
-                                                    <span>🔢 Batch Sequence</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -1603,13 +1622,11 @@
 
                                         <div>
                                             <div class="ext-section-heading">✨ TEXT ANIMATION PRESETS</div>
-                                            <div class="grid grid-cols-3 gap-1.5">
+                                            <div class="grid grid-cols-2 gap-1.5">
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied TextOpac');"><span>✨ TextOpac</span></button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied TextUp');"><span>⬆ TextUp</span></button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied TextDown');"><span>⬇ TextDown</span></button>
                                                 <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied Sweap');"><span>💫 Sweap</span></button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied 3 Words Red');"><span>🎨 3 Words Red</span></button>
-                                                <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Applied 4 Words Red');"><span>🎨 4 Words Red</span></button>
                                             </div>
                                         </div>
 
@@ -1957,28 +1974,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Row 7: BOUNCY TEXT -->
-                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Bouncy Text: Word-by-word kinetic entrance applied!');">
-                                            <div class="mf-row-left">
-                                                <span class="mf-icon" style="color: #ff003c;">
-                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
-                                                        <line x1="9" y1="20" x2="15" y2="20"></line>
-                                                        <line x1="12" y1="4" x2="12" y2="20"></line>
-                                                        <path d="M19 15l2 2-2 2"></path>
-                                                    </svg>
-                                                </span>
-                                                <span class="mf-title">BOUNCY TEXT</span>
-                                            </div>
-                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
-                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Quick Bounce: Applied to active text layer!');" title="Quick Bounce (Selected Text)" style="color: #ff003c; border-color: rgba(255, 0, 60, 0.3);">
-                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                                                </button>
-                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Bouncy Text: Opened Kinetic Text Studio');" title="Bouncy Text Studio">
-                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-                                                </button>
-                                            </div>
-                                        </div>
+
 
                                         <!-- Row 8: SFX STUDIO -->
                                         <div class="mf-row" onclick="AudioFX.pop(); showSimToast('SFX Studio: Automated sound sequencer ready!');">
@@ -2056,8 +2052,8 @@
                                             </div>
                                         </div>
 
-                                        <!-- Row 11: SCAN EFFECT -->
-                                        <div class="mf-row" onclick="AudioFX.laser(); simSelectRig('scan'); showSimToast('Scan Effect: Initialized glowing laser wipe & CRT scanlines!');">
+                                        <!-- Row 11: SCAN EFFECT STUDIO -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); simSelectRig('scan'); showSimToast('Scan Effect Studio: Initialized Laser Reveal, Pixel Reveal & CRT Scanlines!');">
                                             <div class="mf-row-left">
                                                 <span class="mf-icon" style="color: #00f2fe;">
                                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2068,13 +2064,13 @@
                                                         <line x1="4" y1="12" x2="20" y2="12"></line>
                                                     </svg>
                                                 </span>
-                                                <span class="mf-title">SCAN EFFECT</span>
+                                                <span class="mf-title">SCAN EFFECT STUDIO</span>
                                             </div>
                                             <div class="mf-row-actions" onclick="event.stopPropagation()">
                                                 <button class="mf-btn-action" onclick="AudioFX.laser(); simApplyRigAction('scan');" title="Quick Scan Reveal (Selected Layer)" style="color: #00f2fe; border-color: rgba(0, 242, 254, 0.35);">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                                                 </button>
-                                                <button class="mf-btn-action" onclick="AudioFX.click(); simSelectRig('scan'); showSimToast('Scan Effect: Opened Laser Wipe & Venetian Blinds Studio');" title="Settings">
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); simSelectRig('scan'); showSimToast('Scan Effect Studio: Opened 3-Template Reveal Studio');" title="Studio Settings">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
                                                 </button>
                                             </div>
