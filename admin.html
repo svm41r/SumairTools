@@ -1,390 +1,650 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-black text-white antialiased selection:bg-crimson selection:text-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumair Tools 🛡️ — Master Admin Command Center</title>
     <link rel="icon" type="image/png" href="images/favicon.png?v=8.0">
+    <link rel="apple-touch-icon" href="images/sumair_tools_icon.png">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Fonts: SF Pro Display, Inter & JetBrains Mono (Matching Main Website) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Supabase JS Client v2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
+                        pitch: '#000000',
+                        deep: '#060609',
+                        panel: '#0d0d12',
+                        panelAlt: '#121218',
+                        appleGray: '#86868b',
+                        appleGrayLight: '#a1a1a6',
                         crimson: '#ff003c',
-                        darkBg: '#09090d',
-                        panelDark: '#111118',
-                        cyanAccent: '#00f0ff',
-                        purpleAccent: '#a855f7'
+                        accentCyan: '#00f2fe',
+                        accentPurple: '#a855f7'
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        display: ['Syne', 'sans-serif']
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"SF Pro"', 'Inter', 'system-ui', 'sans-serif'],
+                        display: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"SF Pro"', 'Inter', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     }
                 }
             }
         }
     </script>
+
     <style>
-        body {
-            background: #09090d;
-            color: #f4f4f5;
-            min-height: 100vh;
+        :root {
+            --bg-pitch: #000000;
+            --apple-gray: #86868b;
+            --apple-border: rgba(255, 255, 255, 0.08);
+            --crimson: #ff003c;
         }
-        .glass-card {
-            background: rgba(17, 17, 24, 0.85);
+
+        * {
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* macOS Window Frame (Matching Main Website) */
+        .mac-window {
+            background: rgba(13, 13, 18, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 1px rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            overflow: hidden;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .mac-window:hover {
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
+        }
+        .mac-titlebar {
+            background: rgba(20, 20, 28, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .mac-traffic-lights {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .mac-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .mac-dot-red { background: #ff5f56; border: 1px solid #e0443e; }
+        .mac-dot-yellow { background: #ffbd2e; border: 1px solid #dea123; }
+        .mac-dot-green { background: #27c93f; border: 1px solid #1aab29; }
+
+        /* Minimal Bento Card (Matching Main Website) */
+        .bento-card {
+            background: rgba(13, 13, 18, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(18, 18, 24, 0.88);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Crimson Action Button */
         .btn-crimson {
-            background: linear-gradient(135deg, #ff003c, #b00029);
+            background: #ff003c;
             color: #ffffff;
             font-weight: 700;
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
-            transition: all 0.2s ease;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.35);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-crimson:hover {
+            background: #e60036;
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.6);
+            box-shadow: 0 0 35px rgba(255, 0, 60, 0.55);
+        }
+        .btn-crimson:active {
+            transform: scale(0.98);
+        }
+
+        /* Tactile Textured Background System (Matching Main Website 1:1) */
+        .site-texture-grain {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.085;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        .site-texture-dots {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.2px, transparent 1.2px);
+            background-size: 26px 26px;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 95%);
+            -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 95%);
+        }
+
+        .site-texture-grid {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-size: 52px 52px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 40%, transparent 98%);
+            -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 40%, transparent 98%);
+        }
+
+        .site-texture-glows {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(circle 900px at 50% -80px, rgba(255, 0, 60, 0.09), rgba(99, 102, 241, 0.04), transparent 70%),
+                radial-gradient(circle 700px at 15% 45%, rgba(225, 29, 72, 0.04), transparent 60%),
+                radial-gradient(circle 750px at 85% 65%, rgba(56, 189, 248, 0.035), transparent 60%),
+                radial-gradient(circle 850px at 50% 100%, rgba(136, 19, 55, 0.07), transparent 70%);
         }
     </style>
 </head>
-<body class="font-sans antialiased p-4 sm:p-8">
+<body class="font-sans antialiased text-white min-h-screen relative p-4 sm:p-6 lg:p-8">
 
-    <!-- ACCESS GATE MODAL (ALWAYS ENFORCED — NEVER AUTO-BYPASS) -->
-    <div id="admin-access-gate" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4 overflow-y-auto">
-        <div class="max-w-lg w-full glass-card border-crimson/60 rounded-3xl p-6 sm:p-8 text-center shadow-[0_0_100px_rgba(255,0,60,0.4)] relative overflow-hidden my-auto">
-            <!-- Top security accent line -->
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-crimson to-transparent animate-pulse"></div>
+    <!-- 4-Layer Tactile Luxury Background System -->
+    <div class="site-texture-glows"></div>
+    <div class="site-texture-dots"></div>
+    <div class="site-texture-grid"></div>
+    <div class="site-texture-grain"></div>
 
-            <div class="w-16 h-16 rounded-2xl bg-crimson/20 border border-crimson/50 text-3xl flex items-center justify-center mx-auto mb-3 shadow-[0_0_30px_rgba(255,0,60,0.4)]">
-                🛡️
-            </div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-black tracking-widest uppercase bg-crimson/20 border border-crimson/50 text-crimson mb-2">
-                <span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span> RESTRICTED MASTER CLEARANCE
-            </div>
-            <h2 class="font-display font-black text-2xl text-white tracking-wider mb-2">MASTER ADMIN SECURITY GATE</h2>
-            <p id="gate-message" class="text-xs font-mono text-neutral-400 mb-5 leading-relaxed">
-                Contains sensitive license keys, hardware bindings, and system API configurations. Dual verification required for access.
-            </p>
-
-            <!-- Unauthorized Account Banner (Shown if someone is logged in with non-admin email) -->
-            <div id="gate-unauthorized-alert" class="hidden mb-5 p-4 rounded-2xl bg-crimson/15 border border-crimson/60 text-left">
-                <div class="flex items-start gap-3">
-                    <span class="text-xl">⛔</span>
-                    <div>
-                        <div class="font-bold text-crimson text-xs font-mono uppercase">UNAUTHORIZED ACCOUNT DETECTED</div>
-                        <div class="text-[11px] text-neutral-300 font-mono mt-1" id="gate-unauthorized-email-msg">
-                            You are currently signed in as <span class="text-white font-bold underline" id="gate-detected-email">user@example.com</span>.
-                        </div>
-                        <p class="text-[10px] text-neutral-400 font-mono mt-1.5 leading-normal">
-                            Only Sumair Ali Siddiqui (<span class="text-white font-bold">sumairalisiddiqui@gmail.com</span>) has authorization to view license keys and API telemetry.
-                        </p>
-                        <div class="mt-3 flex items-center gap-2 flex-wrap">
-                            <button type="button" onclick="handleAdminSignOutAndSwitch()" class="px-3 py-1.5 rounded-xl bg-crimson hover:bg-crimson/80 text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-md">
-                                Sign Out & Switch Account
-                            </button>
-                            <a href="index.html" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-neutral-300 text-xs font-mono font-bold transition-all">
-                                Return to Site
-                            </a>
-                        </div>
-                    </div>
+    <!-- ========================================================================= -->
+    <!-- ACCESS GATE MODAL (ALWAYS ENFORCED — NEVER AUTO-BYPASS)                    -->
+    <!-- ========================================================================= -->
+    <div id="admin-access-gate" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-3xl flex items-center justify-center p-4 overflow-y-auto">
+        <div class="max-w-lg w-full mac-window border-crimson/50 shadow-[0_0_100px_rgba(255,0,60,0.35)] relative overflow-hidden my-auto">
+            
+            <!-- macOS Window Titlebar -->
+            <div class="mac-titlebar">
+                <div class="mac-traffic-lights">
+                    <span class="mac-dot mac-dot-red"></span>
+                    <span class="mac-dot mac-dot-yellow"></span>
+                    <span class="mac-dot mac-dot-green"></span>
+                </div>
+                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                    <span>Sumair Tools Security Gateway • v8.0</span>
+                </div>
+                <div class="text-[10px] font-mono text-crimson bg-crimson/10 border border-crimson/30 px-2 py-0.5 rounded-full font-bold">
+                    LOCKED
                 </div>
             </div>
 
-            <!-- Direct Admin Sign In Form -->
-            <form id="gate-direct-login-form" onsubmit="handleDirectAdminLogin(event)" class="space-y-4 text-left">
-                
-                <!-- STEP 1: IDENTITY CONFIRMATION -->
-                <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
-                            <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">1</span>
-                            STEP 1: IDENTITY CONFIRMATION
-                        </span>
-                        <span class="text-[10px] font-mono text-emerald-400 font-bold" id="gate-identity-status">Required</span>
+            <!-- Top Security Accent Gradient Bar -->
+            <div class="h-1 bg-gradient-to-r from-transparent via-crimson to-transparent"></div>
+
+            <div class="p-6 sm:p-8 text-center">
+                <!-- Glowing Shield Icon -->
+                <div class="relative w-16 h-16 mx-auto mb-4">
+                    <div class="absolute inset-0 rounded-2xl bg-crimson/30 blur-xl animate-pulse"></div>
+                    <div class="relative w-16 h-16 rounded-2xl bg-gradient-to-b from-neutral-900 to-black border border-crimson/60 text-3xl flex items-center justify-center shadow-[0_0_30px_rgba(255,0,60,0.4)]">
+                        🛡️
+                    </div>
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase bg-crimson/15 border border-crimson/40 text-crimson mb-2.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span> RESTRICTED MASTER CLEARANCE
+                </div>
+
+                <h2 class="font-display font-bold text-2xl text-white tracking-tight mb-2">Master Admin Security Gate</h2>
+                <p id="gate-message" class="text-xs font-mono text-neutral-400 mb-6 leading-relaxed">
+                    Contains sensitive license keys, hardware bindings, and system API configurations. Dual verification required for access.
+                </p>
+
+                <!-- Unauthorized Account Banner (Shown if someone is logged in with non-admin email) -->
+                <div id="gate-unauthorized-alert" class="hidden mb-5 p-4 rounded-2xl bg-crimson/15 border border-crimson/60 text-left">
+                    <div class="flex items-start gap-3">
+                        <span class="text-xl">⛔</span>
+                        <div>
+                            <div class="font-bold text-crimson text-xs font-mono uppercase tracking-wider">UNAUTHORIZED ACCOUNT DETECTED</div>
+                            <div class="text-[11px] text-neutral-300 font-mono mt-1" id="gate-unauthorized-email-msg">
+                                You are currently signed in as <span class="text-white font-bold underline" id="gate-detected-email">user@example.com</span>.
+                            </div>
+                            <p class="text-[10px] text-neutral-400 font-mono mt-1.5 leading-normal">
+                                Only Sumair Ali Siddiqui (<span class="text-white font-bold">sumairalisiddiqui@gmail.com</span>) has authorization to view license keys and API telemetry.
+                            </p>
+                            <div class="mt-3 flex items-center gap-2 flex-wrap">
+                                <button type="button" onclick="handleAdminSignOutAndSwitch()" class="px-3.5 py-1.5 rounded-xl bg-crimson hover:bg-crimson/80 text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-md">
+                                    Sign Out &amp; Switch Account
+                                </button>
+                                <a href="index.html" class="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-neutral-300 text-xs font-mono font-bold transition-all">
+                                    Return to Site
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direct Admin Sign In Form -->
+                <form id="gate-direct-login-form" onsubmit="handleDirectAdminLogin(event)" class="space-y-4 text-left">
+                    
+                    <!-- STEP 1: IDENTITY CONFIRMATION -->
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">1</span>
+                                STEP 1: IDENTITY CONFIRMATION
+                            </span>
+                            <span class="text-[10px] font-mono text-emerald-400 font-bold" id="gate-identity-status">Required</span>
+                        </div>
+
+                        <label class="block text-xs font-mono font-bold text-white">
+                            Are you Sumair Ali Siddiqui?
+                        </label>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-crimson cursor-pointer transition-all has-[:checked]:border-crimson has-[:checked]:bg-crimson/15">
+                                <input type="radio" name="admin_identity_confirm" value="yes" id="ident-yes" required class="accent-crimson w-4 h-4" onchange="updateIdentityState()">
+                                <span class="text-xs font-mono text-white font-bold leading-tight">Yes, I am Sumair Ali Siddiqui</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-neutral-500 cursor-pointer transition-all has-[:checked]:border-neutral-500 has-[:checked]:bg-white/10">
+                                <input type="radio" name="admin_identity_confirm" value="no" id="ident-no" class="accent-neutral-500 w-4 h-4" onchange="updateIdentityState()">
+                                <span class="text-xs font-mono text-neutral-400 font-bold leading-tight">No, someone else</span>
+                            </label>
+                        </div>
+
+                        <!-- Email Field (Locked to Master Admin) -->
+                        <div id="gate-email-box" class="pt-2">
+                            <label class="block text-[10px] font-mono text-neutral-400 uppercase mb-1.5">Authorized Master Admin Email</label>
+                            <div class="relative">
+                                <input id="gate-admin-email" type="email" value="sumairalisiddiqui@gmail.com" readonly class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-neutral-300 font-mono text-xs cursor-not-allowed select-none focus:outline-none">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 text-[11px] font-mono font-bold">🔒 VERIFIED</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <label class="block text-xs font-mono font-bold text-white">
-                        Are you Sumair Ali Siddiqui?
-                    </label>
+                    <!-- STEP 2: MASTER PASSWORD VERIFICATION -->
+                    <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">2</span>
+                                STEP 2: MASTER PASSWORD
+                            </span>
+                            <span class="text-[10px] font-mono text-neutral-500">Required</span>
+                        </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                        <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/15 hover:border-crimson cursor-pointer transition-all has-[:checked]:border-crimson has-[:checked]:bg-crimson/15">
-                            <input type="radio" name="admin_identity_confirm" value="yes" id="ident-yes" required class="accent-crimson w-4 h-4" onchange="updateIdentityState()">
-                            <span class="text-xs font-mono text-white font-bold leading-tight">Yes, I am Sumair Ali Siddiqui</span>
+                        <label class="block text-xs font-mono font-bold text-white">
+                            Enter Master Admin Security Password
                         </label>
-                        <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/15 hover:border-neutral-500 cursor-pointer transition-all has-[:checked]:border-neutral-500 has-[:checked]:bg-white/10">
-                            <input type="radio" name="admin_identity_confirm" value="no" id="ident-no" class="accent-neutral-500 w-4 h-4" onchange="updateIdentityState()">
-                            <span class="text-xs font-mono text-neutral-400 font-bold leading-tight">No, someone else</span>
-                        </label>
-                    </div>
 
-                    <!-- Email Field (Locked to Master Admin) -->
-                    <div id="gate-email-box" class="pt-2">
-                        <label class="block text-[10px] font-mono text-neutral-400 uppercase mb-1">Authorized Master Admin Email</label>
                         <div class="relative">
-                            <input id="gate-admin-email" type="email" value="sumairalisiddiqui@gmail.com" readonly class="w-full px-4 py-2 rounded-xl bg-black/40 border border-white/15 text-neutral-300 font-mono text-xs cursor-not-allowed select-none focus:outline-none">
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 text-[11px] font-mono font-bold">🔒 VERIFIED</span>
+                            <input id="gate-admin-password" type="password" placeholder="Enter master password..." required autocomplete="current-password" class="w-full pl-4 pr-11 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                            <button type="button" onclick="toggleGatePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer select-none" id="gate-eye-btn" title="Toggle password visibility">
+                                <span id="gate-eye-icon">👁️</span>
+                            </button>
                         </div>
                     </div>
+
+                    <!-- Error Message Box -->
+                    <div id="gate-login-error" class="hidden p-3.5 rounded-xl bg-crimson/15 border border-crimson/40 text-xs font-mono text-crimson text-center leading-relaxed"></div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="gate-submit-btn" class="btn-crimson w-full py-3.5 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2">
+                        <span>🔓</span>
+                        <span>VERIFY IDENTITY &amp; UNLOCK LICENSES</span>
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                    <a href="index.html" class="text-xs font-mono text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5">
+                        <span>←</span> Back to Main Website
+                    </a>
+                    <span class="text-[10px] font-mono text-neutral-500">Sumair Tools Security v8.0</span>
                 </div>
-
-                <!-- STEP 2: MASTER PASSWORD VERIFICATION -->
-                <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
-                            <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">2</span>
-                            STEP 2: MASTER PASSWORD
-                        </span>
-                        <span class="text-[10px] font-mono text-neutral-500">Required</span>
-                    </div>
-
-                    <label class="block text-xs font-mono font-bold text-white">
-                        Enter Master Admin Security Password
-                    </label>
-
-                    <div class="relative">
-                        <input id="gate-admin-password" type="password" placeholder="Enter master password..." required autocomplete="current-password" class="w-full pl-4 pr-11 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all">
-                        <button type="button" onclick="toggleGatePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer select-none" id="gate-eye-btn" title="Toggle password visibility">
-                            <span id="gate-eye-icon">👁️</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Error Message Box -->
-                <div id="gate-login-error" class="hidden p-3.5 rounded-xl bg-crimson/15 border border-crimson/40 text-xs font-mono text-crimson text-center leading-relaxed"></div>
-
-                <!-- Submit Button -->
-                <button type="submit" id="gate-submit-btn" class="btn-crimson w-full py-3.5 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(255,0,60,0.4)]">
-                    <span>🔓</span>
-                    <span>VERIFY IDENTITY & UNLOCK LICENSES</span>
-                </button>
-            </form>
-
-            <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-                <a href="index.html" class="text-xs font-mono text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5">
-                    <span>←</span> Back to Main Website
-                </a>
-                <span class="text-[10px] font-mono text-neutral-500">Sumair Tools Security v8.0</span>
             </div>
         </div>
     </div>
 
-    <!-- MAIN ADMIN CONTROL CENTER (HARD LOCKED WITH INLINE DISPLAY NONE) -->
-    <div id="admin-main-content" style="display: none !important;" class="hidden max-w-7xl mx-auto space-y-6">
+    <!-- ========================================================================= -->
+    <!-- MAIN ADMIN CONTROL CENTER (HARD LOCKED WITH INLINE DISPLAY NONE)           -->
+    <!-- ========================================================================= -->
+    <div id="admin-main-content" style="display: none !important;" class="hidden max-w-7xl mx-auto space-y-6 relative z-10">
 
-        <!-- Top Navigation Bar -->
-        <header class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <!-- Top Navigation & Brand Header -->
+        <header class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-5 p-5 sm:p-6 rounded-3xl bg-neutral-950/70 border border-white/[0.08] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
             <!-- Brand & Telemetry Title -->
-            <div class="flex items-center gap-3.5 min-w-0">
-                <img src="images/favicon.png?v=8.0" alt="Sumair Tools" class="w-11 h-11 rounded-xl border border-crimson/60 shadow-[0_0_20px_rgba(255,0,60,0.4)] flex-shrink-0 object-cover">
+            <div class="flex items-center gap-4 min-w-0">
+                <a href="index.html" class="w-12 h-12 rounded-2xl border border-crimson/50 bg-black/60 shadow-[0_0_25px_rgba(255,0,60,0.35)] flex-shrink-0 overflow-hidden flex items-center justify-center group" title="Return to Main Website">
+                    <img src="images/favicon.png?v=8.0" alt="Sumair Tools" class="w-full h-full object-cover transition-transform group-hover:scale-105">
+                </a>
                 <div class="min-w-0">
                     <div class="flex items-center gap-2.5 flex-wrap">
-                        <h1 class="font-display font-black text-xl sm:text-2xl text-white tracking-wider whitespace-nowrap">
-                            SUMAIR TOOLS TELEMETRY
+                        <h1 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight whitespace-nowrap">
+                            Sumair Tools Telemetry
                         </h1>
-                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-mono font-black tracking-widest uppercase bg-crimson/20 border border-crimson/60 text-crimson shadow-[0_0_12px_rgba(255,0,60,0.3)] whitespace-nowrap flex-shrink-0">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase bg-crimson/15 border border-crimson/50 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.25)] whitespace-nowrap flex-shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span>
                             COMMAND CENTER
                         </span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            v8.0
+                        </span>
                     </div>
-                    <p class="text-[11px] font-mono text-neutral-400 mt-0.5 tracking-wide">
+                    <p class="text-[11px] font-mono text-neutral-400 mt-1 tracking-wide">
                         HARDWARE LICENSING &bull; CLIENT TELEMETRY &bull; REMOTE REVOCATION
                     </p>
                 </div>
             </div>
 
-            <!-- Super Admin Info & Controls (Never Wrap Weirdly) -->
+            <!-- Super Admin Info & Controls -->
             <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap w-full xl:w-auto justify-between xl:justify-end">
                 <!-- Super Admin Authenticated Card -->
-                <div class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 shadow-inner flex-shrink-0">
+                <div class="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] shadow-inner flex-shrink-0">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0 shadow-[0_0_8px_#34d399]"></span>
                     <div class="text-left">
-                        <span class="text-[9px] font-mono uppercase tracking-widest text-neutral-400 font-bold block leading-tight mb-0.5">AUTHENTICATED SUPER ADMIN</span>
+                        <span class="text-[9px] font-mono uppercase tracking-widest text-[#86868b] font-bold block leading-tight mb-0.5">AUTHENTICATED SUPER ADMIN</span>
                         <span id="admin-profile-email" class="text-xs font-mono text-emerald-400 font-bold block leading-tight truncate max-w-[220px]">sumairalisiddiqui@gmail.com</span>
                     </div>
                 </div>
 
-                <!-- Action Button Group (Always together) -->
+                <!-- Action Button Group -->
                 <div class="flex items-center gap-2 flex-shrink-0">
-                    <button onclick="loadAdminData()" class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono font-bold text-white flex items-center gap-1.5 transition-all hover:border-white/30 cursor-pointer whitespace-nowrap shadow-sm hover:scale-105 active:scale-95">
+                    <button onclick="loadAdminData()" class="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-mono font-semibold text-white flex items-center gap-1.5 transition-all hover:border-white/25 cursor-pointer whitespace-nowrap shadow-sm active:scale-95">
                         <span>🔄</span>
                         <span>Refresh</span>
                     </button>
-                    <button onclick="lockAdminPanel()" class="px-3.5 py-2.5 rounded-xl bg-crimson/20 hover:bg-crimson/30 border border-crimson/50 text-xs font-mono text-crimson hover:text-white font-bold transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.25)] whitespace-nowrap cursor-pointer" title="Lock Admin Panel and clear session">
+                    <button onclick="lockAdminPanel()" class="px-3.5 py-2.5 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-xs font-mono text-crimson hover:text-white font-semibold transition-all active:scale-95 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.2)] whitespace-nowrap cursor-pointer" title="Lock Admin Panel and clear session">
                         <span>🔒</span>
                         <span>Lock Panel</span>
                     </button>
-                    <a href="index.html" class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-mono text-white font-bold transition-all hover:border-white/30 hover:scale-105 active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                    <a href="index.html" class="px-3.5 py-2.5 rounded-xl bg-white text-black hover:bg-neutral-200 text-xs font-mono font-bold transition-all active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer shadow-sm">
                         <span>🌐</span>
-                        <span>View Website</span>
+                        <span>Main Site</span>
                     </a>
                 </div>
             </div>
         </header>
 
-        <!-- Live Statistics Counter Grid (4 High-Density Stats Cards) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div class="glass-card p-4 rounded-2xl border-white/10">
-                <span class="text-[10px] font-mono text-neutral-400 uppercase block mb-1">Total Keys Generated</span>
-                <span id="stat-total" class="font-display font-black text-2xl text-white">0</span>
+        <!-- Live Statistics Counter Grid (4 High-Density Bento Stat Cards) -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Stat 1: Total Keys -->
+            <div class="bento-card p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#86868b] font-bold">Total Keys Generated</span>
+                    <span class="text-base">🔑</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <span id="stat-total" class="font-display font-bold text-3xl text-white tracking-tight">0</span>
+                    <span class="text-[10px] font-mono text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">Supabase DB</span>
+                </div>
             </div>
-            <div class="glass-card p-4 rounded-2xl border-emerald-500/30 bg-emerald-500/5">
-                <span class="text-[10px] font-mono text-emerald-400 uppercase block mb-1">Active / In-Use Keys</span>
-                <span id="stat-active" class="font-display font-black text-2xl text-emerald-400">0</span>
+
+            <!-- Stat 2: Active Keys -->
+            <div class="bento-card p-5 border-emerald-500/30 bg-emerald-500/[0.04]">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">Active / In-Use Keys</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <span id="stat-active" class="font-display font-bold text-3xl text-emerald-400 tracking-tight">0</span>
+                    <span class="text-[10px] font-mono text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">Bound &amp; Verified</span>
+                </div>
             </div>
-            <div class="glass-card p-4 rounded-2xl border-cyanAccent/30 bg-cyanAccent/5">
-                <span class="text-[10px] font-mono text-cyanAccent uppercase block mb-1">Bound Machines</span>
-                <span id="stat-bound" class="font-display font-black text-2xl text-cyanAccent">0</span>
+
+            <!-- Stat 3: Bound Machines -->
+            <div class="bento-card p-5 border-accentCyan/30 bg-accentCyan/[0.04]">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-accentCyan font-bold">Bound Machines</span>
+                    <span class="text-base">🖥️</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <span id="stat-bound" class="font-display font-bold text-3xl text-accentCyan tracking-tight">0</span>
+                    <span class="text-[10px] font-mono text-accentCyan/90 bg-accentCyan/10 border border-accentCyan/20 px-2 py-0.5 rounded-full">Unique HWIDs</span>
+                </div>
             </div>
-            <div class="glass-card p-4 rounded-2xl border-crimson/30 bg-crimson/5">
-                <span class="text-[10px] font-mono text-crimson uppercase block mb-1">Revoked / Suspended</span>
-                <span id="stat-revoked" class="font-display font-black text-2xl text-crimson">0</span>
+
+            <!-- Stat 4: Revoked / Suspended -->
+            <div class="bento-card p-5 border-crimson/30 bg-crimson/[0.04]">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-crimson font-bold">Revoked / Suspended</span>
+                    <span class="text-base">⛔</span>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <span id="stat-revoked" class="font-display font-bold text-3xl text-crimson tracking-tight">0</span>
+                    <span class="text-[10px] font-mono text-crimson/90 bg-crimson/10 border border-crimson/20 px-2 py-0.5 rounded-full">Access Blocked</span>
+                </div>
             </div>
         </div>
 
         <!-- MINT & DISPATCH LICENSE VIA GMAIL SMTP (Automated Email Distribution) -->
-        <div class="glass-card p-6 rounded-3xl border-crimson/40 bg-gradient-to-br from-panelDark via-panelDark to-crimson/10 shadow-[0_0_40px_rgba(255,0,60,0.15)] relative overflow-hidden">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl bg-crimson/20 border border-crimson/50 text-xl flex items-center justify-center flex-shrink-0 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.3)]">
-                        ✉️
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h2 class="font-display font-black text-lg text-white tracking-wide">
-                                INSTANT LICENSE MINT &amp; GMAIL DISPATCH
-                            </h2>
-                            <span id="dispatch-status-badge" class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-cyanAccent/20 text-cyanAccent border border-cyanAccent/40">
-                                ✉️ 1-CLICK GMAIL COMPOSE
-                            </span>
-                            <button type="button" onclick="configureDispatchMode()" class="px-2.5 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono text-[9px] font-bold transition-all cursor-pointer border border-white/15" title="Configure automated sending via Google Apps Script or 1-Click Gmail Web">
-                                ⚙️ Configure Dispatch Mode
-                            </button>
-                        </div>
-                        <p class="text-[11px] font-mono text-neutral-400 mt-0.5">
-                            Auto-generates enterprise ST-XXXX key in Supabase &amp; delivers dark-mode HTML welcome kit with installation instructions.
-                        </p>
-                    </div>
+        <div class="mac-window border-crimson/40 shadow-[0_0_50px_rgba(255,0,60,0.15)] relative overflow-hidden">
+            <!-- macOS Window Titlebar -->
+            <div class="mac-titlebar">
+                <div class="mac-traffic-lights">
+                    <span class="mac-dot mac-dot-red"></span>
+                    <span class="mac-dot mac-dot-yellow"></span>
+                    <span class="mac-dot mac-dot-green"></span>
+                </div>
+                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                    <span>License Dispatch Engine (Gmail SMTP Automated Delivery)</span>
+                </div>
+                <div class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
+                    ONLINE
                 </div>
             </div>
 
-            <form id="license-dispatch-form" onsubmit="event.preventDefault(); mintAndEmailLicense();" class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
-                <div class="sm:col-span-5">
-                    <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1">
-                        Recipient Customer Email <span class="text-crimson">*</span>
-                    </label>
-                    <input id="dispatch-email" type="email" placeholder="customer@example.com" required autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+            <div class="p-6 sm:p-7">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-2xl bg-crimson/15 border border-crimson/40 text-xl flex items-center justify-center flex-shrink-0 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.25)]">
+                            ✉️
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <h2 class="font-display font-bold text-base sm:text-lg text-white tracking-tight">
+                                    Instant License Mint &amp; Gmail Dispatch
+                                </h2>
+                                <span id="dispatch-status-badge" class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-accentCyan/15 text-accentCyan border border-accentCyan/30">
+                                    ✉️ 1-CLICK GMAIL COMPOSE
+                                </span>
+                                <button type="button" onclick="configureDispatchMode()" class="px-2.5 py-0.5 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] text-neutral-300 hover:text-white font-mono text-[9px] font-bold transition-all cursor-pointer border border-white/10" title="Configure automated sending via Google Apps Script or 1-Click Gmail Web">
+                                    ⚙️ Configure Dispatch Mode
+                                </button>
+                            </div>
+                            <p class="text-[11px] font-mono text-neutral-400 mt-1">
+                                Auto-generates enterprise ST-XXXX key in Supabase &amp; delivers dark-mode HTML welcome kit with v8.0 installation instructions.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="sm:col-span-4">
-                    <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1">
-                        Client Full Name <span class="text-neutral-500">(Optional)</span>
-                    </label>
-                    <input id="dispatch-name" type="text" placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
-                </div>
+                <form id="license-dispatch-form" onsubmit="event.preventDefault(); mintAndEmailLicense();" class="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-end">
+                    <div class="sm:col-span-5">
+                        <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1.5">
+                            Recipient Customer Email <span class="text-crimson">*</span>
+                        </label>
+                        <input id="dispatch-email" type="email" placeholder="customer@example.com" required autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                    </div>
 
-                <div class="sm:col-span-3">
-                    <button type="submit" id="dispatch-submit-btn" class="btn-crimson w-full py-2.5 px-4 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,0,60,0.4)] whitespace-nowrap">
-                        <span id="dispatch-btn-icon">⚡</span>
-                        <span id="dispatch-btn-text">MINT &amp; DISPATCH EMAIL</span>
-                    </button>
-                </div>
-            </form>
+                    <div class="sm:col-span-4">
+                        <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1.5">
+                            Client Full Name <span class="text-neutral-500">(Optional)</span>
+                        </label>
+                        <input id="dispatch-name" type="text" placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                    </div>
 
-            <!-- Real-time Status Alert Container -->
-            <div id="dispatch-status-alert" class="hidden mt-3.5 p-3 rounded-xl font-mono text-xs border transition-all"></div>
+                    <div class="sm:col-span-3">
+                        <button type="submit" id="dispatch-submit-btn" class="btn-crimson w-full py-2.5 px-4 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
+                            <span id="dispatch-btn-icon">⚡</span>
+                            <span id="dispatch-btn-text">MINT &amp; DISPATCH EMAIL</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Real-time Status Alert Container -->
+                <div id="dispatch-status-alert" class="hidden mt-4 p-3.5 rounded-xl font-mono text-xs border transition-all"></div>
+            </div>
         </div>
 
-        <!-- Telemetry Management Panel -->
-        <div class="glass-card p-6 rounded-3xl border-white/10">
-            <!-- Filter & Action Controls -->
-            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
-                <div class="flex items-center gap-3 w-full lg:w-auto flex-wrap">
-                    <input id="admin-search-input" oninput="filterAdmin()" type="text" placeholder="Search by Key, Name, Email, Machine ID..." class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson w-full sm:w-72">
-                    <select id="admin-status-filter" onchange="filterAdmin()" class="px-3.5 py-2.5 rounded-xl bg-panelDark border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson">
-                        <option value="all">All Statuses</option>
-                        <option value="active">Active (Bound Workstations)</option>
-                        <option value="unactivated">Approved (Ready to Bind)</option>
-                        <option value="revoked">Revoked</option>
-                        <option value="suspended">Pending Approval</option>
-                    </select>
-                    <div class="flex items-center gap-1.5 bg-panelDark border border-white/15 rounded-xl px-3 py-1">
-                        <span class="text-[10px] font-mono text-neutral-400 font-bold uppercase whitespace-nowrap">Sort By:</span>
-                        <select id="admin-sort-by" onchange="filterAdmin()" class="bg-transparent text-white font-mono text-xs focus:outline-none py-1.5 cursor-pointer">
-                            <option value="created-desc">📅 Newest First (Created ↓)</option>
-                            <option value="created-asc">📅 Oldest First (Created ↑)</option>
-                            <option value="key-asc">🔑 License Key (A → Z)</option>
-                            <option value="key-desc">🔑 License Key (Z → A)</option>
-                            <option value="user-asc">👤 Claimed User (A → Z)</option>
-                            <option value="user-desc">👤 Claimed User (Z → A)</option>
-                            <option value="status-asc">⚡ Status (Active First)</option>
-                            <option value="hwid-bound">🖥️ Bound Machines First</option>
-                            <option value="hwid-unbound">🔓 Unbound First</option>
-                        </select>
-                    </div>
+        <!-- Telemetry Management Panel (Housed in macOS Window Frame) -->
+        <div class="mac-window border-white/[0.08]">
+            <!-- macOS Window Titlebar -->
+            <div class="mac-titlebar">
+                <div class="mac-traffic-lights">
+                    <span class="mac-dot mac-dot-red"></span>
+                    <span class="mac-dot mac-dot-yellow"></span>
+                    <span class="mac-dot mac-dot-green"></span>
                 </div>
-                <div class="flex items-center gap-2.5 flex-wrap">
-                    <button onclick="document.getElementById('dispatch-email').focus(); document.getElementById('dispatch-email').scrollIntoView({behavior:'smooth'});" class="px-3.5 py-2 rounded-xl bg-crimson/20 hover:bg-crimson/30 border border-crimson/50 text-crimson hover:text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,0,60,0.25)] cursor-pointer">
-                        <span>✉️</span> Mint &amp; Email
-                    </button>
-                    <button onclick="generateBatchKeys(50)" class="px-4 py-2 rounded-xl bg-crimson hover:bg-crimson/80 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.4)] cursor-pointer">
-                        <span>⚡</span> Mint 50 Keys
-                    </button>
-                    <button onclick="batchApprove()" class="px-3.5 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/35 border border-emerald-500/50 text-emerald-300 font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
-                        <span>✓</span> Approve All
-                    </button>
-                    <button onclick="batchSuspend()" class="px-3.5 py-2 rounded-xl bg-crimson/20 hover:bg-crimson/35 border border-crimson/50 text-crimson font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
-                        <span>🔒</span> Suspend All
-                    </button>
-                    <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer">
-                        <span>📥</span> Export CSV
-                    </button>
+                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                    <span>Sumair Tools Telemetry Database (Real-Time Cloud)</span>
+                </div>
+                <div class="text-[10px] font-mono text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded">
+                    Encrypted Hardware Sync
                 </div>
             </div>
 
-            <!-- Table -->
-            <div class="overflow-x-auto rounded-2xl border border-white/10">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-white/5 font-mono text-[10px] text-neutral-400 uppercase border-b border-white/10 select-none">
-                            <th class="py-3 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('key')">
-                                <div class="flex items-center gap-1.5">License Key <span id="sort-icon-key" class="text-neutral-500 font-bold">↕</span></div>
-                            </th>
-                            <th class="py-3 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('user')">
-                                <div class="flex items-center gap-1.5">Claimed User <span id="sort-icon-user" class="text-neutral-500 font-bold">↕</span></div>
-                            </th>
-                            <th class="py-3 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('hwid')">
-                                <div class="flex items-center gap-1.5">Hardware ID <span id="sort-icon-hwid" class="text-neutral-500 font-bold">↕</span></div>
-                            </th>
-                            <th class="py-3 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('status')">
-                                <div class="flex items-center gap-1.5">Status <span id="sort-icon-status" class="text-neutral-500 font-bold">↕</span></div>
-                            </th>
-                            <th class="py-3 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('created')">
-                                <div class="flex items-center gap-1.5">Created At <span id="sort-icon-created" class="text-crimson font-bold">↓</span></div>
-                            </th>
-                            <th class="py-3 px-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-tbody">
-                        <!-- Injected via admin.js -->
-                    </tbody>
-                </table>
+            <div class="p-6">
+                <!-- Filter & Action Controls Bar -->
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3 w-full lg:w-auto flex-wrap">
+                        <input id="admin-search-input" oninput="filterAdmin()" type="text" placeholder="Search by Key, Name, Email, Machine ID..." class="px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson w-full sm:w-72 placeholder:text-neutral-600">
+                        
+                        <select id="admin-status-filter" onchange="filterAdmin()" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson">
+                            <option value="all">All Statuses</option>
+                            <option value="active">Active (Bound Workstations)</option>
+                            <option value="unactivated">Approved (Ready to Bind)</option>
+                            <option value="revoked">Revoked</option>
+                            <option value="suspended">Pending Approval</option>
+                        </select>
+
+                        <div class="flex items-center gap-1.5 bg-neutral-900 border border-white/10 rounded-xl px-3 py-1">
+                            <span class="text-[10px] font-mono text-[#86868b] font-bold uppercase whitespace-nowrap">Sort By:</span>
+                            <select id="admin-sort-by" onchange="filterAdmin()" class="bg-transparent text-white font-mono text-xs focus:outline-none py-1.5 cursor-pointer">
+                                <option value="created-desc">📅 Newest First (Created ↓)</option>
+                                <option value="created-asc">📅 Oldest First (Created ↑)</option>
+                                <option value="key-asc">🔑 License Key (A → Z)</option>
+                                <option value="key-desc">🔑 License Key (Z → A)</option>
+                                <option value="user-asc">👤 Claimed User (A → Z)</option>
+                                <option value="user-desc">👤 Claimed User (Z → A)</option>
+                                <option value="status-asc">⚡ Status (Active First)</option>
+                                <option value="hwid-bound">🖥️ Bound Machines First</option>
+                                <option value="hwid-unbound">🔓 Unbound First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Action Button Group -->
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button onclick="document.getElementById('dispatch-email').focus(); document.getElementById('dispatch-email').scrollIntoView({behavior:'smooth'});" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson hover:text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,0,60,0.2)] cursor-pointer">
+                            <span>✉️</span> Mint &amp; Email
+                        </button>
+                        <button onclick="generateBatchKeys(50)" class="px-4 py-2 rounded-xl bg-crimson hover:bg-crimson/80 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.35)] cursor-pointer">
+                            <span>⚡</span> Mint 50 Keys
+                        </button>
+                        <button onclick="batchApprove()" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
+                            <span>✓</span> Approve All
+                        </button>
+                        <button onclick="batchSuspend()" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
+                            <span>🔒</span> Suspend All
+                        </button>
+                        <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer">
+                            <span>📥</span> Export CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Telemetry Table -->
+                <div class="overflow-x-auto rounded-2xl border border-white/[0.08] bg-black/40">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white/[0.03] font-mono text-[10px] text-[#86868b] uppercase border-b border-white/[0.08] select-none">
+                                <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('key')">
+                                    <div class="flex items-center gap-1.5">License Key <span id="sort-icon-key" class="text-neutral-500 font-bold">↕</span></div>
+                                </th>
+                                <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('user')">
+                                    <div class="flex items-center gap-1.5">Claimed User <span id="sort-icon-user" class="text-neutral-500 font-bold">↕</span></div>
+                                </th>
+                                <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('hwid')">
+                                    <div class="flex items-center gap-1.5">Hardware ID <span id="sort-icon-hwid" class="text-neutral-500 font-bold">↕</span></div>
+                                </th>
+                                <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('status')">
+                                    <div class="flex items-center gap-1.5">Status <span id="sort-icon-status" class="text-neutral-500 font-bold">↕</span></div>
+                                </th>
+                                <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('created')">
+                                    <div class="flex items-center gap-1.5">Created At <span id="sort-icon-created" class="text-crimson font-bold">↓</span></div>
+                                </th>
+                                <th class="py-3.5 px-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tbody">
+                            <!-- Injected dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
     </div>
 
     <!-- Scripts -->
-    <script src="js/supabase_config.js?v=6.6"></script>
-    <script src="js/auth.js?v=6.6"></script>
-    <script src="js/admin.js?v=6.6"></script>
-    <script src="js/contextMenu.js?v=6.6"></script>
+    <script src="js/supabase_config.js?v=8.0"></script>
+    <script src="js/auth.js?v=8.0"></script>
+    <script src="js/admin.js?v=8.0"></script>
+    <script src="js/contextMenu.js?v=8.0"></script>
 </body>
 </html>
