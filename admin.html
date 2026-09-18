@@ -226,10 +226,10 @@
                     <span class="mac-dot mac-dot-yellow"></span>
                     <span class="mac-dot mac-dot-green"></span>
                 </div>
-                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                <div class="font-sans font-light text-xs text-neutral-300 flex items-center gap-2">
                     <span>Sumair Tools Security Gateway • v8.0</span>
                 </div>
-                <div class="text-[10px] font-mono text-crimson bg-crimson/10 border border-crimson/30 px-2 py-0.5 rounded-full font-bold">
+                <div class="text-[10px] font-sans font-medium text-crimson bg-crimson/10 border border-crimson/30 px-2 py-0.5 rounded-full">
                     LOCKED
                 </div>
             </div>
@@ -246,12 +246,12 @@
                     </div>
                 </div>
 
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase bg-crimson/15 border border-crimson/40 text-crimson mb-2.5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-sans font-medium tracking-widest uppercase bg-crimson/15 border border-crimson/40 text-crimson mb-2.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span> RESTRICTED MASTER CLEARANCE
                 </div>
 
-                <h2 class="font-display font-bold text-2xl text-white tracking-tight mb-2">Master Admin Security Gate</h2>
-                <p id="gate-message" class="text-xs font-mono text-neutral-400 mb-6 leading-relaxed">
+                <h2 class="font-sans font-light text-2xl text-white tracking-tight mb-2">Master Admin Security Gate</h2>
+                <p id="gate-message" class="text-xs font-sans font-light text-neutral-400 mb-6 leading-relaxed">
                     Contains sensitive license keys, hardware bindings, and system API configurations. Dual verification required for access.
                 </p>
 
@@ -260,18 +260,18 @@
                     <div class="flex items-start gap-3">
                         <span class="text-xl">⛔</span>
                         <div>
-                            <div class="font-bold text-crimson text-xs font-mono uppercase tracking-wider">UNAUTHORIZED ACCOUNT DETECTED</div>
-                            <div class="text-[11px] text-neutral-300 font-mono mt-1" id="gate-unauthorized-email-msg">
-                                You are currently signed in as <span class="text-white font-bold underline" id="gate-detected-email">user@example.com</span>.
+                            <div class="font-medium text-crimson text-xs font-sans uppercase tracking-wider">UNAUTHORIZED ACCOUNT DETECTED</div>
+                            <div class="text-[11px] text-neutral-300 font-sans font-light mt-1" id="gate-unauthorized-email-msg">
+                                You are currently signed in as <span class="text-white font-medium underline" id="gate-detected-email">user@example.com</span>.
                             </div>
-                            <p class="text-[10px] text-neutral-400 font-mono mt-1.5 leading-normal">
-                                Only Sumair Ali Siddiqui (<span class="text-white font-bold">sumairalisiddiqui@gmail.com</span>) has authorization to view license keys and API telemetry.
+                            <p class="text-[10px] text-neutral-400 font-sans font-light mt-1.5 leading-normal">
+                                Only Sumair Ali Siddiqui (<span class="text-white font-medium">sumairalisiddiqui@gmail.com</span>) has authorization to view license keys and API telemetry.
                             </p>
                             <div class="mt-3 flex items-center gap-2 flex-wrap">
-                                <button type="button" onclick="handleAdminSignOutAndSwitch()" class="px-3.5 py-1.5 rounded-xl bg-crimson hover:bg-crimson/80 text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-md">
+                                <button type="button" onclick="handleAdminSignOutAndSwitch()" class="px-3.5 py-1.5 rounded-xl bg-crimson hover:bg-crimson/80 text-white text-xs font-sans font-medium transition-all cursor-pointer shadow-md">
                                     Sign Out &amp; Switch Account
                                 </button>
-                                <a href="index.html" class="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-neutral-300 text-xs font-mono font-bold transition-all">
+                                <a href="index.html" class="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-neutral-300 text-xs font-sans font-light transition-all">
                                     Return to Site
                                 </a>
                             </div>
@@ -285,34 +285,34 @@
                     <!-- STEP 1: IDENTITY CONFIRMATION -->
                     <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
-                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">1</span>
+                            <span class="text-[10px] font-sans font-medium text-crimson tracking-wider uppercase flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-medium inline-block">1</span>
                                 STEP 1: IDENTITY CONFIRMATION
                             </span>
-                            <span class="text-[10px] font-mono text-emerald-400 font-bold" id="gate-identity-status">Required</span>
+                            <span class="text-[10px] font-sans font-medium text-emerald-400" id="gate-identity-status">Required</span>
                         </div>
 
-                        <label class="block text-xs font-mono font-bold text-white">
+                        <label class="block text-sm font-sans font-light text-white tracking-tight">
                             Are you Sumair Ali Siddiqui?
                         </label>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                             <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-crimson cursor-pointer transition-all has-[:checked]:border-crimson has-[:checked]:bg-crimson/15">
                                 <input type="radio" name="admin_identity_confirm" value="yes" id="ident-yes" required class="accent-crimson w-4 h-4" onchange="updateIdentityState()">
-                                <span class="text-xs font-mono text-white font-bold leading-tight">Yes, I am Sumair Ali Siddiqui</span>
+                                <span class="text-xs font-sans font-light text-white leading-tight">Yes, I am Sumair Ali Siddiqui</span>
                             </label>
                             <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-neutral-500 cursor-pointer transition-all has-[:checked]:border-neutral-500 has-[:checked]:bg-white/10">
                                 <input type="radio" name="admin_identity_confirm" value="no" id="ident-no" class="accent-neutral-500 w-4 h-4" onchange="updateIdentityState()">
-                                <span class="text-xs font-mono text-neutral-400 font-bold leading-tight">No, someone else</span>
+                                <span class="text-xs font-sans font-light text-neutral-400 leading-tight">No, someone else</span>
                             </label>
                         </div>
 
                         <!-- Email Field (Locked to Master Admin) -->
                         <div id="gate-email-box" class="pt-2">
-                            <label class="block text-[10px] font-mono text-neutral-400 uppercase mb-1.5">Authorized Master Admin Email</label>
+                            <label class="block text-[10px] font-sans font-light text-neutral-400 uppercase tracking-wider mb-1.5">Authorized Master Admin Email</label>
                             <div class="relative">
-                                <input id="gate-admin-email" type="email" value="sumairalisiddiqui@gmail.com" readonly class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-neutral-300 font-mono text-xs cursor-not-allowed select-none focus:outline-none">
-                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 text-[11px] font-mono font-bold">🔒 VERIFIED</span>
+                                <input id="gate-admin-email" type="email" value="sumairalisiddiqui@gmail.com" readonly class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/10 text-neutral-300 font-sans font-light text-xs cursor-not-allowed select-none focus:outline-none">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 text-[11px] font-sans font-medium">🔒 VERIFIED</span>
                             </div>
                         </div>
                     </div>
@@ -320,19 +320,19 @@
                     <!-- STEP 2: MASTER PASSWORD VERIFICATION -->
                     <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-mono font-bold text-crimson tracking-wider uppercase flex items-center gap-1.5">
-                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-bold inline-block">2</span>
+                            <span class="text-[10px] font-sans font-medium text-crimson tracking-wider uppercase flex items-center gap-1.5">
+                                <span class="w-4 h-4 rounded-full bg-crimson/20 border border-crimson/40 text-center text-[10px] leading-4 text-crimson font-medium inline-block">2</span>
                                 STEP 2: MASTER PASSWORD
                             </span>
-                            <span class="text-[10px] font-mono text-neutral-500">Required</span>
+                            <span class="text-[10px] font-sans font-light text-neutral-500">Required</span>
                         </div>
 
-                        <label class="block text-xs font-mono font-bold text-white">
+                        <label class="block text-sm font-sans font-light text-white tracking-tight">
                             Enter Master Admin Security Password
                         </label>
 
                         <div class="relative">
-                            <input id="gate-admin-password" type="password" placeholder="Enter master password..." required autocomplete="current-password" class="w-full pl-4 pr-11 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                            <input id="gate-admin-password" type="password" placeholder="Enter master password..." required autocomplete="current-password" class="w-full pl-4 pr-11 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white font-sans font-light text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
                             <button type="button" onclick="toggleGatePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer select-none" id="gate-eye-btn" title="Toggle password visibility">
                                 <span id="gate-eye-icon">👁️</span>
                             </button>
@@ -340,20 +340,20 @@
                     </div>
 
                     <!-- Error Message Box -->
-                    <div id="gate-login-error" class="hidden p-3.5 rounded-xl bg-crimson/15 border border-crimson/40 text-xs font-mono text-crimson text-center leading-relaxed"></div>
+                    <div id="gate-login-error" class="hidden p-3.5 rounded-xl bg-crimson/15 border border-crimson/40 text-xs font-sans font-light text-crimson text-center leading-relaxed"></div>
 
                     <!-- Submit Button -->
-                    <button type="submit" id="gate-submit-btn" class="btn-crimson w-full py-3.5 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2">
+                    <button type="submit" id="gate-submit-btn" class="btn-crimson w-full py-3.5 text-xs font-sans font-medium tracking-wide cursor-pointer flex items-center justify-center gap-2">
                         <span>🔓</span>
                         <span>VERIFY IDENTITY &amp; UNLOCK LICENSES</span>
                     </button>
                 </form>
 
                 <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                    <a href="index.html" class="text-xs font-mono text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5">
+                    <a href="index.html" class="text-xs font-sans font-light text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5">
                         <span>←</span> Back to Main Website
                     </a>
-                    <span class="text-[10px] font-mono text-neutral-500">Sumair Tools Security v8.0</span>
+                    <span class="text-[10px] font-sans font-light text-neutral-500">Sumair Tools Security v8.0</span>
                 </div>
             </div>
         </div>
@@ -376,16 +376,16 @@
                         <h1 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight whitespace-nowrap">
                             Sumair Tools Telemetry
                         </h1>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase bg-crimson/15 border border-crimson/50 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.25)] whitespace-nowrap flex-shrink-0">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-sans font-medium tracking-widest uppercase bg-crimson/15 border border-crimson/50 text-crimson shadow-[0_0_15px_rgba(255,0,60,0.25)] whitespace-nowrap flex-shrink-0">
                             <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span>
                             COMMAND CENTER
                         </span>
-                        <span class="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">
+                        <span class="inline-flex items-center gap-1 text-[10px] font-sans font-light text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                             v8.0
                         </span>
                     </div>
-                    <p class="text-[11px] font-mono text-neutral-400 mt-1 tracking-wide">
+                    <p class="text-[11px] font-sans font-light text-neutral-400 mt-1 tracking-wide">
                         HARDWARE LICENSING &bull; CLIENT TELEMETRY &bull; REMOTE REVOCATION
                     </p>
                 </div>
@@ -397,22 +397,22 @@
                 <div class="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] shadow-inner flex-shrink-0">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0 shadow-[0_0_8px_#34d399]"></span>
                     <div class="text-left">
-                        <span class="text-[9px] font-mono uppercase tracking-widest text-[#86868b] font-bold block leading-tight mb-0.5">AUTHENTICATED SUPER ADMIN</span>
-                        <span id="admin-profile-email" class="text-xs font-mono text-emerald-400 font-bold block leading-tight truncate max-w-[220px]">sumairalisiddiqui@gmail.com</span>
+                        <span class="text-[9px] font-sans uppercase tracking-widest text-[#86868b] font-medium block leading-tight mb-0.5">AUTHENTICATED SUPER ADMIN</span>
+                        <span id="admin-profile-email" class="text-xs font-sans font-medium text-emerald-400 block leading-tight truncate max-w-[220px]">sumairalisiddiqui@gmail.com</span>
                     </div>
                 </div>
 
                 <!-- Action Button Group -->
                 <div class="flex items-center gap-2 flex-shrink-0">
-                    <button onclick="loadAdminData()" class="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-mono font-semibold text-white flex items-center gap-1.5 transition-all hover:border-white/25 cursor-pointer whitespace-nowrap shadow-sm active:scale-95">
+                    <button onclick="loadAdminData()" class="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-sans font-medium text-white flex items-center gap-1.5 transition-all hover:border-white/25 cursor-pointer whitespace-nowrap shadow-sm active:scale-95">
                         <span>🔄</span>
                         <span>Refresh</span>
                     </button>
-                    <button onclick="lockAdminPanel()" class="px-3.5 py-2.5 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-xs font-mono text-crimson hover:text-white font-semibold transition-all active:scale-95 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.2)] whitespace-nowrap cursor-pointer" title="Lock Admin Panel and clear session">
+                    <button onclick="lockAdminPanel()" class="px-3.5 py-2.5 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-xs font-sans text-crimson hover:text-white font-medium transition-all active:scale-95 flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.2)] whitespace-nowrap cursor-pointer" title="Lock Admin Panel and clear session">
                         <span>🔒</span>
                         <span>Lock Panel</span>
                     </button>
-                    <a href="index.html" class="px-3.5 py-2.5 rounded-xl bg-white text-black hover:bg-neutral-200 text-xs font-mono font-bold transition-all active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer shadow-sm">
+                    <a href="index.html" class="px-3.5 py-2.5 rounded-xl bg-white text-black hover:bg-neutral-200 text-xs font-sans font-medium transition-all active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer shadow-sm">
                         <span>🌐</span>
                         <span>Main Site</span>
                     </a>
@@ -425,48 +425,48 @@
             <!-- Stat 1: Total Keys -->
             <div class="bento-card p-5">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#86868b] font-bold">Total Keys Generated</span>
+                    <span class="text-[10px] font-sans uppercase tracking-wider text-[#86868b] font-medium">Total Keys Generated</span>
                     <span class="text-base">🔑</span>
                 </div>
                 <div class="flex items-baseline justify-between">
-                    <span id="stat-total" class="font-display font-bold text-3xl text-white tracking-tight">0</span>
-                    <span class="text-[10px] font-mono text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">Supabase DB</span>
+                    <span id="stat-total" class="font-sans font-light text-3xl text-white tracking-tight">0</span>
+                    <span class="text-[10px] font-sans font-light text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">Supabase DB</span>
                 </div>
             </div>
 
             <!-- Stat 2: Active Keys -->
             <div class="bento-card p-5 border-emerald-500/30 bg-emerald-500/[0.04]">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">Active / In-Use Keys</span>
+                    <span class="text-[10px] font-sans uppercase tracking-wider text-emerald-400 font-medium">Active / In-Use Keys</span>
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 </div>
                 <div class="flex items-baseline justify-between">
-                    <span id="stat-active" class="font-display font-bold text-3xl text-emerald-400 tracking-tight">0</span>
-                    <span class="text-[10px] font-mono text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">Bound &amp; Verified</span>
+                    <span id="stat-active" class="font-sans font-light text-3xl text-emerald-400 tracking-tight">0</span>
+                    <span class="text-[10px] font-sans font-light text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">Bound &amp; Verified</span>
                 </div>
             </div>
 
             <!-- Stat 3: Bound Machines -->
             <div class="bento-card p-5 border-accentCyan/30 bg-accentCyan/[0.04]">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-accentCyan font-bold">Bound Machines</span>
+                    <span class="text-[10px] font-sans uppercase tracking-wider text-accentCyan font-medium">Bound Machines</span>
                     <span class="text-base">🖥️</span>
                 </div>
                 <div class="flex items-baseline justify-between">
-                    <span id="stat-bound" class="font-display font-bold text-3xl text-accentCyan tracking-tight">0</span>
-                    <span class="text-[10px] font-mono text-accentCyan/90 bg-accentCyan/10 border border-accentCyan/20 px-2 py-0.5 rounded-full">Unique HWIDs</span>
+                    <span id="stat-bound" class="font-sans font-light text-3xl text-accentCyan tracking-tight">0</span>
+                    <span class="text-[10px] font-sans font-light text-accentCyan/90 bg-accentCyan/10 border border-accentCyan/20 px-2 py-0.5 rounded-full">Unique HWIDs</span>
                 </div>
             </div>
 
             <!-- Stat 4: Revoked / Suspended -->
             <div class="bento-card p-5 border-crimson/30 bg-crimson/[0.04]">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-crimson font-bold">Revoked / Suspended</span>
+                    <span class="text-[10px] font-sans uppercase tracking-wider text-crimson font-medium">Revoked / Suspended</span>
                     <span class="text-base">⛔</span>
                 </div>
                 <div class="flex items-baseline justify-between">
-                    <span id="stat-revoked" class="font-display font-bold text-3xl text-crimson tracking-tight">0</span>
-                    <span class="text-[10px] font-mono text-crimson/90 bg-crimson/10 border border-crimson/20 px-2 py-0.5 rounded-full">Access Blocked</span>
+                    <span id="stat-revoked" class="font-sans font-light text-3xl text-crimson tracking-tight">0</span>
+                    <span class="text-[10px] font-sans font-light text-crimson/90 bg-crimson/10 border border-crimson/20 px-2 py-0.5 rounded-full">Access Blocked</span>
                 </div>
             </div>
         </div>
@@ -480,10 +480,10 @@
                     <span class="mac-dot mac-dot-yellow"></span>
                     <span class="mac-dot mac-dot-green"></span>
                 </div>
-                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                <div class="font-sans font-light text-xs text-neutral-300 flex items-center gap-2">
                     <span>License Dispatch Engine (Gmail SMTP Automated Delivery)</span>
                 </div>
-                <div class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
+                <div class="text-[10px] font-sans font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full">
                     ONLINE
                 </div>
             </div>
@@ -496,17 +496,17 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2.5 flex-wrap">
-                                <h2 class="font-display font-bold text-base sm:text-lg text-white tracking-tight">
+                                <h2 class="font-sans font-light text-base sm:text-lg text-white tracking-tight">
                                     Instant License Mint &amp; Gmail Dispatch
                                 </h2>
-                                <span id="dispatch-status-badge" class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-accentCyan/15 text-accentCyan border border-accentCyan/30">
+                                <span id="dispatch-status-badge" class="px-2.5 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-accentCyan/15 text-accentCyan border border-accentCyan/30">
                                     ✉️ 1-CLICK GMAIL COMPOSE
                                 </span>
-                                <button type="button" onclick="configureDispatchMode()" class="px-2.5 py-0.5 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] text-neutral-300 hover:text-white font-mono text-[9px] font-bold transition-all cursor-pointer border border-white/10" title="Configure automated sending via Google Apps Script or 1-Click Gmail Web">
+                                <button type="button" onclick="configureDispatchMode()" class="px-2.5 py-0.5 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] text-neutral-300 hover:text-white font-sans text-[9px] font-medium transition-all cursor-pointer border border-white/10" title="Configure automated sending via Google Apps Script or 1-Click Gmail Web">
                                     ⚙️ Configure Dispatch Mode
                                 </button>
                             </div>
-                            <p class="text-[11px] font-mono text-neutral-400 mt-1">
+                            <p class="text-[11px] font-sans font-light text-neutral-400 mt-1">
                                 Auto-generates enterprise ST-XXXX key in Supabase &amp; delivers dark-mode HTML welcome kit with v8.0 installation instructions.
                             </p>
                         </div>
@@ -515,21 +515,21 @@
 
                 <form id="license-dispatch-form" onsubmit="event.preventDefault(); mintAndEmailLicense();" class="grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-end">
                     <div class="sm:col-span-5">
-                        <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1.5">
+                        <label class="block text-[10px] font-sans font-light text-neutral-300 uppercase mb-1.5">
                             Recipient Customer Email <span class="text-crimson">*</span>
                         </label>
-                        <input id="dispatch-email" type="email" placeholder="customer@example.com" required autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                        <input id="dispatch-email" type="email" placeholder="customer@example.com" required autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-sans font-light text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
                     </div>
 
                     <div class="sm:col-span-4">
-                        <label class="block text-[10px] font-mono font-bold text-neutral-300 uppercase mb-1.5">
+                        <label class="block text-[10px] font-sans font-light text-neutral-300 uppercase mb-1.5">
                             Client Full Name <span class="text-neutral-500">(Optional)</span>
                         </label>
-                        <input id="dispatch-name" type="text" placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
+                        <input id="dispatch-name" type="text" placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-sans font-light text-xs focus:outline-none focus:border-crimson transition-all placeholder:text-neutral-600">
                     </div>
 
                     <div class="sm:col-span-3">
-                        <button type="submit" id="dispatch-submit-btn" class="btn-crimson w-full py-2.5 px-4 text-xs font-mono font-black tracking-wider cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button type="submit" id="dispatch-submit-btn" class="btn-crimson w-full py-2.5 px-4 text-xs font-sans font-medium tracking-wider cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
                             <span id="dispatch-btn-icon">⚡</span>
                             <span id="dispatch-btn-text">MINT &amp; DISPATCH EMAIL</span>
                         </button>
@@ -537,7 +537,7 @@
                 </form>
 
                 <!-- Real-time Status Alert Container -->
-                <div id="dispatch-status-alert" class="hidden mt-4 p-3.5 rounded-xl font-mono text-xs border transition-all"></div>
+                <div id="dispatch-status-alert" class="hidden mt-4 p-3.5 rounded-xl font-sans font-light text-xs border transition-all"></div>
             </div>
         </div>
 
@@ -550,10 +550,10 @@
                     <span class="mac-dot mac-dot-yellow"></span>
                     <span class="mac-dot mac-dot-green"></span>
                 </div>
-                <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
+                <div class="font-sans font-light text-xs text-neutral-300 flex items-center gap-2">
                     <span>Sumair Tools Telemetry Database (Real-Time Cloud)</span>
                 </div>
-                <div class="text-[10px] font-mono text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded">
+                <div class="text-[10px] font-sans font-light text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded">
                     Encrypted Hardware Sync
                 </div>
             </div>
@@ -562,9 +562,9 @@
                 <!-- Filter & Action Controls Bar -->
                 <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
                     <div class="flex items-center gap-3 w-full lg:w-auto flex-wrap">
-                        <input id="admin-search-input" oninput="filterAdmin()" type="text" placeholder="Search by Key, Name, Email, Machine ID..." class="px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson w-full sm:w-72 placeholder:text-neutral-600">
+                        <input id="admin-search-input" oninput="filterAdmin()" type="text" placeholder="Search by Key, Name, Email, Machine ID..." class="px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-sans font-light text-xs focus:outline-none focus:border-crimson w-full sm:w-72 placeholder:text-neutral-600">
                         
-                        <select id="admin-status-filter" onchange="filterAdmin()" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson">
+                        <select id="admin-status-filter" onchange="filterAdmin()" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-sans font-light text-xs focus:outline-none focus:border-crimson">
                             <option value="all">All Statuses</option>
                             <option value="active">Active (Bound Workstations)</option>
                             <option value="unactivated">Approved (Ready to Bind)</option>
@@ -573,8 +573,8 @@
                         </select>
 
                         <div class="flex items-center gap-1.5 bg-neutral-900 border border-white/10 rounded-xl px-3 py-1">
-                            <span class="text-[10px] font-mono text-[#86868b] font-bold uppercase whitespace-nowrap">Sort By:</span>
-                            <select id="admin-sort-by" onchange="filterAdmin()" class="bg-transparent text-white font-mono text-xs focus:outline-none py-1.5 cursor-pointer">
+                            <span class="text-[10px] font-sans font-medium text-[#86868b] uppercase whitespace-nowrap">Sort By:</span>
+                            <select id="admin-sort-by" onchange="filterAdmin()" class="bg-transparent text-white font-sans font-light text-xs focus:outline-none py-1.5 cursor-pointer">
                                 <option value="created-desc">📅 Newest First (Created ↓)</option>
                                 <option value="created-asc">📅 Oldest First (Created ↑)</option>
                                 <option value="key-asc">🔑 License Key (A → Z)</option>
@@ -590,19 +590,19 @@
 
                     <!-- Action Button Group -->
                     <div class="flex items-center gap-2 flex-wrap">
-                        <button onclick="document.getElementById('dispatch-email').focus(); document.getElementById('dispatch-email').scrollIntoView({behavior:'smooth'});" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson hover:text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,0,60,0.2)] cursor-pointer">
+                        <button onclick="document.getElementById('dispatch-email').focus(); document.getElementById('dispatch-email').scrollIntoView({behavior:'smooth'});" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson hover:text-white font-sans font-medium text-xs transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,0,60,0.2)] cursor-pointer">
                             <span>✉️</span> Mint &amp; Email
                         </button>
-                        <button onclick="generateBatchKeys(50)" class="px-4 py-2 rounded-xl bg-crimson hover:bg-crimson/80 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.35)] cursor-pointer">
+                        <button onclick="generateBatchKeys(50)" class="px-4 py-2 rounded-xl bg-crimson hover:bg-crimson/80 text-white font-sans font-medium text-xs transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,0,60,0.35)] cursor-pointer">
                             <span>⚡</span> Mint 50 Keys
                         </button>
-                        <button onclick="batchApprove()" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
+                        <button onclick="batchApprove()" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-sans font-medium text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
                             <span>✓</span> Approve All
                         </button>
-                        <button onclick="batchSuspend()" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson font-mono font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
+                        <button onclick="batchSuspend()" class="px-3.5 py-2 rounded-xl bg-crimson/15 hover:bg-crimson/25 border border-crimson/40 text-crimson font-sans font-medium text-xs transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
                             <span>🔒</span> Suspend All
                         </button>
-                        <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-mono font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer">
+                        <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-sans font-medium text-xs transition-all flex items-center gap-1.5 cursor-pointer">
                             <span>📥</span> Export CSV
                         </button>
                     </div>
@@ -612,7 +612,7 @@
                 <div class="overflow-x-auto rounded-2xl border border-white/[0.08] bg-black/40">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-white/[0.03] font-mono text-[10px] text-[#86868b] uppercase border-b border-white/[0.08] select-none">
+                            <tr class="bg-white/[0.03] font-sans font-light text-[10px] text-[#86868b] uppercase border-b border-white/[0.08] select-none">
                                 <th class="py-3.5 px-4 cursor-pointer hover:text-white transition-colors" onclick="setAdminSort('key')">
                                     <div class="flex items-center gap-1.5">License Key <span id="sort-icon-key" class="text-neutral-500 font-bold">↕</span></div>
                                 </th>

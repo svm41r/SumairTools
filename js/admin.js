@@ -46,7 +46,7 @@
             }
             if (statusBadge) {
                 statusBadge.innerText = 'Denied';
-                statusBadge.className = 'text-[10px] font-mono text-crimson font-bold';
+                statusBadge.className = 'text-[10px] font-sans text-crimson font-medium';
             }
             if (passInput) {
                 passInput.disabled = true;
@@ -63,7 +63,7 @@
             }
             if (statusBadge) {
                 statusBadge.innerText = '✓ Confirmed';
-                statusBadge.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+                statusBadge.className = 'text-[10px] font-sans text-emerald-400 font-medium';
             }
             if (passInput) {
                 passInput.disabled = false;
@@ -275,7 +275,7 @@
         var statusBadge = document.getElementById('gate-identity-status');
         if (statusBadge) {
             statusBadge.innerText = 'Required';
-            statusBadge.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+            statusBadge.className = 'text-[10px] font-sans font-medium text-emerald-400';
         }
 
         console.log('[Admin Security] Panel locked. Telemetry cleared.');
@@ -302,7 +302,7 @@
 
         var tableBody = document.getElementById('admin-tbody');
         if (tableBody) {
-            tableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-neutral-500 font-mono text-xs">Fetching live database telemetry and user records...</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-neutral-500 font-sans font-light text-xs">Fetching live database telemetry and user records...</td></tr>';
         }
 
         console.log('[Admin Command Center] Initializing license telemetry fetch for Master Admin...');
@@ -374,7 +374,7 @@
             } catch (err) {
                 console.error('[Admin Command Center] Fatal fetch error:', err);
                 if (tableBody) {
-                    tableBody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-crimson font-mono text-xs">
+                    tableBody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-crimson font-sans font-light text-xs">
                         Failed to fetch licenses: ${err.message || JSON.stringify(err)}<br>
                         <span class="text-neutral-400 text-[10px] block mt-1">Please run <b>FIX_ADMIN_AMBIGUOUS_USER_ID.sql</b> in Supabase SQL Editor.</span>
                     </td></tr>`;
@@ -418,7 +418,7 @@
         if (!tableBody) return;
 
         if (!data || data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-neutral-500 font-mono text-xs">No licenses match the current filter.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-neutral-500 font-sans font-light text-xs">No licenses match the current filter.</td></tr>';
             return;
         }
 
@@ -429,61 +429,61 @@
             var actionBtns = '';
 
             // Copy Key button always present
-            actionBtns += `<button onclick="copyLicenseKey('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-mono font-bold transition-all mr-1.5 cursor-pointer" title="Copy license key">📋 Copy</button>`;
+            actionBtns += `<button onclick="copyLicenseKey('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-sans font-medium transition-all mr-1.5 cursor-pointer" title="Copy license key">📋 Copy</button>`;
 
             // Email License Key button (Direct Gmail SMTP dispatch)
             var safeLicName = (lic.user_name || '').replace(/['"\\]/g, ' ');
             var safeLicEmail = (lic.user_email || '').replace(/['"\\]/g, ' ');
-            actionBtns += `<button onclick="sendExistingLicenseEmail('${lic.license_key}', '${safeLicEmail}', '${safeLicName}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-300 hover:text-white text-[11px] font-mono font-bold transition-all mr-1.5 cursor-pointer" title="Dispatch license key via Gmail SMTP">📧 Email</button>`;
+            actionBtns += `<button onclick="sendExistingLicenseEmail('${lic.license_key}', '${safeLicEmail}', '${safeLicName}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-300 hover:text-white text-[11px] font-sans font-medium transition-all mr-1.5 cursor-pointer" title="Dispatch license key via Gmail SMTP">📧 Email</button>`;
 
             if (isRevoked) {
-                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border text-crimson bg-crimson/15 border-crimson/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-crimson"></span> REVOKED</span>';
-                actionBtns += `<button onclick="reactivateLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-300 hover:text-black text-[11px] font-mono font-bold transition-all cursor-pointer" title="Reactivate license">✓ Reactivate</button>`;
+                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-sans font-medium border text-crimson bg-crimson/15 border-crimson/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-crimson"></span> REVOKED</span>';
+                actionBtns += `<button onclick="reactivateLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-300 hover:text-black text-[11px] font-sans font-medium transition-all cursor-pointer" title="Reactivate license">✓ Reactivate</button>`;
             } else if (lic.status === 'active') {
-                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border text-emerald-400 bg-emerald-500/15 border-emerald-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE (BOUND)</span>';
-                actionBtns += `<button onclick="revokeLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-mono font-bold transition-all cursor-pointer" title="Immediately revoke remote access">⛔ Revoke</button>`;
+                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-sans font-medium border text-emerald-400 bg-emerald-500/15 border-emerald-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE (BOUND)</span>';
+                actionBtns += `<button onclick="revokeLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-sans font-medium transition-all cursor-pointer" title="Immediately revoke remote access">⛔ Revoke</button>`;
             } else if (lic.status === 'unactivated') {
-                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border text-emerald-300 bg-emerald-500/10 border-emerald-500/30 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> APPROVED (READY)</span>';
-                actionBtns += `<button onclick="revokeLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-mono font-bold transition-all cursor-pointer" title="Immediately revoke key">⛔ Revoke</button>`;
+                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-sans font-medium border text-emerald-300 bg-emerald-500/10 border-emerald-500/30 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> APPROVED (READY)</span>';
+                actionBtns += `<button onclick="revokeLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-sans font-medium transition-all cursor-pointer" title="Immediately revoke key">⛔ Revoke</button>`;
             } else {
-                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border text-amber-400 bg-amber-500/15 border-amber-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PENDING (OFF)</span>';
-                actionBtns += `<button onclick="reactivateLicense('${lic.license_key}')" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-[11px] font-mono font-black transition-all inline-flex items-center gap-1 shadow-sm cursor-pointer" title="Approve and activate access">✓ Reactivate</button>`;
+                statusBadge = '<span class="px-2.5 py-1 rounded-full text-[10px] font-sans font-medium border text-amber-400 bg-amber-500/15 border-amber-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PENDING (OFF)</span>';
+                actionBtns += `<button onclick="reactivateLicense('${lic.license_key}')" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-[11px] font-sans font-medium transition-all inline-flex items-center gap-1 shadow-sm cursor-pointer" title="Approve and activate access">✓ Reactivate</button>`;
             }
 
             // Unlink Machine / Reset HWID action if machine is bound
             if (lic.machine_id && lic.machine_id.trim().length > 0) {
-                actionBtns += `<button onclick="resetMachineHWID('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-cyanAccent/15 hover:bg-cyanAccent/30 border border-cyanAccent/40 text-cyanAccent text-[11px] font-mono font-bold transition-all ml-1.5 cursor-pointer" title="Reset HWID binding so user can activate on a new PC">🔄 Reset HWID</button>`;
+                actionBtns += `<button onclick="resetMachineHWID('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-cyanAccent/15 hover:bg-cyanAccent/30 border border-cyanAccent/40 text-cyanAccent text-[11px] font-sans font-medium transition-all ml-1.5 cursor-pointer" title="Reset HWID binding so user can activate on a new PC">🔄 Reset HWID</button>`;
             }
 
             var isClaimed = !!(lic.user_id || lic.user_email || lic.user_name);
             if (isClaimed) {
-                actionBtns += `<button onclick="unlinkLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 border border-white/20 text-neutral-300 hover:text-amber-300 text-[11px] font-mono font-bold transition-all ml-1.5 cursor-pointer" title="Unlink user from this key">🔓 Unlink</button>`;
+                actionBtns += `<button onclick="unlinkLicense('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 border border-white/20 text-neutral-300 hover:text-amber-300 text-[11px] font-sans font-medium transition-all ml-1.5 cursor-pointer" title="Unlink user from this key">🔓 Unlink</button>`;
             }
 
             var claimedHtml = '';
             if (lic.user_name || lic.user_email) {
                 var dispName = lic.user_name || (lic.user_email ? lic.user_email.split('@')[0] : 'Creator');
                 var dispEmail = lic.user_email || '';
-                claimedHtml = `<div><div class="font-bold text-white text-xs">${dispName}</div><div class="text-[10px] text-neutral-400 font-mono">${dispEmail}</div></div>`;
+                claimedHtml = `<div><div class="font-normal text-white text-xs">${dispName}</div><div class="text-[10px] text-neutral-400 font-sans font-light">${dispEmail}</div></div>`;
             } else if (lic.user_id) {
                 claimedHtml = `<span class="text-neutral-400 font-mono text-[10px]" title="${lic.user_id}">UID: ${lic.user_id.substring(0,8)}...</span>`;
             } else {
-                claimedHtml = '<span class="text-neutral-500 italic text-[11px]">Unclaimed</span>';
+                claimedHtml = '<span class="text-neutral-500 italic text-[11px] font-sans font-light">Unclaimed</span>';
             }
 
             var machinePreview = lic.machine_id ? 
                 `<span class="font-mono text-[11px] text-cyanAccent cursor-pointer" title="${lic.machine_id}">${lic.machine_id.substring(0, 8)}...${lic.machine_id.substring(lic.machine_id.length - 8)}</span>` : 
-                '<span class="text-neutral-500 italic text-[11px]">Not Bound</span>';
+                '<span class="text-neutral-500 italic text-[11px] font-sans font-light">Not Bound</span>';
 
             var createdDate = lic.created_at ? new Date(lic.created_at).toLocaleDateString() : 'N/A';
 
             rows += `
-                <tr class="border-b border-white/5 hover:bg-white/5 font-mono text-xs transition-colors">
-                    <td class="py-3 px-4 font-bold text-white tracking-wider select-all">${lic.license_key}</td>
+                <tr class="border-b border-white/5 hover:bg-white/5 font-sans font-light text-xs transition-colors">
+                    <td class="py-3 px-4 font-mono font-medium text-white tracking-wider select-all">${lic.license_key}</td>
                     <td class="py-3 px-4">${claimedHtml}</td>
                     <td class="py-3 px-4">${machinePreview}</td>
                     <td class="py-3 px-4">${statusBadge}</td>
-                    <td class="py-3 px-4 text-neutral-400 text-[11px] whitespace-nowrap">${createdDate}</td>
+                    <td class="py-3 px-4 text-neutral-400 text-[11px] whitespace-nowrap font-sans font-light">${createdDate}</td>
                     <td class="py-3 px-4 text-right whitespace-nowrap">
                         ${actionBtns}
                     </td>
@@ -737,10 +737,10 @@
         if (!badge) return;
         var gasUrl = getGasUrl();
         if (gasUrl) {
-            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
             badge.innerHTML = '⚡ GOOGLE APPS SCRIPT ACTIVE';
         } else {
-            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-cyanAccent/20 text-cyanAccent border border-cyanAccent/40';
+            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-cyanAccent/20 text-cyanAccent border border-cyanAccent/40';
             badge.innerHTML = '✉️ 1-CLICK GMAIL COMPOSE';
         }
     }
@@ -817,7 +817,7 @@
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email || !emailRegex.test(email)) {
             if (alertBox) {
-                alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
+                alertBox.className = 'mt-3.5 p-3 rounded-xl font-sans font-light text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
                 alertBox.innerHTML = '⚠️ <b>Invalid Email Address</b>: Please enter a valid recipient email address.';
             }
             emailInput.focus();
@@ -829,7 +829,7 @@
         if (btnIcon) btnIcon.innerHTML = '⏳';
         if (btnText) btnText.textContent = 'MINTING & DISPATCHING...';
         if (alertBox) {
-            alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-cyanAccent/10 border-cyanAccent/30 text-cyanAccent block';
+            alertBox.className = 'mt-3.5 p-3 rounded-xl font-sans font-light text-xs border bg-cyanAccent/10 border-cyanAccent/30 text-cyanAccent block';
             alertBox.innerHTML = '⚙️ Provisioning enterprise license key in Supabase...';
         }
 
@@ -886,34 +886,34 @@
 
             if (alertBox) {
                 if (dispatchRes.mode === 'gas') {
-                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-mono text-xs border bg-emerald-500/15 border-emerald-500/40 text-emerald-300 block space-y-2';
+                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-sans font-light text-xs border bg-emerald-500/15 border-emerald-500/40 text-emerald-300 block space-y-2';
                     alertBox.innerHTML = `
-                        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                        <div class="flex items-center gap-2 text-emerald-400 font-medium text-sm font-sans">
                             <span>✅</span> <span>LICENSE DELIVERED VIA GOOGLE APPS SCRIPT</span>
                         </div>
                         <div class="text-neutral-200">
-                            Key <span class="text-white font-bold bg-black/40 px-2 py-0.5 rounded border border-emerald-500/40 select-all">${licenseKey}</span> has been dispatched to <b class="text-white">${email}</b>.
+                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-emerald-500/40 font-mono select-all">${licenseKey}</span> has been dispatched to <b class="text-white">${email}</b>.
                         </div>
                         <div class="text-[11px] text-neutral-400 flex items-center gap-3 pt-1">
-                            <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition-colors cursor-pointer">📋 Copy Key</button>
+                            <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-medium text-[10px] transition-colors cursor-pointer font-sans">📋 Copy Key</button>
                         </div>
                     `;
                 } else {
-                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-mono text-xs border bg-cyanAccent/15 border-cyanAccent/40 text-cyanAccent block space-y-2';
+                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-sans font-light text-xs border bg-cyanAccent/15 border-cyanAccent/40 text-cyanAccent block space-y-2';
                     alertBox.innerHTML = `
-                        <div class="flex items-center gap-2 text-white font-bold text-sm">
+                        <div class="flex items-center gap-2 text-white font-medium text-sm font-sans">
                             <span>🚀</span> <span>LICENSE READY &amp; GMAIL COMPOSE OPENED</span>
                         </div>
                         <div class="text-neutral-200">
-                            Key <span class="text-white font-bold bg-black/40 px-2 py-0.5 rounded border border-white/20 select-all">${licenseKey}</span> for <b class="text-white">${email}</b>.
+                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-white/20 font-mono select-all">${licenseKey}</span> for <b class="text-white">${email}</b>.
                         </div>
                         <div class="text-[11px] text-neutral-300">
                             ✓ Gmail compose window has been opened with your pre-filled email. Simply click <b>Send</b> in Gmail!<br>
                             ✓ Message text and key have also been copied to your clipboard.
                         </div>
-                        <div class="flex items-center gap-2 pt-1">
-                            <button onclick="openGmailWebComposer('${email}', '${licenseKey}', '${name}')" class="px-3 py-1.5 rounded-lg bg-crimson hover:bg-crimson/80 text-white font-bold text-[10px] transition-all cursor-pointer">✉️ Reopen Gmail</button>
-                            <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition-colors cursor-pointer">📋 Copy Key</button>
+                        <div class="flex items-center gap-2 pt-1 font-sans">
+                            <button onclick="openGmailWebComposer('${email}', '${licenseKey}', '${name}')" class="px-3 py-1.5 rounded-lg bg-crimson hover:bg-crimson/80 text-white font-medium text-[10px] transition-all cursor-pointer">✉️ Reopen Gmail</button>
+                            <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-[10px] transition-colors cursor-pointer">📋 Copy Key</button>
                         </div>
                     `;
                 }
@@ -928,7 +928,7 @@
         } catch (err) {
             console.error('[Admin] mintAndEmailLicense fatal error:', err);
             if (alertBox) {
-                alertBox.className = 'mt-3.5 p-3 rounded-xl font-mono text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
+                alertBox.className = 'mt-3.5 p-3 rounded-xl font-sans font-light text-xs border bg-crimson/15 border-crimson/40 text-crimson block';
                 alertBox.innerHTML = '❌ <b>System Error</b>: ' + (err.message || 'Unknown network error occurred');
             }
         } finally {

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Sumair Tools — Enterprise User & Admin Telemetry Dashboard Engine
  * Engineered by Sumair Ali Siddiqui
  * All Rights Reserved (c) 2026
@@ -61,13 +61,13 @@
         if (tab === 'user') {
             if (userView) userView.classList.remove('hidden');
             if (adminView) adminView.classList.add('hidden');
-            if (userBtn) userBtn.className = 'px-4 py-2 text-xs font-mono font-bold rounded-xl bg-crimson text-white shadow-[0_0_15px_rgba(255,0,60,0.4)]';
-            if (adminBtn) adminBtn.className = 'px-4 py-2 text-xs font-mono font-bold rounded-xl bg-white/5 text-neutral-400 hover:text-white border border-white/10';
+            if (userBtn) userBtn.className = 'px-4 py-1.5 text-xs font-sans font-medium rounded-full bg-white text-black shadow-sm transition-all cursor-pointer';
+            if (adminBtn) adminBtn.className = 'px-4 py-1.5 text-xs font-sans font-light rounded-full text-neutral-400 hover:text-white transition-all cursor-pointer';
         } else if (tab === 'admin') {
             if (userView) userView.classList.add('hidden');
             if (adminView) adminView.classList.remove('hidden');
-            if (adminBtn) adminBtn.className = 'px-4 py-2 text-xs font-mono font-bold rounded-xl bg-crimson text-white shadow-[0_0_15px_rgba(255,0,60,0.4)]';
-            if (userBtn) userBtn.className = 'px-4 py-2 text-xs font-mono font-bold rounded-xl bg-white/5 text-neutral-400 hover:text-white border border-white/10';
+            if (adminBtn) adminBtn.className = 'px-4 py-1.5 text-xs font-sans font-medium rounded-full bg-white text-black shadow-sm transition-all cursor-pointer';
+            if (userBtn) userBtn.className = 'px-4 py-1.5 text-xs font-sans font-light rounded-full text-neutral-400 hover:text-white transition-all cursor-pointer';
             loadAdminLicenses();
         }
     };
@@ -83,28 +83,28 @@
         // Render Claim Card with Clean High-Converting Copy
         if (claimContainer) {
             claimContainer.innerHTML = `
-                <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-crimson/15 via-white/5 to-transparent border border-crimson/40 shadow-[0_0_30px_rgba(255,0,60,0.15)] text-left">
+                <div class="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-left">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <span class="text-base">🔑</span>
-                            <h4 class="text-xs sm:text-sm font-mono font-bold text-white uppercase tracking-wider">CLAIM YOUR LICENSE</h4>
+                            <h4 class="text-xs sm:text-sm font-sans font-medium text-white tracking-tight">Connect License Key</h4>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-crimson/20 text-crimson border border-crimson/40 font-bold">$1 LAUNCH DEAL</span>
+                        <span class="text-[10px] font-sans font-medium px-2.5 py-0.5 rounded-full bg-crimson/15 text-crimson border border-crimson/30">$1 Launch Deal</span>
                     </div>
-                    <p class="text-[11px] font-mono text-neutral-300 mb-4 leading-relaxed">
-                        Enter your purchased license key to link it to your account and authorize your After Effects workstation.
+                    <p class="text-xs font-sans font-light text-neutral-400 mb-4 leading-relaxed">
+                        Enter your purchased enterprise license key to bind it to your account and authorize your After Effects workstation.
                     </p>
                     <form onsubmit="handleClaimKey(event)" class="flex flex-col sm:flex-row gap-2.5">
-                        <input id="claim-key-input" type="text" placeholder="Enter your License Key (ST-XXXX-XXXX)..." class="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/20 text-white font-mono text-xs focus:outline-none focus:border-crimson uppercase placeholder:text-neutral-500" required>
-                        <button type="submit" class="btn-crimson py-2.5 px-5 text-xs font-mono font-bold tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(255,0,60,0.4)] cursor-pointer">
+                        <input id="claim-key-input" type="text" placeholder="Enter License Key (ST-XXXX-XXXX)..." class="flex-1 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-crimson uppercase placeholder:text-neutral-600" required>
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-sans font-medium text-xs transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap">
                             <span>Connect License</span>
                             <span>➔</span>
                         </button>
                     </form>
-                    <div class="mt-3 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                    <div class="mt-3 flex items-center justify-between text-xs font-sans font-light text-neutral-400">
                         <span>Need a license?</span>
-                        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" class="text-[#7983f5] hover:text-white font-bold underline flex items-center gap-1">
-                            Get License for $1 on Discord ↗
+                        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neutral-300 font-medium underline flex items-center gap-1">
+                            Get Lifetime License for $1 on Discord ↗
                         </a>
                     </div>
                 </div>
@@ -113,9 +113,9 @@
 
         if (!hasLicenses) {
             listContainer.innerHTML = `
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                    <p class="text-neutral-300 text-xs font-mono mb-2">No active license keys bound to your account yet.</p>
-                    <p class="text-[11px] text-neutral-500">Enter your license key in the form above to connect and activate your workstation.</p>
+                <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] text-center">
+                    <p class="text-neutral-300 text-xs font-sans font-light mb-1">No active license keys bound to your account yet.</p>
+                    <p class="text-[11px] font-sans font-light text-neutral-500">Enter your license key in the form above to connect and activate your workstation.</p>
                 </div>
             `;
             return;
@@ -124,7 +124,7 @@
         var html = '';
         licenses.forEach(function (lic) {
             var isRevoked = lic.status === 'revoked' || lic.is_active === false;
-            var statusBg = isRevoked ? 'bg-crimson/20 text-crimson border-crimson/50' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50';
+            var statusBg = isRevoked ? 'bg-crimson/15 text-crimson border-crimson/30' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
             var statusLabel = isRevoked ? 'REVOKED' : 'LINKED & ACTIVE';
 
             var machineText = lic.machine_id ? 
@@ -134,24 +134,24 @@
             var activatedDate = lic.activated_at ? new Date(lic.activated_at).toLocaleDateString() : (lic.linked_at ? 'Linked ' + new Date(lic.linked_at).toLocaleDateString() : 'Ready to Bind');
 
             html += `
-                <div class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="font-mono font-black text-sm text-white tracking-wider select-all">${lic.license_key}</span>
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono border uppercase ${statusBg} inline-flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full ${isRevoked ? 'bg-crimson' : 'bg-emerald-400'}"></span>
+                            <span class="font-mono font-semibold text-sm text-white tracking-wider select-all">${lic.license_key}</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-sans font-medium border uppercase ${statusBg} inline-flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full ${isRevoked ? 'bg-crimson' : 'bg-emerald-400 animate-pulse'}"></span>
                                 ${statusLabel}
                             </span>
                         </div>
-                        <div class="text-[11px] font-mono text-neutral-400">
-                            Hardware Binding: <span class="text-neutral-300 font-mono">${machineText}</span>
+                        <div class="text-xs font-sans font-light text-neutral-400">
+                            Hardware Binding: <span class="text-neutral-300 font-mono text-[11px]">${machineText}</span>
                         </div>
-                        <div class="text-[10px] font-mono text-neutral-500 mt-0.5">
+                        <div class="text-[11px] font-sans font-light text-neutral-500 mt-0.5">
                             Status: <span class="text-neutral-400">${activatedDate}</span> &bull; 1 Workstation Active Lock
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="copyToClipboard('${lic.license_key}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-mono font-bold text-white transition-all flex items-center gap-1.5 cursor-pointer" title="Copy License Key">
+                        <button onclick="copyToClipboard('${lic.license_key}')" class="px-3.5 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-xs font-sans font-light text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm" title="Copy License Key">
                             <span>📋</span> Copy Key
                         </button>
                     </div>
@@ -175,8 +175,8 @@
         if (verifiedBadge) {
             var isVerified = !!user.email_confirmed_at;
             verifiedBadge.innerHTML = isVerified ?
-                '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">✓ VERIFIED EMAIL</span>' :
-                '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-amber-500/20 text-amber-400 border border-amber-500/40">⚡ ACTIVE ACCOUNT</span>';
+                '<span class="px-3 py-1 rounded-full text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">✓ VERIFIED EMAIL</span>' :
+                '<span class="px-3 py-1 rounded-full text-[10px] font-sans font-medium bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1">⚡ ACTIVE ACCOUNT</span>';
         }
 
         var listContainer = document.getElementById('dash-user-licenses-list');
@@ -184,7 +184,7 @@
         // Check if live Supabase is active
         if (window.sbClient && window.ST_CONFIG && window.ST_CONFIG.isConfigured()) {
             if (listContainer) {
-                listContainer.innerHTML = '<div class="text-neutral-500 font-mono text-xs py-4 text-center">Checking account licenses in database...</div>';
+                listContainer.innerHTML = '<div class="text-neutral-500 font-sans font-light text-xs py-4 text-center">Checking account licenses in database...</div>';
             }
             try {
                 var query = window.sbClient.from('licenses').select('*');
@@ -371,7 +371,7 @@
 
         // 1. Live Supabase Query with Telemetry RPC
         if (window.sbClient && window.ST_CONFIG && window.ST_CONFIG.isConfigured()) {
-            tableBody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-neutral-500 font-mono text-xs">Loading database records and user telemetry...</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-neutral-500 font-sans font-light text-xs">Loading database records and user telemetry...</td></tr>';
             try {
                 // Fetch using telemetry RPC (joins auth.users for Full Name & Email)
                 var res = await window.sbClient.rpc('get_admin_licenses_telemetry');
@@ -391,7 +391,7 @@
                 renderAdminTable(allAdminLicenses);
                 return;
             } catch (err) {
-                tableBody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-crimson font-mono text-xs">
+                tableBody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-crimson font-sans font-light text-xs">
                     Database Query Notice: ${err.message || err}<br>
                     <span class="text-neutral-400 text-[10px]">Ensure migration_telemetry_linking.sql is executed in your Supabase SQL editor.</span>
                 </td></tr>`;
@@ -421,7 +421,7 @@
         if (!tableBody) return;
 
         if (!data || data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-neutral-500 font-mono text-xs">No licenses found. Click "Generate Keys" above to mint a batch!</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-neutral-500 font-sans font-light text-xs">No licenses found. Click "Generate Keys" above to mint a batch!</td></tr>';
             return;
         }
 
@@ -432,24 +432,24 @@
             var actionBtns = '';
 
             if (isRevoked) {
-                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border text-crimson bg-crimson/15 border-crimson/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-crimson"></span> REVOKED</span>';
-                actionBtns = `<button onclick="toggleLicenseAccess('${lic.license_key}', 'unactivated')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-300 hover:text-black text-[11px] font-mono font-bold transition-all" title="Restore license">✓ Un-Revoke</button>`;
+                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-sans font-medium border text-crimson bg-crimson/15 border-crimson/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-crimson"></span> REVOKED</span>';
+                actionBtns = `<button onclick="toggleLicenseAccess('${lic.license_key}', 'unactivated')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-300 hover:text-black text-[11px] font-sans font-medium transition-all cursor-pointer" title="Restore license">✓ Un-Revoke</button>`;
             } else if (lic.status === 'active') {
-                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border text-emerald-400 bg-emerald-500/15 border-emerald-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE (BOUND)</span>';
-                actionBtns = `<button onclick="handleAdminRevoke('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-mono font-bold transition-all" title="Immediately revoke remote access">⛔ Revoke</button>`;
+                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-sans font-medium border text-emerald-400 bg-emerald-500/15 border-emerald-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE (BOUND)</span>';
+                actionBtns = `<button onclick="handleAdminRevoke('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-sans font-medium transition-all cursor-pointer" title="Immediately revoke remote access">⛔ Revoke</button>`;
             } else if (lic.status === 'unactivated') {
-                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border text-emerald-300 bg-emerald-500/10 border-emerald-500/30 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> APPROVED (READY)</span>';
-                actionBtns = `<button onclick="handleAdminRevoke('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-mono font-bold transition-all" title="Immediately revoke key">⛔ Revoke</button>`;
+                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-sans font-medium border text-emerald-300 bg-emerald-500/10 border-emerald-500/30 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> APPROVED (READY)</span>';
+                actionBtns = `<button onclick="handleAdminRevoke('${lic.license_key}')" class="px-2.5 py-1 rounded-lg bg-crimson/20 hover:bg-crimson border border-crimson/50 text-crimson hover:text-white text-[11px] font-sans font-medium transition-all cursor-pointer" title="Immediately revoke key">⛔ Revoke</button>`;
             } else {
                 // suspended or pending
-                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border text-amber-400 bg-amber-500/15 border-amber-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PENDING (OFF)</span>';
-                actionBtns = `<button onclick="toggleLicenseAccess('${lic.license_key}', 'unactivated')" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-[11px] font-mono font-black transition-all inline-flex items-center gap-1 shadow-sm" title="Approve and activate access">✓ APPROVE</button>`;
+                statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-sans font-medium border text-amber-400 bg-amber-500/15 border-amber-500/40 uppercase inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PENDING (OFF)</span>';
+                actionBtns = `<button onclick="toggleLicenseAccess('${lic.license_key}', 'unactivated')" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-[11px] font-sans font-medium transition-all inline-flex items-center gap-1 shadow-sm cursor-pointer" title="Approve and activate access">✓ APPROVE</button>`;
             }
 
             // Unlink Button if Claimed
             var isClaimed = !!(lic.user_id || lic.user_email || lic.user_name);
             if (isClaimed) {
-                actionBtns += `<button onclick="handleAdminUnlink('${lic.license_key}')" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 border border-white/20 text-neutral-300 hover:text-amber-300 text-[11px] font-mono font-bold transition-all ml-1.5" title="Unlink this key from user">🔓 Unlink</button>`;
+                actionBtns += `<button onclick="handleAdminUnlink('${lic.license_key}')" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-amber-500/25 border border-white/20 text-neutral-300 hover:text-amber-300 text-[11px] font-sans font-medium transition-all ml-1.5 cursor-pointer" title="Unlink this key from user">🔓 Unlink</button>`;
             }
 
             // Claimed By User Cell
@@ -457,20 +457,20 @@
             if (lic.user_name || lic.user_email) {
                 var displayName = lic.user_name || (lic.user_email ? lic.user_email.split('@')[0] : 'Creator');
                 var displayEmail = lic.user_email || '';
-                claimedCell = `<div><div class="font-bold text-white text-xs">${displayName}</div><div class="text-[10px] text-neutral-400 font-mono">${displayEmail}</div></div>`;
+                claimedCell = `<div><div class="font-normal text-white text-xs">${displayName}</div><div class="text-[10px] text-neutral-400 font-sans font-light">${displayEmail}</div></div>`;
             } else if (lic.user_id) {
                 claimedCell = `<span class="text-neutral-400 font-mono text-[10px]" title="${lic.user_id}">UID: ${lic.user_id.substring(0,8)}...</span>`;
             } else {
-                claimedCell = '<span class="text-neutral-500 italic text-[11px]">Unclaimed</span>';
+                claimedCell = '<span class="text-neutral-500 italic text-[11px] font-sans font-light">Unclaimed</span>';
             }
 
             var machinePreview = lic.machine_id ? 
                 `<span class="font-mono text-[11px] text-neutral-300 cursor-pointer" title="${lic.machine_id}">${lic.machine_id.substring(0, 8)}...${lic.machine_id.substring(lic.machine_id.length - 8)}</span>` : 
-                '<span class="text-neutral-500 italic text-[11px]">Not Bound</span>';
+                '<span class="text-neutral-500 italic text-[11px] font-sans font-light">Not Bound</span>';
 
             rows += `
-                <tr class="border-b border-white/5 hover:bg-white/5 font-mono text-xs transition-colors">
-                    <td class="py-3 px-3 font-bold text-white tracking-wider select-all">${lic.license_key}</td>
+                <tr class="border-b border-white/5 hover:bg-white/5 font-sans font-light text-xs transition-colors">
+                    <td class="py-3 px-3 font-mono font-medium text-white tracking-wider select-all">${lic.license_key}</td>
                     <td class="py-3 px-3">${statusBadge}</td>
                     <td class="py-3 px-3">${claimedCell}</td>
                     <td class="py-3 px-3">${machinePreview}</td>
