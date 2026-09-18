@@ -181,8 +181,8 @@
         }
 
         var os = window.getOperatingSystem();
-        var defaultUrl = (os === 'mac') ? 'SumairTools_v7.0_Mac.zip?v=7.0.2' : 'SumairTools_v7.0_Windows.zip?v=7.0.2';
-        var defaultName = (os === 'mac') ? 'SumairTools_v7.0_Mac.zip' : 'SumairTools_v7.0_Windows.zip';
+        var defaultUrl = (os === 'mac') ? 'SumairTools_v8.0_Mac.zip?v=8.0.0' : 'SumairTools_v8.0_Windows.zip?v=8.0.0';
+        var defaultName = (os === 'mac') ? 'SumairTools_v8.0_Mac.zip' : 'SumairTools_v8.0_Windows.zip';
         var targetUrl = fileUrl || defaultUrl;
         var targetName = fileName || defaultName;
 

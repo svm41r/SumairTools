@@ -693,7 +693,7 @@
             licenseKey + "\n\n" +
             "Assigned Email: " + recipientEmail + "\n\n" +
             "QUICK 3-STEP WORKSTATION SETUP:\n" +
-            "1. Install Extension: Download SumairTools_v7.0.zxp or use our 1-click Windows/Mac installers from https://sumairtools.online/#download\n" +
+            "1. Install Extension: Download SumairTools_v8.0.zxp or use our 1-click Windows/Mac installers from https://sumairtools.online/#download\n" +
             "2. Launch in After Effects: Open AE and go to Window > Extensions > Sumair Tools.\n" +
             "3. Activate: Paste your License Key above into the activator prompt. Your hardware binds automatically.\n\n" +
             "SUPPORT & COMMUNITY:\n" +

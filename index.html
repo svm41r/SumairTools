@@ -6,7 +6,7 @@
     <title>Sumair Tools — The Motion Suite for Adobe After Effects</title>
     <meta name="description" content="An elite ExtendScript automation suite by Sumair Ali Siddiqui. Dual-rail Caption Pro, 6-12s niche B-rolls, Dan Ebberts physics, and audio sequencing with zero friction.">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <link rel="icon" type="image/png" href="images/favicon.png?v=7.0">
+    <link rel="icon" type="image/png" href="images/favicon.png?v=8.0">
     <link rel="apple-touch-icon" href="images/sumair_tools_icon.png">
     <meta name="theme-color" content="#000000">
 
@@ -584,6 +584,411 @@
             color: #ffffff;
         }
 
+    
+        /* ============================================================= */
+        /* RIGHT-CLICK CYBER CONTEXT MENU (1:1 AE CEP Context Menu)      */
+        /* ============================================================= */
+        .cyber-context-menu {
+            position: fixed !important;
+            z-index: 9999999 !important;
+            background: rgba(13, 13, 18, 0.98) !important;
+            border: 1px solid #e11d48 !important;
+            border-radius: 14px !important;
+            padding: 6px !important;
+            min-width: 215px !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(225, 29, 72, 0.45) !important;
+            display: flex;
+            flex-direction: column !important;
+            gap: 3px !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            user-select: none !important;
+            animation: ctxFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .context-toolbar {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 4px !important;
+            padding: 4px !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 9px !important;
+            margin-bottom: 2px !important;
+        }
+
+        .context-tool-btn {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 3px !important;
+            padding: 6px 2px !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 7px !important;
+            color: #cbd5e1 !important;
+            font-size: 10px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.14s ease !important;
+            user-select: none !important;
+            outline: none !important;
+        }
+
+        .context-tool-btn:hover:not(.disabled) {
+            background: rgba(255, 0, 60, 0.22) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.35) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .context-tool-btn.disabled,
+        .context-tool-btn[disabled] {
+            opacity: 0.3 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+
+        .context-item {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            font-size: 10.5px !important;
+            font-weight: 800 !important;
+            color: #e2e8f0 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            cursor: pointer !important;
+            transition: all 0.14s ease !important;
+            text-decoration: none !important;
+        }
+
+        .context-item:hover {
+            background: rgba(255, 0, 60, 0.22) !important;
+            color: #ffffff !important;
+            box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.2) !important;
+            transform: translateX(2px) !important;
+        }
+
+        .context-icon {
+            font-size: 13px !important;
+            color: #94a3b8 !important;
+            width: 16px !important;
+            text-align: center !important;
+            transition: color 0.14s ease !important;
+        }
+
+        .context-item:hover .context-icon {
+            color: #ff003c !important;
+            text-shadow: 0 0 8px #ff003c !important;
+        }
+
+        .context-text {
+            flex: 1 !important;
+            white-space: nowrap !important;
+        }
+
+        .context-divider {
+            height: 1px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            margin: 4px 6px !important;
+        }
+
+        @keyframes ctxFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ============================================================= */
+        /* MORE FEATURES ROWS & PROCEDURAL RIGS (Matching Image 4 1:1)   */
+        /* ============================================================= */
+        .mf-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-top: 4px;
+        }
+
+        .mf-row {
+            background: rgba(18, 20, 26, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mf-row:hover {
+            background: rgba(26, 29, 38, 0.95);
+            border-color: rgba(225, 29, 72, 0.45);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 12px rgba(225, 29, 72, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .mf-row-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mf-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e2e8f0;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .mf-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.6px;
+        }
+
+        .mf-row-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mf-btn-action {
+            height: 26px;
+            min-width: 26px;
+            padding: 0 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 9.5px;
+            font-weight: 700;
+        }
+
+        .mf-btn-action:hover {
+            color: #ffffff;
+            border-color: #e11d48;
+            background: rgba(225, 29, 72, 0.2);
+            box-shadow: 0 0 8px rgba(225, 29, 72, 0.35);
+        }
+
+        /* ============================================================= */
+        /* MOTION GRAPHS TAB & LIVE EASING INSPECTOR                      */
+        /* ============================================================= */
+        .graphs-main-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .graphs-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+        }
+        .graphs-header-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .graph-status-badge {
+            font-size: 8.5px;
+            padding: 1.5px 6px;
+            border-radius: 999px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+            font-weight: 700;
+        }
+        .graph-mode-switcher {
+            display: flex;
+            gap: 3px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px;
+            border-radius: 6px;
+        }
+        .graph-mode-btn {
+            font-size: 9px;
+            font-weight: 700;
+            color: #94a3b8;
+            background: transparent;
+            border: none;
+            padding: 2px 7px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .graph-mode-btn.active {
+            background: #e11d48;
+            color: #ffffff;
+        }
+        .graph-category-pills {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 2px;
+        }
+        .graph-cat-pill {
+            white-space: nowrap;
+            font-size: 9.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .graph-cat-pill.active {
+            background: rgba(225, 29, 72, 0.25);
+            border-color: #e11d48;
+            color: #ffffff;
+        }
+        .graphs-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .graph-card-slot {
+            aspect-ratio: 1.1;
+            background: rgba(18, 20, 26, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .graph-card-slot:hover {
+            border-color: rgba(225, 29, 72, 0.5);
+            background: rgba(26, 29, 38, 0.95);
+            transform: scale(1.02);
+        }
+        .graph-card-slot.active {
+            border-color: #e11d48;
+            box-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
+            background: rgba(225, 29, 72, 0.15);
+        }
+        .graph-card-title {
+            font-size: 8px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-top: 2px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .graph-inspector-deck {
+            display: flex;
+            gap: 8px;
+            background: rgba(14, 16, 22, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px;
+        }
+        .graph-preview-box {
+            width: 90px;
+            height: 90px;
+            background: #08080c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .graph-preview-motion-track {
+            position: absolute;
+            bottom: 3px;
+            left: 4px;
+            right: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        .graph-preview-ball {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff003c;
+            box-shadow: 0 0 6px #ff003c;
+            position: absolute;
+            top: -2px;
+            left: 0;
+            animation: easeBallMove 2s infinite alternate cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        @keyframes easeBallMove {
+            0% { left: 0%; }
+            100% { left: calc(100% - 8px); }
+        }
+        .graph-controls-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+        }
+        .graph-slider-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9px;
+            color: #cbd5e1;
+        }
+        .graph-range-slider {
+            flex: 1;
+            accent-color: #e11d48;
+            height: 3px;
+            cursor: pointer;
+        }
+        .btn-graph-apply {
+            width: 100%;
+            padding: 6px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 10px rgba(225, 29, 72, 0.4);
+        }
+        .btn-graph-apply:hover {
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.7);
+            transform: translateY(-1px);
+        }
+
     </style>
 </head>
 <body class="bg-black text-white relative min-h-screen selection:bg-white selection:text-black">
@@ -670,7 +1075,7 @@
                     <span class="font-display font-semibold text-sm tracking-tight text-white">Sumair Tools</span>
                     <span class="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-neutral-400 bg-white/[0.05] border border-white/10 px-2 py-0.5 rounded-full">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        v7.0
+                        v8.0
                     </span>
                 </div>
             </a>
@@ -694,19 +1099,19 @@
                     <span>Discord</span>
                 </a>
 
-                <!-- Master Admin Link -->
-                <a id="nav-master-admin-btn" href="admin.html" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-full bg-crimson/80 border border-crimson text-xs font-mono font-bold text-white transition-all shadow-sm" title="Admin">
-                    <span>🛡️ Admin</span>
-                </a>
-
-                <!-- Portal Sign In -->
-                <button id="nav-auth-btn" onclick="openAuthModal('signup')" class="hidden sm:inline-flex text-xs font-medium text-neutral-400 hover:text-white transition-colors px-2.5 py-1">
-                    Sign In
-                </button>
+                <!-- Auth Group (Sign In & Create Account) -->
+                <div id="nav-user-container" class="hidden sm:flex items-center gap-2 flex-shrink-0">
+                    <button id="nav-signin-btn" onclick="openAuthModal('signin')" class="text-xs font-medium text-neutral-400 hover:text-white transition-colors px-2.5 py-1.5 cursor-pointer">
+                        Sign In
+                    </button>
+                    <button id="nav-signup-btn" onclick="openAuthModal('signup')" class="text-xs font-semibold text-neutral-200 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-3.5 py-1.5 rounded-full transition-all shadow-sm cursor-pointer">
+                        Create Account
+                    </button>
+                </div>
 
                 <!-- Primary Action Button (Sleek Apple White Pill) -->
                 <button type="button" id="nav-download-btn" onclick="AudioFX.laser(); handleDownloadClick();" class="px-4 py-1.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all shadow-sm cursor-pointer whitespace-nowrap">
-                    <span id="nav-download-btn-text">Get Suite — $1</span>
+                    <span id="nav-download-btn-text">Download v8.0</span>
                 </button>
 
                 <!-- Mobile Menu Button -->
@@ -721,7 +1126,6 @@
         <!-- Mobile Drawer -->
         <div id="mobile-menu-drawer" class="hidden xl:hidden max-w-6xl mx-auto mt-2 rounded-2xl bg-neutral-950/95 border border-white/10 p-5 shadow-2xl backdrop-blur-2xl">
             <nav class="flex flex-col gap-3 text-sm">
-                <a id="mobile-master-admin-btn" href="admin.html" class="hidden text-crimson font-mono font-bold">🛡️ Master Admin</a>
                 <a href="#powerhouses" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">Features</a>
                 <a href="#simulator" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">1:1 Live Extension</a>
                 <a href="#tutorial" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">Video Masterclass</a>
@@ -729,6 +1133,16 @@
                 <a href="#pricing" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">$1 Launch License</a>
                 <a href="#download" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">Direct Downloads</a>
                 <a href="#faq" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">FAQ</a>
+                <div id="mobile-nav-user-container" class="flex flex-col gap-2 pt-2 border-t border-white/10">
+                    <button onclick="toggleMobileMenu(); openAuthModal('signin');" class="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-200 text-xs font-medium flex items-center justify-between cursor-pointer">
+                        <span>🔑 Sign In</span>
+                        <span class="text-neutral-400">➔</span>
+                    </button>
+                    <button onclick="toggleMobileMenu(); openAuthModal('signup');" class="w-full text-left px-4 py-2.5 rounded-xl bg-crimson/20 border border-crimson/40 text-white text-xs font-bold flex items-center justify-between cursor-pointer">
+                        <span>✨ Create Account</span>
+                        <span class="text-crimson">➔</span>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -744,7 +1158,7 @@
         <!-- Release Tag -->
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-8 hover:border-white/20 transition-all cursor-default">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span class="text-xs font-medium text-neutral-300 tracking-tight">Sumair Tools v7.0 • Designed for After Effects 2020 – 2026</span>
+            <span class="text-xs font-medium text-neutral-300 tracking-tight">Sumair Tools v8.0 • Designed for After Effects 2020 – 2026</span>
             <span class="text-[10px] font-mono font-bold text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2 py-0.5 rounded-full">$1 Launch Access</span>
         </div>
 
@@ -903,8 +1317,8 @@
                                             <img src="images/sumair_tools_icon.png" alt="Logo" class="w-full h-full object-cover">
                                         </div>
                                         <span class="ext-brand-title">SUMAIR TOOLS</span>
-                                        <span class="ext-version-badge cursor-pointer" onclick="AudioFX.click(); showSimToast('Reloaded Sumair Tools v7.0');" title="Reload panel">
-                                            <span>v7.0</span>
+                                        <span class="ext-version-badge cursor-pointer" onclick="AudioFX.click(); showSimToast('Reloaded Sumair Tools v8.0');" title="Reload panel">
+                                            <span>v8.0</span>
                                             <span class="text-[7px]">🔄</span>
                                         </span>
                                     </div>
@@ -952,6 +1366,9 @@
                                         </button>
                                         <button onclick="switchRealExtTab('tab-ext-ai')" id="ext-tab-btn-ai" class="ext-nav-tab-btn">
                                             <span>🤖 AI Agent</span>
+                                        </button>
+                                        <button onclick="switchRealExtTab('tab-ext-graphs')" id="ext-tab-btn-graphs" class="ext-nav-tab-btn">
+                                            <span>📈 Graphs</span>
                                         </button>
                                         <button onclick="switchRealExtTab('tab-ext-more')" id="ext-tab-btn-more" class="ext-nav-tab-btn">
                                             <span>✨ More Features</span>
@@ -1285,15 +1702,353 @@
                                 </div>
 
                                 <!-- ======================================================== -->
-                                <!-- TAB 7: MORE FEATURES                                    -->
+                                <!-- TAB 7: MOTION GRAPHS (Live Curves & Flow Presets)          -->
                                 <!-- ======================================================== -->
-                                <div id="tab-ext-more" class="ext-tab-pane hidden space-y-3 max-h-[480px] overflow-y-auto pr-1">
-                                    <div class="ext-section-heading">✨ AUTOMATION &amp; 6-12s B-ROLL PIPELINE</div>
-                                    <div class="grid grid-cols-2 gap-1.5">
-                                        <button class="ext-tool-btn" onclick="AudioFX.laser(); showSimToast('Auto B-Roll: Built 2 compositions (6-12s each)!');"><span>🎬 Auto B-Roll (6-12s)</span></button>
-                                        <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Auto SFX: Synced whooshes & risers to cuts!');"><span>🔊 Auto SFX Sequencer</span></button>
-                                        <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('3D Carousel: Built cylindrical cards rig!');"><span>🎡 3D Carousel Rig</span></button>
-                                        <button class="ext-tool-btn" onclick="AudioFX.pop(); showSimToast('Counter: Generated dynamic number counter!');"><span>🔢 Number Counter</span></button>
+                                <div id="tab-ext-graphs" class="ext-tab-pane hidden space-y-2.5 max-h-[480px] overflow-y-auto pr-1">
+                                    <div class="graphs-main-container">
+                                        <!-- Header Bar -->
+                                        <div class="graphs-header-bar">
+                                            <div class="graphs-header-title">
+                                                <span>📈</span>
+                                                <span>MOTION GRAPHS</span>
+                                                <span class="graph-status-badge">● Ready</span>
+                                            </div>
+                                            <div class="graph-mode-switcher">
+                                                <button class="graph-mode-btn active" onclick="switchGraphMode('both', this)">Both</button>
+                                                <button class="graph-mode-btn" onclick="switchGraphMode('out', this)">Out</button>
+                                                <button class="graph-mode-btn" onclick="switchGraphMode('in', this)">In</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Category Filter Pills -->
+                                        <div class="graph-category-pills">
+                                            <button class="graph-cat-pill active" onclick="filterGraphCategory('all', this)">🔥 All Curves</button>
+                                            <button class="graph-cat-pill" onclick="filterGraphCategory('timeremap', this)">⏱️ Time Remap</button>
+                                            <button class="graph-cat-pill" onclick="filterGraphCategory('flow', this)">⚡ JerryFlow</button>
+                                            <button class="graph-cat-pill" onclick="filterGraphCategory('custom', this)">⭐ My Slots</button>
+                                        </div>
+
+                                        <!-- 8 Preset Easing Cards -->
+                                        <div class="graphs-cards-grid">
+                                            <div class="graph-card-slot active" onclick="selectSimGraphCurve('JerryFlow Smooth S', 25, 25, 'M 5 80 C 30 80, 25 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#ff003c" stroke-width="3">
+                                                    <path d="M 5 80 C 30 80, 25 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">JerryFlow S</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Fast Snappy Ease', 85, 15, 'M 5 80 C 85 80, 15 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#38bdf8" stroke-width="3">
+                                                    <path d="M 5 80 C 85 80, 15 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Snappy Ease</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Dramatic Ramp', 95, 5, 'M 5 80 C 95 80, 5 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#a855f7" stroke-width="3">
+                                                    <path d="M 5 80 C 95 80, 5 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Dramatic</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Gentle Drift', 40, 40, 'M 5 80 C 40 80, 40 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#10b981" stroke-width="3">
+                                                    <path d="M 5 80 C 40 80, 40 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Gentle Drift</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Elastic Pop', 70, 30, 'M 5 80 C 70 80, 30 -10, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#f59e0b" stroke-width="3">
+                                                    <path d="M 5 80 C 70 80, 30 -10, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Elastic Pop</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Speed Ramp Up', 90, 80, 'M 5 80 C 90 80, 80 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#00f2fe" stroke-width="3">
+                                                    <path d="M 5 80 C 90 80, 80 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Speed Ramp</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Linear Rush', 0, 0, 'M 5 80 L 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#94a3b8" stroke-width="3">
+                                                    <path d="M 5 80 L 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Linear Rush</span>
+                                            </div>
+                                            <div class="graph-card-slot" onclick="selectSimGraphCurve('Bounce In Flow', 65, 85, 'M 5 80 C 65 80, 85 15, 85 15', this)">
+                                                <svg width="46" height="26" viewBox="0 0 90 90" fill="none" stroke="#ec4899" stroke-width="3">
+                                                    <path d="M 5 80 C 65 80, 85 15, 85 15"></path>
+                                                </svg>
+                                                <span class="graph-card-title">Bounce In</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Live Curve Inspector Deck -->
+                                        <div class="graph-inspector-deck">
+                                            <div class="graph-preview-box">
+                                                <svg id="sim-graph-main-svg" viewBox="0 0 100 100" style="width: 100%; height: 100%; display: block;">
+                                                    <path id="sim-graph-curve-path" d="M 10 90 C 35 90, 30 15, 90 15" fill="none" stroke="#ff003c" stroke-width="3.5" stroke-linecap="round"></path>
+                                                </svg>
+                                                <div class="graph-preview-motion-track">
+                                                    <div id="sim-graph-preview-ball" class="graph-preview-ball"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="graph-controls-box">
+                                                <div class="flex items-center justify-between">
+                                                    <span id="sim-graph-name" class="font-display font-bold text-xs text-white">JerryFlow Smooth S</span>
+                                                    <span class="text-[9px] font-mono text-neutral-400">Velocity Engine</span>
+                                                </div>
+
+                                                <div class="graph-slider-row">
+                                                    <span class="w-12 text-[9.5px]">Out Ease:</span>
+                                                    <input id="sim-graph-out-slider" type="range" class="graph-range-slider" min="0" max="100" value="25" oninput="updateSimGraphSliders()">
+                                                    <span id="sim-graph-out-val" class="w-6 text-right font-mono text-[9.5px] text-white">25%</span>
+                                                </div>
+
+                                                <div class="graph-slider-row">
+                                                    <span class="w-12 text-[9.5px]">In Ease:</span>
+                                                    <input id="sim-graph-in-slider" type="range" class="graph-range-slider" min="0" max="100" value="25" oninput="updateSimGraphSliders()">
+                                                    <span id="sim-graph-in-val" class="w-6 text-right font-mono text-[9.5px] text-white">25%</span>
+                                                </div>
+
+                                                <button class="btn-graph-apply" onclick="applySimGraphEasing()">
+                                                    ⚡ APPLY TO AE KEYFRAMES
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ======================================================== -->
+                                <!-- TAB 8: MORE FEATURES (10 Procedural Studios - Image 4 1:1) -->
+                                <!-- ======================================================== -->
+                                <div id="tab-ext-more" class="ext-tab-pane hidden space-y-2 max-h-[480px] overflow-y-auto pr-1">
+                                    <div class="ext-section-heading">✨ ADVANCED MOTION RIGS (100% 1:1 CEP)</div>
+
+                                    <div class="mf-list">
+                                        <!-- Row 1: PROXIMITY -->
+                                        <div class="mf-row" onclick="AudioFX.pop(); showSimToast('Proximity: Attached distance effector to target null!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <circle cx="12" cy="12" r="6"></circle>
+                                                        <circle cx="12" cy="12" r="2"></circle>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">PROXIMITY</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Proximity: Opened Effector Configuration');" title="Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 2: 3D EXTRUSION -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('3D Extrusion: Extruded 30 procedural Z-space layers!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">3D EXTRUSION</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('3D Extrusion: Opened Depth & Lighting Settings');" title="Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 3: NUMBER COUNTER -->
+                                        <div class="mf-row" onclick="AudioFX.pop(); showSimToast('Number Counter: Generated smooth dynamic currency counter!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                                                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                                                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                                                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">NUMBER COUNTER</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Number Counter: Opened Currency & Decimals Settings');" title="Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 4: BOUNCE STUDIO PRO -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Bounce Studio Pro: Applied Dan Ebberts Inertial Physics expression!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #ff003c;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M4 18a8 8 0 1 1 16 0"></path>
+                                                        <polyline points="12 2 12 10 16 6"></polyline>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">BOUNCE STUDIO PRO</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Quick Bounce: Keyframes baked with 0ms lag!');" title="Quick Bounce (Selected Keyframes)">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Bounce Studio: Opened Waveform & Physics Studio');" title="Bounce Studio Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 5: TEXT MORPH STUDIO -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Text Morph Studio: Vector outline morph created between layers!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #60a5fa;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <circle cx="6" cy="18" r="3"></circle>
+                                                        <circle cx="18" cy="6" r="3"></circle>
+                                                        <path d="M18 9v6a3 3 0 0 1-3 3H9"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">TEXT MORPH STUDIO</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Text Morph Studio: Studio Mode Launched');" title="Open Text Morph Studio" style="color: #60a5fa; border-color: rgba(96, 165, 250, 0.4); padding: 2px 7px; font-size: 9.5px; font-weight: 800;">
+                                                    <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                                    <span>STUDIO</span>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Super Morphings: Executed JSXBIN native engine');" title="Launch Super Morphings Script" style="color: #94a3b8; border-color: rgba(255, 255, 255, 0.15); padding: 2px 6px; font-size: 8.5px; font-weight: 700;">
+                                                    <span>JSXBIN</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 6: PIXELATED REVEAL -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Pixelated Reveal: VisionOS glassmorphic linear wipe generated!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #38bdf8;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <rect x="3" y="3" width="7" height="7"></rect>
+                                                        <rect x="14" y="3" width="7" height="7"></rect>
+                                                        <rect x="14" y="14" width="7" height="7"></rect>
+                                                        <rect x="3" y="14" width="7" height="7"></rect>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">PIXELATED REVEAL</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Quick Reveal: Mosaic keyframes applied!');" title="Quick Reveal (Selected Layer)" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3);">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Pixelated Reveal: Opened Settings');" title="Reveal Studio & Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 7: BOUNCY TEXT -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Bouncy Text: Word-by-word kinetic entrance applied!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #ff003c;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                                                        <line x1="9" y1="20" x2="15" y2="20"></line>
+                                                        <line x1="12" y1="4" x2="12" y2="20"></line>
+                                                        <path d="M19 15l2 2-2 2"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">BOUNCY TEXT</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Quick Bounce: Applied to active text layer!');" title="Quick Bounce (Selected Text)" style="color: #ff003c; border-color: rgba(255, 0, 60, 0.3);">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Bouncy Text: Opened Kinetic Text Studio');" title="Bouncy Text Studio">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 8: SFX STUDIO -->
+                                        <div class="mf-row" onclick="AudioFX.pop(); showSimToast('SFX Studio: Automated sound sequencer ready!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #ff003c;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">SFX STUDIO</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Auto SFX: Synced whooshes & risers to all timeline cuts!');" title="⚡ Auto-Place SFX to Selected Timeline Cuts" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); font-weight: 800; font-size: 9.5px; padding: 2px 7px;">
+                                                    AUTO
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.pop(); showSimToast('Custom SFX: Prompted audio import (.wav/.mp3)');" title="Add Your Own SFX (.mp3/.wav)" style="color: #10b981; border-color: rgba(16, 185, 129, 0.35); font-size: 13px; font-weight: 800; padding: 2px 6px;">
+                                                    +
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Quick SFX placed at playhead position!');" title="Quick Add Sound (At Playhead)" style="color: #ff003c; border-color: rgba(255, 0, 60, 0.3);">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('SFX Studio: Opened SFX Library Browser');" title="Browse SFX Studio">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 9: AUTO B-ROLL -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Auto B-Roll: Built 2 compositions (6-12s each, 1-3 brolls)!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon" style="color: #f59e0b;">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                                                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                                                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                                                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                                                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                                                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">AUTO B-ROLL</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Auto B-Roll: Millisecond-accurate SRT speech segments loaded!');" title="Open Auto B-Roll Studio" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); font-weight: 800; font-size: 9.5px; padding: 2px 7px;">
+                                                    STUDIO
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Auto B-Roll: Opened Niche & Footage Settings');" title="Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 10: ORB GENERATOR -->
+                                        <div class="mf-row" onclick="AudioFX.laser(); showSimToast('Orb Generator: Built procedural 3D carousel cylinder!');">
+                                            <div class="mf-row-left">
+                                                <span class="mf-icon">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <rect x="2" y="5" width="4" height="14" rx="1"></rect>
+                                                        <rect x="10" y="3" width="4" height="18" rx="1"></rect>
+                                                        <rect x="18" y="5" width="4" height="14" rx="1"></rect>
+                                                    </svg>
+                                                </span>
+                                                <span class="mf-title">ORB GENERATOR</span>
+                                            </div>
+                                            <div class="mf-row-actions" onclick="event.stopPropagation()">
+                                                <button class="mf-btn-action" onclick="AudioFX.laser(); showSimToast('Rebuilt procedural Orb Generator rig!');" title="Rebuild / Quick Run">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                                </button>
+                                                <button class="mf-btn-action" onclick="AudioFX.click(); showSimToast('Orb Generator: Opened 3D Cylinder Settings');" title="Settings">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1400,8 +2155,73 @@
             }
         });
 
+        
+        // Interactive Motion Graphs Simulator Helpers
+        window.switchGraphMode = function(mode, btn) {
+            document.querySelectorAll('.graph-mode-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            AudioFX.click();
+            showSimToast('Motion Graphs Mode: ' + mode.toUpperCase());
+        };
+
+        window.filterGraphCategory = function(cat, btn) {
+            document.querySelectorAll('.graph-cat-pill').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            AudioFX.click();
+            showSimToast('Filtered Curves: ' + cat.toUpperCase());
+        };
+
+        window.selectSimGraphCurve = function(name, outEase, inEase, pathD, el) {
+            document.querySelectorAll('.graph-card-slot').forEach(s => s.classList.remove('active'));
+            if (el) el.classList.add('active');
+            
+            const nameEl = document.getElementById('sim-graph-name');
+            if (nameEl) nameEl.textContent = name;
+
+            const outSlider = document.getElementById('sim-graph-out-slider');
+            const inSlider = document.getElementById('sim-graph-in-slider');
+            const outVal = document.getElementById('sim-graph-out-val');
+            const inVal = document.getElementById('sim-graph-in-val');
+            
+            if (outSlider) outSlider.value = outEase;
+            if (inSlider) inSlider.value = inEase;
+            if (outVal) outVal.textContent = outEase + '%';
+            if (inVal) inVal.textContent = inEase + '%';
+
+            const curvePath = document.getElementById('sim-graph-curve-path');
+            if (curvePath) curvePath.setAttribute('d', pathD);
+
+            AudioFX.pop();
+            showSimToast('Selected Curve: ' + name);
+        };
+
+        window.updateSimGraphSliders = function() {
+            const outSlider = document.getElementById('sim-graph-out-slider');
+            const inSlider = document.getElementById('sim-graph-in-slider');
+            const outVal = document.getElementById('sim-graph-out-val');
+            const inVal = document.getElementById('sim-graph-in-val');
+            const curvePath = document.getElementById('sim-graph-curve-path');
+
+            const o = outSlider ? outSlider.value : 25;
+            const i = inSlider ? inSlider.value : 25;
+            if (outVal) outVal.textContent = o + '%';
+            if (inVal) inVal.textContent = i + '%';
+
+            if (curvePath) {
+                const cp1x = 10 + (o * 0.7);
+                const cp2x = 90 - (i * 0.7);
+                curvePath.setAttribute('d', `M 10 90 C ${cp1x} 90, ${cp2x} 15, 90 15`);
+            }
+        };
+
+        window.applySimGraphEasing = function() {
+            AudioFX.laser();
+            const name = document.getElementById('sim-graph-name')?.textContent || 'Custom Ease';
+            showSimToast('⚡ Applied ' + name + ' to AE Keyframes!');
+        };
+
         function switchRealExtTab(tabId) {
-            const tabs = ['tab-ext-master', 'tab-ext-caption', 'tab-ext-autocut', 'tab-ext-ss', 'tab-ext-pf', 'tab-ext-ai', 'tab-ext-more'];
+            const tabs = ['tab-ext-master', 'tab-ext-caption', 'tab-ext-autocut', 'tab-ext-ss', 'tab-ext-pf', 'tab-ext-ai', 'tab-ext-graphs', 'tab-ext-more'];
             const btns = {
                 'tab-ext-master': 'ext-tab-btn-master',
                 'tab-ext-caption': 'ext-tab-btn-caption',
@@ -1409,6 +2229,7 @@
                 'tab-ext-ss': 'ext-tab-btn-ss',
                 'tab-ext-pf': 'ext-tab-btn-pf',
                 'tab-ext-ai': 'ext-tab-btn-ai',
+                'tab-ext-graphs': 'ext-tab-btn-graphs',
                 'tab-ext-more': 'ext-tab-btn-more'
             };
 
@@ -1519,7 +2340,7 @@
                     <div class="font-mono text-xs text-neutral-300 font-medium flex items-center gap-2 truncate max-w-[260px] sm:max-w-none">
                         <span>QuickTime Player</span>
                         <span class="text-neutral-600">—</span>
-                        <span class="text-white font-semibold">Sumair Tools v7.0 Master Walkthrough.mp4</span>
+                        <span class="text-white font-semibold">Sumair Tools v8.0 Master Walkthrough.mp4</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-white/10 text-neutral-300 text-[10px] font-bold">1080p 60FPS</span>
@@ -1533,7 +2354,7 @@
                         <iframe 
                             class="w-full h-full block" 
                             src="https://www.youtube.com/embed/miacZ5G4goc?rel=0&amp;modestbranding=1" 
-                            title="Sumair Tools v7.0 Official Video Tutorial &amp; Beginner Guide" 
+                            title="Sumair Tools v8.0 Official Video Tutorial &amp; Beginner Guide" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             referrerpolicy="strict-origin-when-cross-origin" 
@@ -1548,7 +2369,7 @@
                                 <span>▶</span>
                             </div>
                             <div>
-                                <div class="text-sm font-semibold text-white font-display">Sumair Tools v7.0 Beginner to Pro Masterclass</div>
+                                <div class="text-sm font-semibold text-white font-display">Sumair Tools v8.0 Beginner to Pro Masterclass</div>
                                 <div class="text-xs text-[#86868b] font-mono">Stream directly on YouTube &bull; Free Lifetime Access</div>
                             </div>
                         </div>
@@ -1896,7 +2717,7 @@
                     One dollar. Lifetime access.
                 </h2>
                 <p class="text-[#86868b] text-base sm:text-lg max-w-xl mx-auto">
-                    No monthly subscriptions. No locked tiers. Get the full v7.0 suite and all future updates for the community price of $1.
+                    No monthly subscriptions. No locked tiers. Get the full v8.0 suite and all future updates for the community price of $1.
                 </p>
             </div>
 
@@ -2014,7 +2835,7 @@
                             <span class="mac-dot mac-dot-green"></span>
                         </div>
                         <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
-                            <span>Sumair Tools v7.0 (Windows Edition)</span>
+                            <span>Sumair Tools v8.0 (Windows Edition)</span>
                         </div>
                         <div class="text-[10px] font-mono text-cyan-400 bg-cyan-400/10 border border-cyan-400/30 px-2 py-0.5 rounded-full font-bold">
                             64-BIT &bull; 68.2 MB
@@ -2027,7 +2848,7 @@
                                 <span class="text-xs font-display font-bold text-cyan-400 bg-cyan-400/10 border border-cyan-400/25 px-3 py-1 rounded-full flex items-center gap-1.5">
                                     <span>🪟</span> WINDOWS 10 &amp; 11 &bull; 1-CLICK INSTALL
                                 </span>
-                                <span class="font-mono text-xs text-neutral-400">v7.0 Stable</span>
+                                <span class="font-mono text-xs text-neutral-400">v8.0 Stable</span>
                             </div>
                             <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mb-2 tracking-tight">Sumair Tools for Windows</h3>
                             <p class="text-[#86868b] text-sm leading-relaxed">
@@ -2037,14 +2858,14 @@
 
                         <!-- 1-Click Download Primary Action -->
                         <div class="space-y-3 pt-1">
-                            <a href="javascript:void(0)" id="card-download-win-btn" onclick="handleDownloadClick('SumairTools_v7.0_Windows.zip?v=7.0.2', 'SumairTools_v7.0_Windows.zip')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
+                            <a href="javascript:void(0)" id="card-download-win-btn" onclick="handleDownloadClick('SumairTools_v8.0_Windows.zip?v=8.0.0', 'SumairTools_v8.0_Windows.zip')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 <span id="card-download-win-text">DOWNLOAD FOR WINDOWS (1-CLICK)</span>
                             </a>
                             <div class="flex items-center justify-center gap-4 text-center font-mono text-xs text-neutral-500 pt-1">
-                                <span>Direct .ZXP: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zxp?v=7.0.2', 'SumairTools_v7.0.zxp')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zxp</a></span>
+                                <span>Direct .ZXP: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v8.0.zxp?v=8.0.0', 'SumairTools_v8.0.zxp')" class="text-neutral-400 hover:text-white underline">SumairTools_v8.0.zxp</a></span>
                                 <span>&bull;</span>
-                                <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zip?v=7.0.2', 'SumairTools_v7.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zip</a></span>
+                                <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v8.0.zip?v=8.0.0', 'SumairTools_v8.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v8.0.zip</a></span>
                             </div>
                         </div>
                     </div>
@@ -2059,7 +2880,7 @@
                             <span class="mac-dot mac-dot-green"></span>
                         </div>
                         <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
-                            <span>Sumair Tools v7.0 (macOS Edition)</span>
+                            <span>Sumair Tools v8.0 (macOS Edition)</span>
                         </div>
                         <div class="text-[10px] font-mono text-purple-400 bg-purple-400/10 border border-purple-400/30 px-2 py-0.5 rounded-full font-bold">
                             APPLE SILICON &amp; INTEL &bull; 68.2 MB
@@ -2072,7 +2893,7 @@
                                 <span class="text-xs font-display font-bold text-purple-400 bg-purple-400/10 border border-purple-400/25 px-3 py-1 rounded-full flex items-center gap-1.5">
                                     <span>🍎</span> APPLE SILICON (M1–M4) &amp; INTEL
                                 </span>
-                                <span class="font-mono text-xs text-neutral-400">v7.0 Stable</span>
+                                <span class="font-mono text-xs text-neutral-400">v8.0 Stable</span>
                             </div>
                             <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mb-2 tracking-tight">Sumair Tools for Mac</h3>
                             <p class="text-[#86868b] text-sm leading-relaxed">
@@ -2081,14 +2902,14 @@
                         </div>
 
                         <div class="space-y-3 pt-1">
-                            <a href="javascript:void(0)" id="card-download-mac-btn" onclick="handleDownloadClick('SumairTools_v7.0_Mac.zip?v=7.0.2', 'SumairTools_v7.0_Mac.zip')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
+                            <a href="javascript:void(0)" id="card-download-mac-btn" onclick="handleDownloadClick('SumairTools_v8.0_Mac.zip?v=8.0.0', 'SumairTools_v8.0_Mac.zip')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 <span id="card-download-mac-text">DOWNLOAD FOR MACOS (1-CLICK)</span>
                             </a>
                             <div class="flex items-center justify-center gap-4 text-center font-mono text-xs text-neutral-500 pt-1">
-                                <span>Direct .ZXP: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zxp?v=7.0.2', 'SumairTools_v7.0.zxp')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zxp</a></span>
+                                <span>Direct .ZXP: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v8.0.zxp?v=8.0.0', 'SumairTools_v8.0.zxp')" class="text-neutral-400 hover:text-white underline">SumairTools_v8.0.zxp</a></span>
                                 <span>&bull;</span>
-                                <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zip?v=7.0.2', 'SumairTools_v7.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v7.0.zip</a></span>
+                                <span>Bundle: <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v8.0.zip?v=8.0.0', 'SumairTools_v8.0.zip')" class="text-neutral-400 hover:text-white underline">SumairTools_v8.0.zip</a></span>
                             </div>
                         </div>
                     </div>
@@ -2103,10 +2924,10 @@
                             <span class="mac-dot mac-dot-green"></span>
                         </div>
                         <div class="font-display text-xs text-neutral-300 font-medium flex items-center gap-2">
-                            <span>Sumair Tools v7.0 (Universal Archive)</span>
+                            <span>Sumair Tools v8.0 (Universal Archive)</span>
                         </div>
                         <div class="text-[10px] font-mono text-neutral-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
-                            v7.0
+                            v8.0
                         </div>
                     </div>
 
@@ -2125,7 +2946,7 @@
                         </div>
 
                         <div class="space-y-3 pt-1">
-                            <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v7.0.zxp?v=7.0.2', 'SumairTools_v7.0.zxp')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
+                            <a href="javascript:void(0)" onclick="handleDownloadClick('SumairTools_v8.0.zxp?v=8.0.0', 'SumairTools_v8.0.zxp')" class="w-full py-4 px-6 rounded-2xl bg-white hover:bg-neutral-200 text-black text-sm font-display font-bold text-center flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.2)] hover:scale-[1.02] cursor-pointer">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 <span>DOWNLOAD UNIVERSAL .ZXP</span>
                             </a>
@@ -2150,7 +2971,7 @@
                     <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                         <div class="text-[10px] font-mono text-cyan-400 font-bold mb-1">STEP 01</div>
                         <div class="text-xs font-bold text-white mb-1">Unzip Package</div>
-                        <div class="text-[11px] text-[#86868b] leading-relaxed">Extract <code class="text-cyan-300 text-[10px]">SumairTools_v7.0_Windows.zip</code> to your computer.</div>
+                        <div class="text-[11px] text-[#86868b] leading-relaxed">Extract <code class="text-cyan-300 text-[10px]">SumairTools_v8.0_Windows.zip</code> to your computer.</div>
                     </div>
                     <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                         <div class="text-[10px] font-mono text-cyan-400 font-bold mb-1">STEP 02</div>
@@ -2179,7 +3000,7 @@
                     <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                         <div class="text-[10px] font-mono text-purple-400 font-bold mb-1">STEP 01</div>
                         <div class="text-xs font-bold text-white mb-1">Unzip Package</div>
-                        <div class="text-[11px] text-[#86868b] leading-relaxed">Double-click <code class="text-purple-300 text-[10px]">SumairTools_v7.0_Mac.zip</code> in Finder.</div>
+                        <div class="text-[11px] text-[#86868b] leading-relaxed">Double-click <code class="text-purple-300 text-[10px]">SumairTools_v8.0_Mac.zip</code> in Finder.</div>
                     </div>
                     <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                         <div class="text-[10px] font-mono text-purple-400 font-bold mb-1">STEP 02</div>
@@ -2273,7 +3094,7 @@
                 <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mt-2 mb-2">
                     Frequently asked questions.
                 </h2>
-                <p class="text-[#86868b] text-sm sm:text-base">Everything you need to know about Sumair Tools v7.0.</p>
+                <p class="text-[#86868b] text-sm sm:text-base">Everything you need to know about Sumair Tools v8.0.</p>
             </div>
 
             <!-- FAQ Accordion List -->
@@ -2284,7 +3105,7 @@
                         <span id="faq-icon-faq-1" class="text-neutral-400 text-lg">+</span>
                     </div>
                     <div id="faq-1" class="hidden mt-3 text-xs sm:text-sm text-[#86868b] leading-relaxed border-t border-white/[0.06] pt-3">
-                        Sumair Tools v7.0 is 100% native ExtendScript and supports Adobe After Effects CC 2019, 2020, 2021, 2022, 2023, 2024, 2025, and 2026+ on both macOS (Apple Silicon M1–M4 & Intel) and Windows 10/11.
+                        Sumair Tools v8.0 is 100% native ExtendScript and supports Adobe After Effects CC 2019, 2020, 2021, 2022, 2023, 2024, 2025, and 2026+ on both macOS (Apple Silicon M1–M4 & Intel) and Windows 10/11.
                     </div>
                 </div>
 
@@ -2294,7 +3115,7 @@
                         <span id="faq-icon-faq-2" class="text-neutral-400 text-lg">+</span>
                     </div>
                     <div id="faq-2" class="hidden mt-3 text-xs sm:text-sm text-[#86868b] leading-relaxed border-t border-white/[0.06] pt-3">
-                        Yes! As part of our launch for the video editing community, $1 grants you lifetime access, an official license key, and all future v7.x updates with zero subscriptions or hidden fees.
+                        Yes! As part of our launch for the video editing community, $1 grants you lifetime access, an official license key, and all future v8.x updates with zero subscriptions or hidden fees.
                     </div>
                 </div>
 
@@ -2314,7 +3135,7 @@
                         <span id="faq-icon-faq-4" class="text-neutral-400 text-lg">+</span>
                     </div>
                     <div id="faq-4" class="hidden mt-3 text-xs sm:text-sm text-[#86868b] leading-relaxed border-t border-white/[0.06] pt-3">
-                        In v7.0, all undo groups are strictly guarded by explicit boolean open-tracking, and the automated 1-click installers configure PlayerDebugMode in the registry automatically. Both issues are 100% eliminated.
+                        In v8.0, all undo groups are strictly guarded by explicit boolean open-tracking, and the automated 1-click installers configure PlayerDebugMode in the registry automatically. Both issues are 100% eliminated.
                     </div>
                 </div>
             </div>
@@ -2333,7 +3154,7 @@
                         <img src="images/sumair_tools_icon.png" alt="Sumair Tools" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <span class="font-display font-bold text-sm text-white">Sumair Tools v7.0</span>
+                        <span class="font-display font-bold text-sm text-white">Sumair Tools v8.0</span>
                         <p class="text-xs text-[#86868b]">Engineered by Sumair Ali Siddiqui</p>
                     </div>
                 </div>
@@ -2548,23 +3369,23 @@
                     </div>
                 </div>
 
-                <!-- Simulator Live Update Modal (v7.0 Cyber Suite Update) -->
+                <!-- Simulator Live Update Modal (v8.0 Cyber Suite Update) -->
                 <div id="sim-update-modal" class="hidden fixed inset-0 z-[999999] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
                     <div class="glass-panel border border-crimson/60 rounded-2xl p-6 max-w-sm w-full text-left shadow-[0_0_50px_rgba(255,0,60,0.5)]">
                         <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
                             <div class="flex items-center gap-2">
                                 <span class="text-base animate-pulse">📥</span>
                                 <h3 class="font-display font-black text-sm text-white tracking-wider">UPDATE AVAILABLE</h3>
-                                <span class="text-[9px] font-mono font-bold bg-crimson/20 border border-crimson/50 text-crimson px-2 py-0.5 rounded-full">v7.0 (Latest)</span>
+                                <span class="text-[9px] font-mono font-bold bg-crimson/20 border border-crimson/50 text-crimson px-2 py-0.5 rounded-full">v8.0 (Latest)</span>
                             </div>
                             <button onclick="closeSimUpdateModal()" class="text-neutral-400 hover:text-white text-sm cursor-pointer">✕</button>
                         </div>
                         <div class="mb-4">
-                            <h4 class="font-display font-bold text-white text-xs mb-1">Sumair Tools v7.0 Cyber Suite Update</h4>
+                            <h4 class="font-display font-bold text-white text-xs mb-1">Sumair Tools v8.0 Cyber Suite Update</h4>
                             <p class="text-[10px] font-mono text-neutral-400">Live Remote Push • Instant Cloud Notification</p>
                         </div>
                         <div class="bg-black/50 border border-white/10 rounded-xl p-3 mb-4 max-h-48 overflow-y-auto">
-                            <div class="text-[10px] font-mono font-bold text-crimson uppercase tracking-wider mb-2">WHAT'S NEW &amp; BUGFIXES (v7.0):</div>
+                            <div class="text-[10px] font-mono font-bold text-crimson uppercase tracking-wider mb-2">WHAT'S NEW &amp; BUGFIXES (v8.0):</div>
                             <ul class="text-[11px] font-mono text-neutral-300 space-y-1.5 leading-relaxed">
                                 <li class="flex items-start gap-1.5"><span class="text-crimson font-bold">•</span> <strong>Master Tools FX Manager:</strong> Mute all comp FX or Heavy GPU laggy effects for smooth 60 FPS playback</li>
                                 <li class="flex items-start gap-1.5"><span class="text-crimson font-bold">•</span> <strong>Groq AI Whisper Cut:</strong> High-precision speech cutting that never gets fooled by background music</li>
@@ -2777,7 +3598,7 @@
                         <div class="w-12 h-12 rounded-xl bg-crimson/20 border border-crimson/40 flex items-center justify-center text-xl mx-auto mb-3">
                             🕷️
                         </div>
-                        <h3 class="font-display font-black text-lg text-white mb-1">SUMAIR TOOLS v7.0</h3>
+                        <h3 class="font-display font-black text-lg text-white mb-1">SUMAIR TOOLS v8.0</h3>
                         <div class="text-[10px] font-mono text-crimson font-bold uppercase mb-3">Engineered by Sumair Ali Siddiqui</div>
                         <p class="text-xs text-neutral-300 font-mono leading-relaxed mb-4">
                             The #1 all-in-one Adobe After Effects extension suite. AI Agent ExtendScript, 1-Click Caption Pro, 9-point Anchor Grid, and Auto Cut timeline silence removal.
@@ -3201,7 +4022,7 @@
         }
 
         // =========================================================================
-        // MASTER TOOLS BRANCH SWITCHER & FX MANAGER (v7.0)
+        // MASTER TOOLS BRANCH SWITCHER & FX MANAGER (v8.0)
         // =========================================================================
         function switchSimMasterSubtab(mode) {
             AudioFX.click();
@@ -3356,7 +4177,7 @@
         }
 
         // =========================================================================
-        // AUTO CUT 3-MODE ENGINE & 1-CLICK PROFILES (v7.0)
+        // AUTO CUT 3-MODE ENGINE & 1-CLICK PROFILES (v8.0)
         // =========================================================================
         function switchSimAutoCutMode(mode) {
             AudioFX.click();
@@ -3540,7 +4361,7 @@
         }
 
         // =========================================================================
-        // SFX STUDIO MODAL & SOUND MANAGER (v7.0)
+        // SFX STUDIO MODAL & SOUND MANAGER (v8.0)
         // =========================================================================
         const simSfxData = [
             { id: 1, name: 'Cinematic Sub Whoosh', cat: 'transitions', dur: '0.6s', isCustom: false },
@@ -4286,7 +5107,7 @@
                 const res = await fetch('version.json?_t=' + Date.now(), { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
-                    const SIM_VER = "7.0";
+                    const SIM_VER = "8.0";
                     const btn = document.getElementById('sim-btn-update-badge');
                     if (btn) {
                         if (isNewerVersion(data.version, SIM_VER)) {
@@ -4544,11 +5365,19 @@
             triggerSimExecutionToast(`Language Set: ${lang.toUpperCase()}`);
         }
 
-        // Global Right-Click Event Listener (triggers custom context menu)
+        // Right-Click Event Listener (authentic AE CEP Context Menu inside extension simulator)
         window.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            showSimContextMenu(e);
-            return false;
+            const extPanel = document.getElementById('extension-interactive-panel') || document.getElementById('simulator');
+            const isInsideExt = extPanel && extPanel.contains(e.target);
+            const isInsideCtx = simCtxMenu && simCtxMenu.contains(e.target);
+
+            if (isInsideExt || isInsideCtx) {
+                e.preventDefault();
+                showSimContextMenu(e);
+                return false;
+            }
+            // Outside the extension, allow normal browser right-click and dismiss custom cyber menu if open
+            hideSimContextMenu();
         }, true);
 
         // Click outside & Escape listeners to dismiss context menu
@@ -5192,7 +6021,7 @@
 
             <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
                 <div class="flex items-center gap-3">
-                    <img src="images/favicon.png?v=7.0" class="w-7 h-7 rounded-lg border border-crimson" alt="Sumair Tools">
+                    <img src="images/favicon.png?v=8.0" class="w-7 h-7 rounded-lg border border-crimson" alt="Sumair Tools">
                     <div>
                         <h3 class="font-display font-black text-sm text-white tracking-wider">SUMAIR TOOLS</h3>
                         <p class="text-[10px] font-mono text-neutral-400">SECURE USER PORTAL</p>
@@ -5325,14 +6154,14 @@
                 <!-- Downloads Section: Windows, Mac, & ZXP -->
                 <div class="flex flex-col gap-2 pt-1">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <a href="SumairTools_v7.0_Windows.zip?v=7.0.2" download="SumairTools_v7.0_Windows.zip" onclick="AudioFX.success()" class="btn-crimson py-3 px-3 text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide">
+                        <a href="SumairTools_v8.0_Windows.zip?v=8.0.0" download="SumairTools_v8.0_Windows.zip" onclick="AudioFX.success()" class="btn-crimson py-3 px-3 text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide">
                             <span>🪟 Windows (.ZIP)</span>
                         </a>
-                        <a href="SumairTools_v7.0_Mac.zip?v=7.0.2" download="SumairTools_v7.0_Mac.zip" onclick="AudioFX.success()" class="py-3 px-3 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                        <a href="SumairTools_v8.0_Mac.zip?v=8.0.0" download="SumairTools_v8.0_Mac.zip" onclick="AudioFX.success()" class="py-3 px-3 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)]">
                             <span>🍎 macOS (.ZIP)</span>
                         </a>
                     </div>
-                    <a href="SumairTools_v7.0.zxp?v=7.0.2" download="SumairTools_v7.0.zxp" onclick="AudioFX.success()" class="py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-300 hover:text-white text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide transition-colors">
+                    <a href="SumairTools_v8.0.zxp?v=8.0.0" download="SumairTools_v8.0.zxp" onclick="AudioFX.success()" class="py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-neutral-300 hover:text-white text-xs text-center flex items-center justify-center gap-2 font-mono font-bold tracking-wide transition-colors">
                         <span>⚡ Direct Universal .ZXP (Win &amp; Mac)</span>
                     </a>
                 </div>
@@ -5340,8 +6169,8 @@
                 <!-- Easy Setup Guide -->
                 <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 text-left font-mono text-[11px] text-neutral-300 leading-relaxed">
                     <span class="text-white font-bold block mb-1.5">⚡ Quick Installation Guide:</span>
-                    • <strong class="text-cyanAccent">Windows Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v7.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.<br>
-                    • <strong class="text-purpleAccent">Mac Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v7.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder.<br>
+                    • <strong class="text-cyanAccent">Windows Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v8.0_Windows.zip</code> and double-click <code class="text-cyanAccent font-bold">Install_Sumair_Tools.bat</code>.<br>
+                    • <strong class="text-purpleAccent">Mac Users:</strong> Unzip <code class="text-white font-bold">SumairTools_v8.0_Mac.zip</code> and double-click <code class="text-purpleAccent font-bold">install_mac.command</code> in Finder.<br>
                     • Restart After Effects, open <code class="text-emerald-400 font-bold">Window &gt; Extensions &gt; Sumair Tools</code>, and enter your license key.<br>
                     <span class="text-emerald-400 font-semibold block mt-1">✓ The "No response from AE engine" error is completely gone!</span>
                 </div>
@@ -5358,7 +6187,7 @@
             <!-- Header -->
             <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
                 <div class="flex items-center gap-3">
-                    <img src="images/favicon.png?v=7.0" class="w-8 h-8 rounded-xl border border-crimson" alt="Sumair Tools">
+                    <img src="images/favicon.png?v=8.0" class="w-8 h-8 rounded-xl border border-crimson" alt="Sumair Tools">
                     <div>
                         <h3 class="font-display font-black text-base text-white tracking-wider">SUMAIR TOOLS DASHBOARD</h3>
                         <p class="text-[11px] font-mono text-neutral-400">HARDWARE LICENSING & ACCOUNT MANAGEMENT</p>
@@ -5525,9 +6354,9 @@
     </div>
 
     <!-- Auth & Dashboard Script Controllers -->
-    <script src="js/supabase_config.js?v=7.0"></script>
-    <script src="js/auth.js?v=7.0"></script>
-    <script src="js/dashboard.js?v=7.0"></script>
+    <script src="js/supabase_config.js?v=8.0"></script>
+    <script src="js/auth.js?v=8.0"></script>
+    <script src="js/dashboard.js?v=8.0"></script>
     
     <!-- Instant Master Admin Visibility Detector (Bulletproof Real-Time Scanner) -->
     <script>

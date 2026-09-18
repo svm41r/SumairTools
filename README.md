@@ -16,26 +16,26 @@ Official landing page and distribution repository for **Sumair Tools v6.5** (Lat
 
 ---
 
-## 📦 Downloads (v7.0 Latest)
+## 📦 Downloads (v8.0 Latest)
 
-- **[SumairTools_v7.0_Windows.zip](./SumairTools_v7.0_Windows.zip)** (1-Click Windows Automated Installer `Install_Sumair_Tools.bat`)
-- **[SumairTools_v7.0_Mac.zip](./SumairTools_v7.0_Mac.zip)** (1-Click macOS Automated Installer `install_mac.command`)
-- **[SumairTools_v7.0.zxp](./SumairTools_v7.0.zxp)** (Universal Adobe CEP ZXP package)
-- **[SumairTools_v7.0.zip](./SumairTools_v7.0.zip)** (Universal Manual ZIP bundle)
+- **[SumairTools_v8.0_Windows.zip](./SumairTools_v8.0_Windows.zip)** (1-Click Windows Automated Installer `Install_Sumair_Tools.bat`)
+- **[SumairTools_v8.0_Mac.zip](./SumairTools_v8.0_Mac.zip)** (1-Click macOS Automated Installer `install_mac.command`)
+- **[SumairTools_v8.0.zxp](./SumairTools_v8.0.zxp)** (Universal Adobe CEP ZXP package)
+- **[SumairTools_v8.0.zip](./SumairTools_v8.0.zip)** (Universal Manual ZIP bundle)
 
 ---
 
 ## 🚀 How to Install & Use
 
 ### 🪟 Windows (1-Click)
-1. Download **SumairTools_v7.0_Windows.zip** and extract it.
+1. Download **SumairTools_v8.0_Windows.zip** and extract it.
 2. Double-click **`Install_Sumair_Tools.bat`**.
 3. Open After Effects ➔ **Window > Extensions > Sumair Tools**.
 
 ### 🍎 macOS (1-Click)
-1. Download **SumairTools_v7.0_Mac.zip** and extract it.
+1. Download **SumairTools_v8.0_Mac.zip** and extract it.
 2. Double-click **`install_mac.command`** in Finder.
 3. Open After Effects ➔ **Window > Extensions > Sumair Tools**.
 
 ### ⚡ Universal .ZXP
-- Drag & drop **`SumairTools_v7.0.zxp`** into [ZXP Installer](https://zxpinstaller.com/) or aescripts ZXP manager.
+- Drag & drop **`SumairTools_v8.0.zxp`** into [ZXP Installer](https://zxpinstaller.com/) or aescripts ZXP manager.
