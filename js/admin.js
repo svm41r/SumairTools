@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Sumair Tools — Master Admin Command Center Controller
  * Dedicated Telemetry, Revocation & Key Generation Hub
  * Copyright (c) 2026 Sumair Ali Siddiqui. All Rights Reserved.
@@ -697,7 +697,7 @@
             "2. Launch in After Effects: Open AE and go to Window > Extensions > Sumair Tools.\n" +
             "3. Activate: Paste your License Key above into the activator prompt. Your hardware binds automatically.\n\n" +
             "SUPPORT & COMMUNITY:\n" +
-            "• Official VIP Discord: https://discord.gg/sumairtools\n" +
+            "• Official VIP Discord: https://discord.gg/639znDw2tU\n" +
             "• Website & Documentation: https://sumairtools.online\n" +
             "• Direct Support: sumairalisiddiqui@gmail.com\n\n" +
             "Sumair Ali Siddiqui\n" +

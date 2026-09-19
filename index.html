@@ -7,10 +7,19 @@
     <meta name="description" content="An elite ExtendScript automation suite by Sumair Ali Siddiqui. Get 3 hours of work done in 1 hour. Clipboard image paste, local AI background removal (isnet-anime), universal yt-dlp downloader, 150K+ icons, SFX auto-placement to cuts, dual-rail Caption Pro, and Dan Ebberts physics.">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <link rel="icon" type="image/png" href="images/favicon.png?v=8.0">
-    <link rel="apple-touch-icon" href="images/sumair_tools_icon.png">
     <meta name="theme-color" content="#000000">
 
-    <!-- OpenGraph -->
+    <!-- Early Theme Detection Script (Prevents FOUC) -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('sumair_theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.classList.add('light-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta property="og:title" content="Sumair Tools — The Motion Suite for Adobe After Effects">
     <meta property="og:description" content="Get 3 hours of work done in 1 hour. Clipboard image paste, local AI background removal (isnet-anime), yt-dlp downloader, 150K+ vector icons, SFX auto-sync to cuts, dual-rail captions, and Dan Ebberts physics. Limited $3 Launch Deal (Was $25).">
     <meta property="og:type" content="website">
@@ -87,6 +96,297 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ========================================================================= */
+        /* ========================================================================= */
+        /* WHITE MINIMAL THEME (APPLE-GRADE LIGHT MODE)                              */
+        /* ========================================================================= */
+        html.light-mode {
+            background-color: #fbfbfd !important;
+            color: #111827 !important;
+        }
+        html.light-mode body {
+            background-color: #fbfbfd !important;
+            color: #111827 !important;
+        }
+
+        /* Subtle ambient textures in light mode */
+        html.light-mode .site-texture-grain {
+            opacity: 0.02 !important;
+        }
+        html.light-mode .site-texture-dots,
+        html.light-mode .site-texture-grid {
+            opacity: 0.04 !important;
+            filter: invert(1) !important;
+        }
+        html.light-mode .site-texture-glows {
+            opacity: 0.08 !important;
+        }
+        html.light-mode .blur-3xl {
+            opacity: 0.1 !important;
+        }
+
+        /* Floating Minimal Header (Apple-Grade Frosted Glass) */
+        html.light-mode #main-header > div {
+            background: rgba(255, 255, 255, 0.88) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+        }
+        html.light-mode #main-header .font-display {
+            color: #111827 !important;
+        }
+        html.light-mode #desktop-nav a {
+            color: #6e6e73 !important;
+        }
+        html.light-mode #desktop-nav a:hover {
+            color: #000000 !important;
+        }
+        html.light-mode #nav-signin-btn {
+            color: #4b5563 !important;
+        }
+        html.light-mode #nav-signin-btn:hover {
+            color: #111827 !important;
+        }
+        html.light-mode #nav-signup-btn {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            color: #111827 !important;
+        }
+        html.light-mode #nav-signup-btn:hover {
+            background: rgba(0, 0, 0, 0.09) !important;
+            color: #000000 !important;
+        }
+
+        /* Bento Cards & Containers */
+        html.light-mode .bento-card {
+            background: #ffffff !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+        }
+        html.light-mode .bento-card:hover {
+            border-color: rgba(0, 0, 0, 0.16) !important;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08) !important;
+            background: #ffffff !important;
+        }
+
+        /* macOS Window Frame */
+        html.light-mode .mac-window {
+            background: #ffffff !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.15) !important;
+        }
+        html.light-mode .mac-window:hover {
+            border-color: rgba(0, 0, 0, 0.18) !important;
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.12) !important;
+        }
+        html.light-mode .mac-titlebar {
+            background: #f4f4f7 !important;
+            border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+            color: #111827 !important;
+        }
+
+        /* Floating Bottom Audio & SFX Docks */
+        html.light-mode #bg-music-dock,
+        html.light-mode .fixed.bottom-4.sm\:bottom-6.right-4 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
+        }
+        html.light-mode #music-track-title {
+            color: #111827 !important;
+        }
+        html.light-mode #music-disc-icon {
+            color: #ff003c !important;
+        }
+        html.light-mode #music-play-btn {
+            background-color: #111827 !important;
+            color: #ffffff !important;
+        }
+        html.light-mode #music-play-btn:hover {
+            background-color: #000000 !important;
+        }
+        html.light-mode #music-shuffle-btn,
+        html.light-mode #music-volume-btn,
+        html.light-mode button[onclick*="changeVolume"] {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #374151 !important;
+        }
+        html.light-mode #floating-sfx-toggle {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #374151 !important;
+        }
+
+        /* Background utility class overrides */
+        html.light-mode .bg-black,
+        html.light-mode .bg-neutral-950,
+        html.light-mode .bg-neutral-900,
+        html.light-mode .bg-\[\#060609\],
+        html.light-mode .bg-panel,
+        html.light-mode .bg-panelAlt {
+            background-color: #ffffff !important;
+        }
+
+        html.light-mode .bg-black\/40,
+        html.light-mode .bg-black\/60,
+        html.light-mode .bg-black\/80,
+        html.light-mode .bg-neutral-950\/95,
+        html.light-mode .bg-white\/\[0\.02\],
+        html.light-mode .bg-white\/\[0\.03\],
+        html.light-mode .bg-white\/\[0\.04\],
+        html.light-mode .bg-white\/\[0\.05\],
+        html.light-mode .bg-white\/\[0\.06\],
+        html.light-mode .bg-white\/\[0\.08\],
+        html.light-mode .bg-white\/5 {
+            background-color: rgba(0, 0, 0, 0.035) !important;
+        }
+
+        html.light-mode .bg-white\/\[0\.1\],
+        html.light-mode .bg-white\/\[0\.12\],
+        html.light-mode .bg-white\/10,
+        html.light-mode .bg-white\/15,
+        html.light-mode .bg-white\/20 {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        /* Typography */
+        html.light-mode .text-white {
+            color: #111827 !important;
+        }
+        html.light-mode .text-neutral-200,
+        html.light-mode .text-neutral-300 {
+            color: #374151 !important;
+        }
+        html.light-mode .text-neutral-400,
+        html.light-mode .text-\[\#86868b\],
+        html.light-mode .text-\[\#a1a1a6\] {
+            color: #6b7280 !important;
+        }
+        html.light-mode .text-neutral-500 {
+            color: #9ca3af !important;
+        }
+
+        /* Borders */
+        html.light-mode .border-white\/\[0\.06\],
+        html.light-mode .border-white\/\[0\.07\],
+        html.light-mode .border-white\/\[0\.08\],
+        html.light-mode .border-white\/\[0\.09\],
+        html.light-mode .border-white\/\[0\.15\],
+        html.light-mode .border-white\/5,
+        html.light-mode .border-white\/10,
+        html.light-mode .border-white\/15,
+        html.light-mode .border-white\/20,
+        html.light-mode .border-neutral-800,
+        html.light-mode .border-neutral-900 {
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* Text Gradients */
+        html.light-mode .bg-gradient-to-r.from-white.via-neutral-200.to-neutral-500,
+        html.light-mode .bg-gradient-to-b.from-white.to-white\/40,
+        html.light-mode .bg-gradient-to-r.from-white.via-cyan-200.to-cyan-400 {
+            background-image: linear-gradient(to right, #111827, #374151, #0284c7) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        /* Interactive Action Buttons */
+        html.light-mode a[href="#download"].bg-white {
+            background-color: #111827 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+        html.light-mode a[href="#download"].bg-white:hover {
+            background-color: #000000 !important;
+        }
+
+        html.light-mode a[href="#simulator"].bg-white\/\[0\.04\],
+        html.light-mode a[href="#tutorial"].bg-white\/\[0\.04\] {
+            background-color: #f3f4f6 !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            color: #374151 !important;
+        }
+        html.light-mode a[href="#simulator"].bg-white\/\[0\.04\]:hover,
+        html.light-mode a[href="#tutorial"].bg-white\/\[0\.04\]:hover {
+            background-color: #e5e7eb !important;
+            color: #111827 !important;
+        }
+
+        /* Mobile Menu Drawer */
+        html.light-mode #mobile-menu-drawer {
+            background-color: rgba(255, 255, 255, 0.98) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12) !important;
+        }
+        html.light-mode #mobile-menu-drawer a {
+            color: #374151 !important;
+        }
+        html.light-mode #mobile-menu-drawer a:hover {
+            color: #111827 !important;
+        }
+
+        /* Modals & Dialogs */
+        html.light-mode .modal-content,
+        html.light-mode #auth-modal-content,
+        html.light-mode #dashboard-modal-content,
+        html.light-mode #st-config-modal > div {
+            background: #ffffff !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Form Inputs */
+        html.light-mode input[type="text"],
+        html.light-mode input[type="email"],
+        html.light-mode input[type="password"],
+        html.light-mode textarea {
+            background-color: #f8fafc !important;
+            border-color: rgba(0, 0, 0, 0.12) !important;
+            color: #111827 !important;
+        }
+        html.light-mode input::placeholder,
+        html.light-mode textarea::placeholder {
+            color: #9ca3af !important;
+        }
+
+        /* Theme Toggle Button Style */
+        .theme-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            color: #ffffff;
+        }
+        html.light-mode .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #1f2937;
+        }
+        html.light-mode .theme-toggle-btn:hover {
+            background: rgba(0, 0, 0, 0.09);
+            border-color: rgba(0, 0, 0, 0.18);
+            color: #000000;
         }
 
         /* macOS Window Frame */
@@ -1093,8 +1393,14 @@
 
             <!-- Action Controls -->
             <div class="flex items-center gap-2 sm:gap-2.5">
+                <!-- Theme Toggle Button (White Minimal / Dark) -->
+                <button id="theme-toggle-btn" onclick="toggleTheme()" class="theme-toggle-btn" title="Toggle White Minimal / Dark Mode" aria-label="Toggle Theme">
+                    <span id="theme-icon-sun" class="text-amber-400 text-sm">☀️</span>
+                    <span id="theme-icon-moon" class="text-neutral-700 text-sm hidden">🌙</span>
+                </button>
+
                 <!-- Discord Community Link -->
-                <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-medium text-neutral-300 hover:text-white transition-all" title="Join Discord">
+                <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-medium text-neutral-300 hover:text-white transition-all" title="Join Discord">
                     <svg class="w-3.5 h-3.5 fill-current text-[#7983f5]" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                     <span>Discord</span>
                 </a>
@@ -1128,6 +1434,12 @@
                 <a href="#pricing" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">$3 Launch License</a>
                 <a href="#download" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">Direct Downloads</a>
                 <a href="#faq" class="text-neutral-300 hover:text-white" onclick="toggleMobileMenu()">FAQ</a>
+                <div class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-black/5 border border-black/10 mt-1">
+                    <span class="text-xs font-semibold text-neutral-400">Theme</span>
+                    <button onclick="toggleTheme()" class="theme-toggle-btn" style="width: auto; height: 30px; padding: 4px 12px; gap: 6px; font-size: 11px; font-weight: 700;">
+                        <span id="mobile-theme-icon">☀️ White Minimal</span>
+                    </button>
+                </div>
                 <div id="mobile-nav-user-container" class="flex flex-col gap-2 pt-2 border-t border-white/10">
                     <button onclick="toggleMobileMenu(); openAuthModal('signin');" class="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-neutral-200 text-xs font-medium flex items-center justify-between cursor-pointer">
                         <span>🔑 Sign In</span>
@@ -1339,7 +1651,7 @@
                                         </a>
 
                                         <!-- Discord Button -->
-                                        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="w-6 h-6 rounded-md bg-[#5865F2] hover:bg-[#4752C4] border border-[#7983f5] text-white flex items-center justify-center transition-all shadow-[0_0_8px_rgba(88,101,242,0.4)]" title="Join Discord Community">
+                                        <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="w-6 h-6 rounded-md bg-[#5865F2] hover:bg-[#4752C4] border border-[#7983f5] text-white flex items-center justify-center transition-all shadow-[0_0_8px_rgba(88,101,242,0.4)]" title="Join Discord Community">
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                                         </a>
 
@@ -2803,7 +3115,7 @@
                                 <span>Open in YouTube</span>
                                 <span>↗</span>
                             </a>
-                            <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="flex-1 sm:flex-initial px-4 py-2 rounded-lg bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-all">
+                            <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.click()" class="flex-1 sm:flex-initial px-4 py-2 rounded-lg bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-all">
                                 <span>Discord Community</span>
                             </a>
                         </div>
@@ -3156,7 +3468,7 @@
                             </a>
 
                             <!-- Discord VIP Card -->
-                            <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#5865F2]/15 hover:bg-[#5865F2]/25 border border-[#5865F2]/30 hover:border-[#5865F2]/60 transition-all sm:col-span-2 group" onclick="AudioFX.laser()">
+                            <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#5865F2]/15 hover:bg-[#5865F2]/25 border border-[#5865F2]/30 hover:border-[#5865F2]/60 transition-all sm:col-span-2 group" onclick="AudioFX.laser()">
                                 <div class="flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-lg bg-[#5865F2] text-white flex items-center justify-center shrink-0">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
@@ -3846,7 +4158,7 @@
         </div>
 
         <!-- Discord Link -->
-        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" title="Join Official Discord Server ($3 Launch License & Support)" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-[#5865F2] hover:border-[#5865F2] border border-white/10 text-white font-sans font-light text-xs transition-all flex items-center gap-1.5 shadow-sm">
+        <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" title="Join Official Discord Server ($3 Launch License & Support)" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-[#5865F2] hover:border-[#5865F2] border border-white/10 text-white font-sans font-light text-xs transition-all flex items-center gap-1.5 shadow-sm">
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
             <span>Discord</span>
         </a>
@@ -3897,6 +4209,10 @@
                         <span class="context-icon">⚙</span>
                         <span class="context-text">SUMAIR TOOLS SETTINGS</span>
                     </div>
+                    <div class="context-item" onclick="toggleTheme(); hideSimContextMenu();">
+                        <span class="context-icon" id="sim-ctx-theme-icon">☀️</span>
+                        <span class="context-text" id="sim-ctx-theme-text">SWITCH TO WHITE MINIMAL</span>
+                    </div>
                     <div class="context-item" onclick="openSimAboutModal()">
                         <span class="context-icon">ℹ</span>
                         <span class="context-text">ABOUT SUMAIR TOOLS</span>
@@ -3905,7 +4221,7 @@
                         <span class="context-icon">✉</span>
                         <span class="context-text">CONTACT US</span>
                     </div>
-                    <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" class="context-item" onclick="AudioFX.laser()" style="color: #7983f5; text-decoration: none;">
+                    <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" class="context-item" onclick="AudioFX.laser()" style="color: #7983f5; text-decoration: none;">
                         <span class="context-icon">👾</span>
                         <span class="context-text">JOIN DISCORD COMMUNITY</span>
                     </a>
@@ -3951,6 +4267,14 @@
                                     <option value="miles-morales">Miles Morales</option>
                                     <option value="spider-gwen">Spider-Gwen</option>
                                     <option value="symbiote">Symbiote / Venom</option>
+                                </select>
+                            </div>
+
+                            <div class="flex-row">
+                                <span class="flex-row-label">WEBSITE THEME</span>
+                                <select id="sim-flex-web-theme" class="flex-select" onchange="if ((this.value === 'light' && !document.documentElement.classList.contains('light-mode')) || (this.value === 'dark' && document.documentElement.classList.contains('light-mode'))) { toggleTheme(); }">
+                                    <option value="dark" selected>🌙 Dark Mode (Default)</option>
+                                    <option value="light">☀️ White Minimal (Apple-grade)</option>
                                 </select>
                             </div>
 
@@ -4213,7 +4537,7 @@
                         <p class="text-xs text-neutral-300 font-sans font-light leading-relaxed mb-4">
                             The #1 all-in-one Adobe After Effects extension suite. AI Agent ExtendScript, 1-Click Caption Pro, 9-point Anchor Grid, and Auto Cut timeline silence removal.
                         </p>
-                        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" class="w-full py-2 px-4 mb-3 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-sans font-medium text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(88,101,242,0.5)]">
+                        <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" class="w-full py-2 px-4 mb-3 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-sans font-medium text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(88,101,242,0.5)]">
                             <span>👾 Join Official Discord Community</span>
                         </a>
                         <button onclick="closeSimAboutModal()" class="btn-crimson py-2 px-6 text-xs font-sans font-medium">
@@ -4227,7 +4551,7 @@
                     <div class="glass-panel border border-white/15 rounded-2xl p-6 max-w-sm w-full text-center shadow-[0_0_40px_rgba(0,0,0,0.8)]">
                         <h3 class="font-sans font-light text-lg text-white mb-3">CONNECT &amp; HIRE ONLINE</h3>
                         <div class="space-y-2 mb-4 font-sans font-light text-xs">
-                            <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser();" class="block p-3 rounded-xl bg-gradient-to-r from-[#5865F2] to-[#4752C4] text-white transition-all font-sans font-medium shadow-[0_0_20px_rgba(88,101,242,0.5)] hover:scale-[1.02] flex items-center justify-center gap-2">
+                            <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser();" class="block p-3 rounded-xl bg-gradient-to-r from-[#5865F2] to-[#4752C4] text-white transition-all font-sans font-medium shadow-[0_0_20px_rgba(88,101,242,0.5)] hover:scale-[1.02] flex items-center justify-center gap-2">
                                 <span>👾 Join Official Discord Community</span>
                             </a>
                             <a href="https://www.upwork.com/freelancers/~01a50df73294f1ee67?viewMode=1" target="_blank" class="block p-2.5 rounded-xl bg-white/5 hover:bg-[#14a800]/20 border border-white/10 hover:border-[#14a800]/50 text-neutral-200 hover:text-[#6fda44] transition-all font-sans font-medium">
@@ -5547,6 +5871,49 @@
         }
 
         // =========================================================================
+        // WHITE MINIMAL THEME CONTROLLER
+        // =========================================================================
+        function toggleTheme() {
+            if (typeof AudioFX !== 'undefined' && AudioFX.click) AudioFX.click();
+            var isLight = document.documentElement.classList.toggle('light-mode');
+            localStorage.setItem('sumair_theme', isLight ? 'light' : 'dark');
+            updateThemeUI(isLight);
+        }
+
+        function updateThemeUI(isLight) {
+            var sun = document.getElementById('theme-icon-sun');
+            var moon = document.getElementById('theme-icon-moon');
+            var mobileThemeIcon = document.getElementById('mobile-theme-icon');
+            var metaTheme = document.querySelector('meta[name="theme-color"]');
+            var simCtxIcon = document.getElementById('sim-ctx-theme-icon');
+            var simCtxText = document.getElementById('sim-ctx-theme-text');
+            var simWebThemeSelect = document.getElementById('sim-flex-web-theme');
+
+            if (isLight) {
+                if (sun) sun.classList.add('hidden');
+                if (moon) moon.classList.remove('hidden');
+                if (mobileThemeIcon) mobileThemeIcon.innerHTML = '🌙 Dark Mode';
+                if (metaTheme) metaTheme.setAttribute('content', '#fbfbfd');
+                if (simCtxIcon) simCtxIcon.innerText = '🌙';
+                if (simCtxText) simCtxText.innerText = 'SWITCH TO DARK MODE';
+                if (simWebThemeSelect) simWebThemeSelect.value = 'light';
+            } else {
+                if (sun) sun.classList.remove('hidden');
+                if (moon) moon.classList.add('hidden');
+                if (mobileThemeIcon) mobileThemeIcon.innerHTML = '☀️ White Minimal';
+                if (metaTheme) metaTheme.setAttribute('content', '#000000');
+                if (simCtxIcon) simCtxIcon.innerText = '☀️';
+                if (simCtxText) simCtxText.innerText = 'SWITCH TO WHITE MINIMAL';
+                if (simWebThemeSelect) simWebThemeSelect.value = 'dark';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var isLight = document.documentElement.classList.contains('light-mode');
+            updateThemeUI(isLight);
+        });
+
+        // =========================================================================
         // CAPTION PRO 2X vs 4X WORD SPLIT MODAL (v4.1 Core Feature)
         // =========================================================================
         function simOpenSplitModal() {
@@ -6806,7 +7173,7 @@
                     <p class="text-xs font-sans font-light text-neutral-300 mb-3 leading-relaxed">
                         To activate your After Effects workstation, join our Discord server and grab your $3 verified license key directly from <span class="text-white font-medium">Sumair Ali Siddiqui</span>!
                     </p>
-                    <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" class="w-full py-2.5 px-4 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-sans font-medium text-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.02] shadow-[0_0_15px_rgba(88,101,242,0.5)]">
+                    <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" onclick="AudioFX.laser()" class="w-full py-2.5 px-4 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-sans font-medium text-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.02] shadow-[0_0_15px_rgba(88,101,242,0.5)]">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                         <span>👾 JOIN DISCORD TO GET KEY ➔</span>
                     </a>
