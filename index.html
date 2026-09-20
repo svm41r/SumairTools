@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth bg-black text-white antialiased">
 <head>
     <meta charset="UTF-8">
@@ -553,6 +553,51 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* FAQ High-Contrast Readability */
+        #faq .font-display, 
+        #faq h2, 
+        #faq h3, 
+        #faq span:not([id^="faq-icon-"]), 
+        #faq div[onclick] span:first-child {
+            color: #ffffff !important;
+        }
+        #faq div[id^="faq-"] {
+            color: #e2e8f0 !important;
+        }
+        #faq div[id^="faq-"] p {
+            color: #e2e8f0 !important;
+        }
+        #faq div[id^="faq-"] ul,
+        #faq div[id^="faq-"] li {
+            color: #cbd5e1 !important;
+        }
+        #faq div[id^="faq-"] strong {
+            color: #ffffff !important;
+        }
+        #faq div[id^="faq-"] code {
+            color: #38bdf8 !important;
+        }
+        #faq div[id^="faq-"] kbd {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+        }
+        html.light-mode #faq .font-display,
+        html.light-mode #faq h2,
+        html.light-mode #faq h3,
+        html.light-mode #faq span:not([id^="faq-icon-"]),
+        html.light-mode #faq div[onclick] span:first-child {
+            color: #0f172a !important;
+        }
+        html.light-mode #faq div[id^="faq-"],
+        html.light-mode #faq div[id^="faq-"] p,
+        html.light-mode #faq div[id^="faq-"] ul,
+        html.light-mode #faq div[id^="faq-"] li {
+            color: #334155 !important;
+        }
+        html.light-mode #faq div[id^="faq-"] strong {
+            color: #0f172a !important;
         }
     
         /* ============================================================= */
