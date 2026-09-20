@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Sumair Tools — Enterprise License Email Distribution API
  * Endpoint: /api/send-license
  * -----------------------------------------------------------------
@@ -58,7 +58,7 @@ const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASS || ''
 
 const SENDER_NAME = process.env.SENDER_NAME || 'Sumair Tools Official';
 const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || 'sumairalisiddiqui@gmail.com';
-const DISCORD_URL = process.env.DISCORD_URL || 'https://discord.gg/sumairtools';
+const DISCORD_URL = process.env.DISCORD_URL || 'https://discord.gg/639znDw2tU';
 const WEBSITE_URL = process.env.WEBSITE_URL || 'https://sumairtools.com';
 const DOWNLOAD_URL = process.env.DOWNLOAD_URL || 'https://sumairtools.com/#download';
 

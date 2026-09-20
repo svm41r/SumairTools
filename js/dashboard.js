@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Sumair Tools — Enterprise User & Admin Telemetry Dashboard Engine
  * Engineered by Sumair Ali Siddiqui
  * All Rights Reserved (c) 2026
@@ -103,7 +103,7 @@
                     </form>
                     <div class="mt-3 flex items-center justify-between text-xs font-sans font-light text-neutral-400">
                         <span>Need a license?</span>
-                        <a href="https://discord.gg/dxSFk6a3n" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neutral-300 font-medium underline flex items-center gap-1">
+                        <a href="https://discord.gg/639znDw2tU" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neutral-300 font-medium underline flex items-center gap-1">
                             Get Lifetime License for $1 on Discord ↗
                         </a>
                     </div>

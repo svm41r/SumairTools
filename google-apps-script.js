@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ==============================================================================
  * SUMAIR TOOLS — GOOGLE APPS SCRIPT LICENSE DISPATCHER (100% FREE FOR GITHUB PAGES)
  * ==============================================================================
@@ -101,7 +101,7 @@ function buildHtmlEmail(name, key, email) {
   '            </ol>' +
   '          </div>' +
   '          <div style="text-align:center;margin-bottom:24px;">' +
-  '            <a href="https://discord.gg/sumairtools" style="background:linear-gradient(135deg,#ff003c,#b00029);color:#ffffff;font-weight:700;border-radius:10px;padding:14px 28px;display:inline-block;text-align:center;font-size:13px;text-transform:uppercase;letter-spacing:1px;text-decoration:none;">💬 Join VIP Discord Community & Support</a>' +
+  '            <a href="https://discord.gg/639znDw2tU" style="background:linear-gradient(135deg,#ff003c,#b00029);color:#ffffff;font-weight:700;border-radius:10px;padding:14px 28px;display:inline-block;text-align:center;font-size:13px;text-transform:uppercase;letter-spacing:1px;text-decoration:none;">💬 Join VIP Discord Community & Support</a>' +
   '          </div>' +
   '          <p style="margin:0;font-size:12px;color:#71717a;text-align:center;">Need help or looking for video tutorials? Visit <a href="https://sumairtools.online" style="color:#ff003c;text-decoration:none;">sumairtools.online</a> anytime.</p>' +
   '        </td>' +
@@ -130,7 +130,7 @@ function buildTextEmail(name, key, email) {
   "2. Launch in After Effects: Go to Window > Extensions > Sumair Tools\n" +
   "3. Activate: Paste your License Key into the activator prompt. Your hardware binds automatically.\n\n" +
   "SUPPORT & COMMUNITY:\n" +
-  "• Official VIP Discord: https://discord.gg/sumairtools\n" +
+  "• Official VIP Discord: https://discord.gg/639znDw2tU\n" +
   "• Website: https://sumairtools.online\n" +
   "• Direct Support: sumairalisiddiqui@gmail.com\n\n" +
   "Sumair Ali Siddiqui — Lead Developer, Sumair Tools Team\n";
