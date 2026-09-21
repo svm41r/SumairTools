@@ -126,7 +126,7 @@ function buildTextEmail(name, key, email) {
   "YOUR LICENSE KEY:\n" + key + "\n\n" +
   "Assigned Email: " + email + "\n\n" +
   "QUICK 3-STEP ACTIVATION GUIDE:\n" +
-  "1. Install Extension: Download SumairTools_v8.0.zxp or use our 1-click Windows/Mac bundles from https://sumairtools.online/#download\n" +
+  "1. Install Extension: Download SumairTools_v9.0.zxp or use our 1-click Windows/Mac bundles from https://sumairtools.online/#download\n" +
   "2. Launch in After Effects: Go to Window > Extensions > Sumair Tools\n" +
   "3. Activate: Paste your License Key into the activator prompt. Your hardware binds automatically.\n\n" +
   "SUPPORT & COMMUNITY:\n" +

@@ -1,22 +1,21 @@
 {
-  "version": "8.0.0",
-  "badgeText": "VERSION 8.0: MOTION GRAPHS + PROXIMITY TEMPLATES + 3D CAROUSEL ORB!",
-  "title": "Sumair Tools Cyber Suite v8.0",
-  "date": "2026-09-18",
+  "version": "9.0.0",
+  "badgeText": "VERSION 9.0: PROCEDURAL CHARTS + HUD STUDIOS + BATCH COMPOSITION!",
+  "title": "Sumair Tools Cyber Suite v9.0",
+  "date": "2026-09-22",
   "changelog": [
-    "📈 Motion Graphs Easing Engine: Live curve inspector, interactive bezier preview, custom curve saving, prompt naming, and Organize & Sort toolbar",
-    "✨ Proximity Effector Templates: 12-card interactive green canvas simulation with 5 production templates (Drift Wall, Flat Marquee, Option Wheel, Spotlight Grid, Chroma Grid)",
-    "🌐 Orb Generator 3D Carousel: 3x2 grid with 6 looks (Horizontal Curve, Cylindrical Ring, Tilted Ring, Vertical Stack, Floating Perspective, Sphere Cloud)",
-    "🪶 Mask & Shape Taper: Quick Stroke & Fill drawer with 4 presets and 4 precision sliders via ADBE Vector Taper",
-    "💾 PF Expressions Saving: Dual-persistence to localStorage and disk file (user_expressions.json) with bulletproof rendering",
-    "🎨 Icon-Only Tab Bar: Streamlined navigation with glowing glassmorphic hover tooltips",
-    "⚡ Flex GUI-Style Premade Templates Engine: 1-Click authentic .aep drops for Pixel Reveal, Vertical Reveal, and Wipe Scan",
-    "🎬 Auto B-Roll Studio: Millisecond-accurate SRT subtitle timestamp parsing & B-Roll sequencer with intelligent niche keyword matching",
-    "⚡ Auto SFX Placement Engine: 1-Click automated sound effects placement synchronized to timeline layer cuts & transitions",
+    "📈 Procedural Animated Chart & Graph Studio: Cinematic Catmull-Rom cubic bezier splines, luminous area fill, glowing nodes & floating peak tooltip",
+    "📦 Batch Composition (Each Layer in Own Comp): 1-Click pre-compose each selected layer into individual comps with Ad Hook formulas",
+    "🔔 Social Action HUD Studio: Interactive YouTube, Instagram, Twitter/X, and TikTok HUD popups with platform avatars & zero text overlap",
+    "💻 Code Syntax Highlighter & Typer: Monospace syntax highlighting with native range animator typewriter and macOS traffic lights",
+    "⏱️ Reel & Short Progress Bars: Story-style progressive segmented bars & linear progress rigs with active comp tracking",
+    "🏷️ Batch Layer & Comp Renamer Pro: Ad Hook formula sequencer with real-time preview and Project Bin source comp synchronization",
+    "📱 UI Safe-Zone Guides: Non-rendering wireframe overlay guides for TikTok, Instagram Reels, YouTube Shorts",
+    "🖤 Total Obsidian Dark Mode: Pure minimal dark theme with crisp typography and neutralized white buttons",
     "🍎 1-Click macOS Automated Installer with direct Unix permissions & cfprefsd cache flush",
     "🪟 1-Click Windows Automated Installer with universal CSXS registry bypass",
-    "🚀 Version 8.0 Full Windows & macOS Cross-Platform Support for AE CC 2019–2026+"
+    "🚀 Version 9.0 Full Windows & macOS Cross-Platform Support for AE CC 2019–2026+"
   ],
   "downloadUrl": "https://sumairtools.online/#download",
-  "zxpUrl": "https://sumairtools.online/SumairTools_v8.0.zxp?v=8.0.0"
+  "zxpUrl": "https://sumairtools.online/SumairTools_v9.0.zxp?v=9.0.0"
 }

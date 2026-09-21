@@ -284,7 +284,7 @@ ${licenseKey}
 Assigned Email: ${recipientEmail}
 
 QUICK 3-STEP ACTIVATION GUIDE:
-1. Install Extension: Download SumairTools_v8.0.zxp or use our 1-click Windows/Mac bundles from ${DOWNLOAD_URL}.
+1. Install Extension: Download SumairTools_v9.0.zxp or use our 1-click Windows/Mac bundles from ${DOWNLOAD_URL}.
 2. Launch in After Effects: Go to Window > Extensions > Sumair Tools.
 3. Activate: Paste your License Key above into the activator prompt. Your hardware binds automatically.
 
