@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Sumair Tools — Master Admin Command Center Controller
  * Dedicated Telemetry, Revocation & Key Generation Hub
  * Copyright (c) 2026 Sumair Ali Siddiqui. All Rights Reserved.
@@ -704,71 +704,80 @@
             "Lead Developer, Sumair Tools Team\n";
     }
 
-    function openGmailWebComposer(email, licenseKey, customerName) {
+    window.copyEmailTemplate = function (email, licenseKey, customerName) {
         var safeName = customerName && customerName.trim() ? customerName.trim() : 'Creator';
-        var subject = "🛡️ Your Sumair Tools Enterprise License Key: " + licenseKey;
         var body = buildLicenseEmailText(safeName, licenseKey, email);
-
         try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(body);
+                alert('✓ Full email text with license key copied to clipboard!');
+                return;
             }
         } catch (e) {}
-
-        var gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1" +
-            "&to=" + encodeURIComponent(email) +
-            "&su=" + encodeURIComponent(subject) +
-            "&body=" + encodeURIComponent(body);
-
-        var win = window.open(gmailUrl, '_blank');
-        if (!win) {
-            window.location.href = "mailto:" + encodeURIComponent(email) +
-                "?subject=" + encodeURIComponent(subject) +
-                "&body=" + encodeURIComponent(body);
-        }
-    }
+        prompt('Copy email text below (Ctrl+C):', body);
+    };
 
     function getGasUrl() {
         return localStorage.getItem('ST_GAS_URL') || (window.ST_CONFIG && (window.ST_CONFIG.GAS_URL || window.ST_CONFIG.EMAIL_API_URL)) || '';
+    }
+
+    function getBackendApiUrl() {
+        return localStorage.getItem('ST_BACKEND_API_URL') || (window.ST_CONFIG && (window.ST_CONFIG.BACKEND_API_URL || window.ST_CONFIG.API_URL)) || '';
     }
 
     function updateDispatchBadge() {
         var badge = document.getElementById('dispatch-status-badge');
         if (!badge) return;
         var gasUrl = getGasUrl();
+        var backendUrl = getBackendApiUrl();
         if (gasUrl) {
-            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+            badge.className = 'px-2.5 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
             badge.innerHTML = '⚡ GOOGLE APPS SCRIPT ACTIVE';
+        } else if (backendUrl) {
+            badge.className = 'px-2.5 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+            badge.innerHTML = '⚡ SMTP BACKEND ACTIVE';
         } else {
-            badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-cyanAccent/20 text-cyanAccent border border-cyanAccent/40';
-            badge.innerHTML = '✉️ 1-CLICK GMAIL COMPOSE';
+            badge.className = 'px-2.5 py-0.5 rounded-full text-[9px] font-sans font-medium uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40';
+            badge.innerHTML = '⚙️ CONFIGURE AUTOMATED DISPATCH';
         }
     }
 
     window.configureDispatchMode = function () {
         var currentGas = getGasUrl();
-        var msg = "✉️ EMAIL DISPATCH CONFIGURATION (GitHub Pages)\n\n" +
-            "• Mode 1 (Default): 1-Click Gmail Web Composer\n" +
-            "  Opens Gmail compose pre-filled with customer email, key, & instructions (No setup needed).\n\n" +
-            "• Mode 2: Automated Background Sending via Google Apps Script (100% Free)\n" +
-            "  Sends dark-mode HTML email directly from your Gmail account without leaving this page.\n\n" +
-            "Enter your Google Apps Script Web App URL (or leave blank for 1-Click Gmail):";
-        
-        var input = prompt(msg, currentGas);
+        var currentBackend = getBackendApiUrl();
+        var msg = "✉️ AUTOMATED EMAIL DISPATCH SETUP\n\n" +
+            "Emails are automatically dispatched in the background with the dark-mode HTML template (No Gmail popups/windows).\n\n" +
+            "• Option 1 (Recommended for GitHub Pages): Google Apps Script Web App URL\n" +
+            "  (Free 60-second setup in google-apps-script.js — sends from sumairalisiddiqui@gmail.com)\n\n" +
+            "• Option 2: Custom Server / Vercel Backend URL (/api/send-license)\n\n" +
+            "Enter your Google Apps Script Web App URL (or Backend URL):";
+
+        var input = prompt(msg, currentGas || currentBackend);
         if (input !== null) {
             var trimmed = input.trim();
             if (trimmed) {
-                localStorage.setItem('ST_GAS_URL', trimmed);
-                alert("✓ Google Apps Script URL saved!\nEmails will now be sent automatically in the background.");
+                if (trimmed.includes('script.google.com')) {
+                    localStorage.setItem('ST_GAS_URL', trimmed);
+                    localStorage.removeItem('ST_BACKEND_API_URL');
+                    alert("✓ Google Apps Script URL saved!\nEmails will now be dispatched automatically in the background.");
+                } else {
+                    localStorage.setItem('ST_BACKEND_API_URL', trimmed.replace(/\/+$/, ''));
+                    localStorage.removeItem('ST_GAS_URL');
+                    alert("✓ Backend API URL saved!\nEmails will now be dispatched automatically via your backend.");
+                }
             } else {
                 localStorage.removeItem('ST_GAS_URL');
-                alert("✓ Reset to 1-Click Gmail Web Composer!\nClicking Email will open your Gmail compose tab pre-filled.");
+                localStorage.removeItem('ST_BACKEND_API_URL');
+                alert("✓ Cleared custom email dispatch URL.");
             }
             updateDispatchBadge();
         }
     };
 
     async function dispatchEmail(email, licenseKey, customerName) {
+        var errors = [];
+
+        // 1. Try Google Apps Script if URL configured
         var gasUrl = getGasUrl();
         if (gasUrl) {
             try {
@@ -784,14 +793,64 @@
                 });
                 return { success: true, mode: 'gas' };
             } catch (err) {
-                console.warn('[Admin] GAS dispatch error, falling back to Gmail Web:', err);
-                openGmailWebComposer(email, licenseKey, customerName);
-                return { success: true, mode: 'gmail_web', fallback: true };
+                console.warn('[Admin] GAS dispatch error:', err);
+                errors.push('Google Apps Script: ' + (err.message || err.toString()));
             }
-        } else {
-            openGmailWebComposer(email, licenseKey, customerName);
-            return { success: true, mode: 'gmail_web' };
         }
+
+        // 2. Try Backend API (/api/send-license)
+        var backendUrl = getBackendApiUrl();
+        var apiEndpoints = [];
+        if (backendUrl) {
+            apiEndpoints.push(backendUrl.replace(/\/+$/, '') + '/api/send-license');
+        }
+        if (!backendUrl || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            apiEndpoints.push('/api/send-license');
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiEndpoints.push('http://localhost:3000/api/send-license');
+            }
+        }
+
+        for (var i = 0; i < apiEndpoints.length; i++) {
+            var endpoint = apiEndpoints[i];
+            try {
+                var apiRes = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        license_key: licenseKey,
+                        customer_name: customerName || 'Creator'
+                    })
+                });
+
+                if (apiRes.ok) {
+                    var data = await apiRes.json();
+                    if (data && data.success) {
+                        return { success: true, mode: 'backend', messageId: data.messageId };
+                    } else if (data && data.error) {
+                        errors.push(data.error);
+                    }
+                } else if (apiRes.status === 405) {
+                    errors.push('Static host detected (HTTP 405). Configure Google Apps Script URL for GitHub Pages.');
+                } else if (apiRes.status !== 404) {
+                    var text = await apiRes.text();
+                    errors.push('HTTP ' + apiRes.status + ': ' + text.substring(0, 100));
+                }
+            } catch (apiErr) {
+                console.warn('[Admin] API endpoint failed:', endpoint, apiErr);
+            }
+        }
+
+        // If no automated dispatch succeeded, return failure WITHOUT EVER opening Gmail
+        var errorMsg = errors.length > 0 ? errors.join(' | ') :
+            'No active email dispatch endpoint found. Click "Configure Dispatch Mode" to connect your Google Apps Script URL or Backend URL.';
+
+        return {
+            success: false,
+            mode: 'none',
+            error: errorMsg
+        };
     }
 
     // Initialize badge on load
@@ -885,35 +944,37 @@
             var dispatchRes = await dispatchEmail(email, licenseKey, name);
 
             if (alertBox) {
-                if (dispatchRes.mode === 'gas') {
+                if (dispatchRes.success) {
+                    var channelInfo = dispatchRes.mode === 'gas' ? 'Google Apps Script' : 'Gmail SMTP';
                     alertBox.className = 'mt-3.5 p-4 rounded-xl font-sans font-light text-xs border bg-emerald-500/15 border-emerald-500/40 text-emerald-300 block space-y-2';
                     alertBox.innerHTML = `
                         <div class="flex items-center gap-2 text-emerald-400 font-medium text-sm font-sans">
-                            <span>✅</span> <span>LICENSE DELIVERED VIA GOOGLE APPS SCRIPT</span>
+                            <span>✅</span> <span>LICENSE DELIVERED VIA ${channelInfo.toUpperCase()}</span>
                         </div>
                         <div class="text-neutral-200">
-                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-emerald-500/40 font-mono select-all">${licenseKey}</span> has been dispatched to <b class="text-white">${email}</b>.
+                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-emerald-500/40 font-mono select-all">${licenseKey}</span> has been dispatched to <b class="text-white">${email}</b> with the dark-mode HTML welcome kit.
                         </div>
                         <div class="text-[11px] text-neutral-400 flex items-center gap-3 pt-1">
-                            <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-medium text-[10px] transition-colors cursor-pointer font-sans">📋 Copy Key</button>
+                            <span>Delivered automatically in background</span>
+                            <button onclick="copyLicenseKey('${licenseKey}')" class="ml-auto px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-medium text-[10px] transition-colors cursor-pointer font-sans">📋 Copy Key</button>
                         </div>
                     `;
                 } else {
-                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-sans font-light text-xs border bg-cyanAccent/15 border-cyanAccent/40 text-cyanAccent block space-y-2';
+                    alertBox.className = 'mt-3.5 p-4 rounded-xl font-sans font-light text-xs border bg-amber-500/15 border-amber-500/40 text-amber-300 block space-y-2';
                     alertBox.innerHTML = `
-                        <div class="flex items-center gap-2 text-white font-medium text-sm font-sans">
-                            <span>🚀</span> <span>LICENSE READY &amp; GMAIL COMPOSE OPENED</span>
+                        <div class="flex items-center gap-2 text-amber-400 font-medium text-sm font-sans">
+                            <span>⚠️</span> <span>LICENSE MINTED • AUTOMATED EMAIL PENDING</span>
                         </div>
                         <div class="text-neutral-200">
-                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-white/20 font-mono select-all">${licenseKey}</span> for <b class="text-white">${email}</b>.
+                            Key <span class="text-white font-medium bg-black/40 px-2 py-0.5 rounded border border-amber-500/40 font-mono select-all">${licenseKey}</span> was successfully provisioned in Supabase for <b class="text-white">${email}</b>.
                         </div>
-                        <div class="text-[11px] text-neutral-300">
-                            ✓ Gmail compose window has been opened with your pre-filled email. Simply click <b>Send</b> in Gmail!<br>
-                            ✓ Message text and key have also been copied to your clipboard.
+                        <div class="text-[11px] text-amber-300/80 bg-black/40 p-2.5 rounded-lg border border-amber-500/20">
+                            ${dispatchRes.error}
                         </div>
                         <div class="flex items-center gap-2 pt-1 font-sans">
-                            <button onclick="openGmailWebComposer('${email}', '${licenseKey}', '${name}')" class="px-3 py-1.5 rounded-lg bg-crimson hover:bg-crimson/80 text-white font-medium text-[10px] transition-all cursor-pointer">✉️ Reopen Gmail</button>
+                            <button onclick="configureDispatchMode()" class="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 hover:bg-amber-500/30 text-amber-300 font-medium text-[10px] transition-all cursor-pointer">⚙️ Configure Dispatch Mode</button>
                             <button onclick="copyLicenseKey('${licenseKey}')" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-[10px] transition-colors cursor-pointer">📋 Copy Key</button>
+                            <button onclick="copyEmailTemplate('${email}', '${licenseKey}', '${name}')" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white font-medium text-[10px] transition-colors cursor-pointer">📋 Copy Email Text</button>
                         </div>
                     `;
                 }
@@ -956,15 +1017,21 @@
             var originalBtn = document.activeElement;
             if (originalBtn && originalBtn.tagName === 'BUTTON') {
                 originalBtn.disabled = true;
-                originalBtn.innerText = 'Opening...';
+                originalBtn.innerText = 'Dispatching...';
             }
 
             var dispatchRes = await dispatchEmail(recipientEmail, licenseKey, recipientName);
 
-            if (dispatchRes.mode === 'gas') {
-                alert('✓ Success!\nLicense ' + licenseKey + ' has been dispatched to ' + recipientEmail + ' via Google Apps Script.');
+            if (dispatchRes.success) {
+                var channel = dispatchRes.mode === 'gas' ? 'Google Apps Script' : 'Gmail SMTP';
+                alert('✓ Success!\n\nLicense ' + licenseKey + ' has been automatically emailed to ' + recipientEmail + ' via ' + channel + ' with the dark-mode HTML welcome kit.');
             } else {
-                alert('✓ Gmail Compose Opened!\n\nRecipient: ' + recipientEmail + '\nLicense: ' + licenseKey + '\n\nYour Gmail tab has been opened with the complete pre-filled message. Click "Send" in Gmail!\n(Details also copied to clipboard)');
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(licenseKey);
+                    }
+                } catch (e) {}
+                alert('⚠️ Automated Email Dispatch Note:\n\n' + dispatchRes.error + '\n\nLicense key ' + licenseKey + ' was copied to your clipboard.\nClick "⚙️ Configure Dispatch Mode" in the dispatch section to connect your Google Apps Script Web App URL.');
             }
 
             if (window.sbClient && (!existingEmail || existingEmail !== recipientEmail)) {
@@ -978,8 +1045,12 @@
             }
         } catch (err) {
             console.error('[Admin] sendExistingLicenseEmail error:', err);
-            openGmailWebComposer(recipientEmail, licenseKey, recipientName);
-            alert('✓ Opened Gmail compose tab for ' + recipientEmail + ' with license ' + licenseKey + ' pre-filled.');
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(licenseKey);
+                }
+            } catch (e) {}
+            alert('⚠️ Email Dispatch Error:\n' + (err.message || 'Unknown network error') + '\n\nLicense key ' + licenseKey + ' was copied to your clipboard.');
         } finally {
             if (typeof window.loadAdminData === 'function') {
                 window.loadAdminData();
